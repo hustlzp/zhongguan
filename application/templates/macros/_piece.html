@@ -4,61 +4,61 @@
 
 
 {% macro piece_full_screen_script() %}
-   <script type="text/javascript">
-      (function () {
-         $(document).onOnce('click', '.btn-full-screen', function () {
-            var id = $(this).data('id');
-            var content = $(this).data('content');
-            var source = $(this).data('source-string');
+    <script type="text/javascript">
+        (function () {
+            $(document).onOnce('click', '.btn-full-screen', function () {
+                var id = $(this).data('id');
+                var content = $(this).data('content');
+                var source = $(this).data('source-string');
 
-            openBackdrop(false, '', id, content, source);
-         });
-      })();
-   </script>
+                openBackdrop(false, '', id, content, source);
+            });
+        })();
+    </script>
 {% endmacro %}
 
 
 {% macro render_piece_source(piece, with_link=True) %}
-   {% if piece.original or piece.author or piece.source %}
-      <div class="source-wap">
-         {% if piece.original %}
-            <span class="source">原创</span>
-         {% else %}
-            <span class="source">{{ piece.source_string }}</span>
+    {% if piece.original or piece.author or piece.source %}
+        <div class="source-wap">
+            {% if piece.original %}
+                <span class="source">原创</span>
+            {% else %}
+                <span class="source">{{ piece.source_string }}</span>
 
-            {% if with_link and piece.source_link %}
-               <a href="{{ piece.source_link }}" class="source-link" target="_blank"
-                  title="相关链接">
-                  <span class="fa fa-link fa-rotate-90"></span>
-               </a>
+                {% if with_link and piece.source_link %}
+                    <a href="{{ piece.source_link }}" class="source-link" target="_blank"
+                       title="相关链接">
+                        <span class="fa fa-link fa-rotate-90"></span>
+                    </a>
+                {% endif %}
             {% endif %}
-         {% endif %}
-      </div>
-   {% endif %}
+        </div>
+    {% endif %}
 {% endmacro %}
 
 
 {% macro render_piece_comment(comment) %}
-   <div class="comment {% if sub %}sub-comment{% endif %}" data-comment-id="{{ comment.id }}">
-      <div class="media">
-         <div class="media-left">
-            {{ render_user_avatar(comment.user) }}
-         </div>
-
-         <div class="media-body">
-            <div class="comment-user">
-               <a href="{{ url_for('user.profile', uid=comment.user_id) }}">
-                  {{ comment.user.name }}
-               </a>
-               {% if comment.root_comment_id %}
-                  <span class="to-target-user">回复</span>
-                  <a href="{{ url_for('user.profile', uid=comment.target_user_id) }}">
-                     {{ comment.target_user.name }}
-                  </a>
-               {% endif %}
+    <div class="comment {% if sub %}sub-comment{% endif %}" data-comment-id="{{ comment.id }}">
+        <div class="media">
+            <div class="media-left">
+                {{ render_user_avatar(comment.user) }}
             </div>
-            <div class="comment-content">{{ comment.content }}</div>
-            <div class="comment-meta">
+
+            <div class="media-body">
+                <div class="comment-user">
+                    <a href="{{ url_for('user.profile', uid=comment.user_id) }}">
+                        {{ comment.user.name }}
+                    </a>
+                    {% if comment.root_comment_id %}
+                        <span class="to-target-user">回复</span>
+                        <a href="{{ url_for('user.profile', uid=comment.target_user_id) }}">
+                            {{ comment.target_user.name }}
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="comment-content">{{ comment.content }}</div>
+                <div class="comment-meta">
                <span class="options">
                   {% set votes_count = comment.votes.count() %}
                   <a href="javascript: void(0)" title="顶"
@@ -66,1013 +66,926 @@
                         {% if votes_count %}voted-by-people{% endif %}
                         {% if comment.voted_by_user() %}voted-by-me{% endif %}"
                      data-id="{{ comment.id }}">
-                     <span class="fa fa-angle-up"></span>
-                     <span class="comment-votes-count">{{ votes_count }}</span>
-                     <span class="comment-vote-text">顶</span>
+                      <span class="fa fa-angle-up"></span>
+                      <span class="comment-votes-count">{{ votes_count }}</span>
+                      <span class="comment-vote-text">顶</span>
                   </a>
 
                   <a href="javascript: void(0)" class="btn-show-comment-form need-signed-in"
                      title="回复" data-target-user-name="{{ comment.user.name }}"
                      data-root-comment-id="{{ comment.root_comment_id or comment.id }}"
                      data-target-user-id="{{ comment.user_id }}">
-                     <span class="fa fa-comment-o"></span>
+                      <span class="fa fa-comment-o"></span>
                   </a>
                </span>
 
-               <div class="comment-time pull-right">
-                  {{ comment.created_at|timesince }}
-               </div>
+                    <div class="comment-time pull-right">
+                        {{ comment.created_at|timesince }}
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </div>
+        </div>
+    </div>
 {% endmacro %}
 
 
 {% macro render_piece_sub_comments(comment) %}
-   <div class="sub-comments-wap" data-root-comment-id="{{ comment.id }}">
-      <div class="inner-wap">
-         {% for sub_comment in comment.sub_comments %}
-            {{ render_piece_comment(sub_comment) }}
-         {% endfor %}
-      </div>
+    <div class="sub-comments-wap" data-root-comment-id="{{ comment.id }}">
+        <div class="inner-wap">
+            {% for sub_comment in comment.sub_comments %}
+                {{ render_piece_comment(sub_comment) }}
+            {% endfor %}
+        </div>
 
-      <form action="" class="form-sub-comment">
-         <div class="form-group">
+        <form action="" class="form-sub-comment">
+            <div class="form-group">
             <textarea name="" rows="4" class="form-control sub-comment-textarea"
                       placeholder=""></textarea>
-         </div>
-         <div class="submit-wap submit-right">
-            <span class="btn-cancel-submit-sub-comment">取消</span>
-            <button type="button" class="btn btn-sm btn-submit-sub-comment btn-primary"
-                    data-piece-id="{{ comment.piece_id }}">回复
-            </button>
-         </div>
-      </form>
-   </div>
+            </div>
+            <div class="submit-wap submit-right">
+                <span class="btn-cancel-submit-sub-comment">取消</span>
+                <button type="button" class="btn btn-sm btn-submit-sub-comment btn-primary"
+                        data-piece-id="{{ comment.piece_id }}">回复
+                </button>
+            </div>
+        </form>
+    </div>
 {% endmacro %}
 
 
 {% macro render_piece_comments(piece) %}
-   <div class="subtitle">{{ piece.comments.count() }} 评论</div>
+    <div class="subtitle">{{ piece.comments.count() }} 评论</div>
 
-   {% if g.user %}
-      <form action="" id="form-comment">
-         <div class="form-group">
+    {% if g.user %}
+        <form action="" id="form-comment">
+            <div class="form-group">
             <textarea name="" id="comment-textarea" rows="5" class="form-control"
                       placeholder="说点什么"></textarea>
-         </div>
-         <div class="submit-wap submit-right">
-            <button type="button" class="btn btn-sm btn-comment btn-primary">评论</button>
-         </div>
-      </form>
-   {% else %}
-      <div class="comment-after-signed-in-wap">
-         <a href="{{ url_for('account.signin') }}">登录</a> 后评论
-      </div>
-   {% endif %}
+            </div>
+            <div class="submit-wap submit-right">
+                <button type="button" class="btn btn-sm btn-comment btn-primary">评论</button>
+            </div>
+        </form>
+    {% else %}
+        <div class="comment-after-signed-in-wap">
+            <a href="{{ url_for('account.signin') }}">登录</a> 后评论
+        </div>
+    {% endif %}
 
-   <div class="comments-wap">
-      {% for comment in piece.root_comments %}
-         {{ render_piece_comment(comment) }}
-         {{ render_piece_sub_comments(comment) }}
-      {% endfor %}
-   </div>
+    <div class="comments-wap">
+        {% for comment in piece.root_comments %}
+            {{ render_piece_comment(comment) }}
+            {{ render_piece_sub_comments(comment) }}
+        {% endfor %}
+    </div>
 
-   <script type="text/javascript">
-      (function () {
-         var pieceId = {{ piece.id }};
+    <script type="text/javascript">
+        (function () {
+            var pieceId = {{ piece.id }};
 
-         // 评论
-         $('.btn-comment').click(function () {
-            var comment = $.trim($('#comment-textarea').val());
+            // 评论
+            $('.btn-comment').click(function () {
+                var comment = $.trim($('#comment-textarea').val());
 
-            if (comment === "") {
-               return;
-            }
+                if (comment === "") {
+                    return;
+                }
 
-            $.ajax({
-               url: urlFor('piece.comment', {uid: pieceId}),
-               method: 'post',
-               data: {
-                  comment: comment
-               }
-            }).done(function (comment) {
-               var $comment = $(comment);
+                $.ajax({
+                    url: urlFor('piece.comment', {uid: pieceId}),
+                    method: 'post',
+                    data: {
+                        comment: comment
+                    }
+                }).done(function (comment) {
+                    var $comment = $(comment);
 
-               $comment.hide();
-               $('#comment-textarea').val('');
-               $('.comments-wap').prepend($comment);
-               $comment.fadeIn();
+                    $comment.hide();
+                    $('#comment-textarea').val('');
+                    $('.comments-wap').prepend($comment);
+                    $comment.fadeIn();
+                });
             });
-         });
 
-         // 顶评论
-         $(document).onOnce('click', '.btn-vote-comment', function () {
-            var commentId = $(this).data('id');
-            var url = "";
-            var _this = $(this);
-            var voted = $(this).hasClass('voted-by-me');
+            // 顶评论
+            $(document).onOnce('click', '.btn-vote-comment', function () {
+                var commentId = $(this).data('id');
+                var url = "";
+                var _this = $(this);
+                var voted = $(this).hasClass('voted-by-me');
 
-            if (!g.signedIn) {
-               return;
-            }
+                if (!g.signedIn) {
+                    return;
+                }
 
-            if (voted) {
-               url = urlFor('piece.unvote_comment', {uid: commentId});
-            } else {
-               url = urlFor('piece.vote_comment', {uid: commentId});
-            }
+                if (voted) {
+                    url = urlFor('piece.unvote_comment', {uid: commentId});
+                } else {
+                    url = urlFor('piece.vote_comment', {uid: commentId});
+                }
 
-            toggleCommentVoteEffect(_this);
+                toggleCommentVoteEffect(_this);
 
-            $.ajax({
-               url: url,
-               dataType: 'json',
-               method: 'post'
-            }).done(function (response) {
-               if (!response.result) {
-                  toggleCommentVoteEffect(_this);
-               }
-            }).fail(function () {
-               toggleCommentVoteEffect(_this);
+                $.ajax({
+                    url: url,
+                    dataType: 'json',
+                    method: 'post'
+                }).done(function (response) {
+                    if (!response.result) {
+                        toggleCommentVoteEffect(_this);
+                    }
+                }).fail(function () {
+                    toggleCommentVoteEffect(_this);
+                });
             });
-         });
 
-         // 打开评论回复form
-         $(document).onOnce('click', '.btn-show-comment-form', function () {
-            var rootCommentId = $(this).data('root-comment-id');
-            var targetUserId = $(this).data('target-user-id');
-            var targetUserName = $(this).data('target-user-name');
-            var $subCommentForm = $(".sub-comments-wap[data-root-comment-id='" + rootCommentId + "'] form");
+            // 打开评论回复form
+            $(document).onOnce('click', '.btn-show-comment-form', function () {
+                var rootCommentId = $(this).data('root-comment-id');
+                var targetUserId = $(this).data('target-user-id');
+                var targetUserName = $(this).data('target-user-name');
+                var $subCommentForm = $(".sub-comments-wap[data-root-comment-id='" + rootCommentId + "'] form");
 
-            if (!g.signedIn) {
-               return;
-            }
+                if (!g.signedIn) {
+                    return;
+                }
 
-            $('.form-sub-comment').hide();
-            $subCommentForm.show();
-            $subCommentForm.find('textarea').attr('placeholder', '回复 ' + targetUserName).focus();
-            $subCommentForm.attr({
-               'data-root-comment-id': rootCommentId,
-               'data-target-user-id': targetUserId
+                $('.form-sub-comment').hide();
+                $subCommentForm.show();
+                $subCommentForm.find('textarea').attr('placeholder', '回复 ' + targetUserName).focus();
+                $subCommentForm.attr({
+                    'data-root-comment-id': rootCommentId,
+                    'data-target-user-id': targetUserId
+                });
             });
-         });
 
-         // 提交对评论的回复
-         $(document).onOnce('click', '.btn-submit-sub-comment', function () {
-            var $form = $(this).parents('form').first();
-            var comment = $.trim($form.find('textarea').val());
-            var rootCommentId = $form.data('root-comment-id');
-            var targetUserId = $form.data('target-user-id');
+            // 提交对评论的回复
+            $(document).onOnce('click', '.btn-submit-sub-comment', function () {
+                var $form = $(this).parents('form').first();
+                var comment = $.trim($form.find('textarea').val());
+                var rootCommentId = $form.data('root-comment-id');
+                var targetUserId = $form.data('target-user-id');
 
-            if (comment === '') {
-               return;
-            }
+                if (comment === '') {
+                    return;
+                }
 
-            $.ajax({
-               url: urlFor('piece.comment', {uid: pieceId}),
-               method: 'post',
-               data: {
-                  comment: comment,
-                  'root_comment_id': rootCommentId,
-                  'target_user_id': targetUserId
-               }
-            }).done(function (comment) {
-               var $comment = $(comment);
+                $.ajax({
+                    url: urlFor('piece.comment', {uid: pieceId}),
+                    method: 'post',
+                    data: {
+                        comment: comment,
+                        'root_comment_id': rootCommentId,
+                        'target_user_id': targetUserId
+                    }
+                }).done(function (comment) {
+                    var $comment = $(comment);
 
-               $('.sub-comment-textarea').val('');
-               $form.hide();
-               $comment.hide();
-               $form.parent().find('.inner-wap').append($comment);
-               $comment.fadeIn();
+                    $('.sub-comment-textarea').val('');
+                    $form.hide();
+                    $comment.hide();
+                    $form.parent().find('.inner-wap').append($comment);
+                    $comment.fadeIn();
+                });
             });
-         });
 
-         // 取消回复评论
-         $(document).onOnce('click', '.btn-cancel-submit-sub-comment', function () {
-            var $form = $(this).parents('form').first();
+            // 取消回复评论
+            $(document).onOnce('click', '.btn-cancel-submit-sub-comment', function () {
+                var $form = $(this).parents('form').first();
 
-            $form.find('textarea').val('');
-            $form.hide();
-         });
+                $form.find('textarea').val('');
+                $form.hide();
+            });
 
-         /**
-          * 切换顶评论效果
-          * @param $btnVoteComment
-          */
-         function toggleCommentVoteEffect($btnVoteComment) {
-            var voted = $btnVoteComment.hasClass('voted-by-me');
-            var $votesCountElement = $btnVoteComment.find('.comment-votes-count');
-            var votesCount = parseInt($.trim($votesCountElement.text()));
+            /**
+             * 切换顶评论效果
+             * @param $btnVoteComment
+             */
+            function toggleCommentVoteEffect($btnVoteComment) {
+                var voted = $btnVoteComment.hasClass('voted-by-me');
+                var $votesCountElement = $btnVoteComment.find('.comment-votes-count');
+                var votesCount = parseInt($.trim($votesCountElement.text()));
 
-            $btnVoteComment.toggleClass('voted-by-me');
+                $btnVoteComment.toggleClass('voted-by-me');
 
-            if (voted) {
-               votesCount -= 1;
-            } else {
-               votesCount += 1;
+                if (voted) {
+                    votesCount -= 1;
+                } else {
+                    votesCount += 1;
+                }
+
+                $votesCountElement.text(votesCount);
+
+                if (votesCount === 0) {
+                    $btnVoteComment.removeClass('voted-by-people');
+                }
             }
-
-            $votesCountElement.text(votesCount);
-
-            if (votesCount === 0) {
-               $btnVoteComment.removeClass('voted-by-people');
-            }
-         }
-      })();
-   </script>
+        })();
+    </script>
 {% endmacro %}
 
 
 {% macro render_piece_log(log, with_options=True) %}
-   <div class="piece-log media">
-      <div class="media-left">{{ render_user_avatar(log.user) }}</div>
-      <div class="media-body">
-         <div class="title">
-            <a href="{{ url_for('user.profile', uid=log.user_id) }}">
-               {{ log.user.name }}
-            </a>
+    <div class="piece-log media">
+        <div class="media-left">{{ render_user_avatar(log.user) }}</div>
+        <div class="media-body">
+            <div class="title">
+                <a href="{{ url_for('user.profile', uid=log.user_id) }}">
+                    {{ log.user.name }}
+                </a>
 
-            {% if log.kind == PIECE_EDIT_KIND.CREATE %}
-               分享了句子
-            {% elif log.kind == PIECE_EDIT_KIND.ADD_TO_COLLECTION %}
-               添加了话题
-            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
-               移除了话题
-            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
-               编辑了句子
-            {% elif log.kind == PIECE_EDIT_KIND.CHANGE_TO_ORIGINAL %}
-               将句子设为原创
-            {% elif log.kind == PIECE_EDIT_KIND.CHANGE_TO_NON_ORIGINAL %}
-               将句子设为引用
-            {% elif log.kind == PIECE_EDIT_KIND.ADD_AUTHOR %}
-               添加了原作者
-            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_AUTHOR %}
-               更新了原作者
-            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_AUTHOR %}
-               移除了原作者
-            {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE %}
-               添加了出处
-            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE %}
-               更新了出处
-            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE %}
-               移除了出处
-            {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE_LINK %}
-               添加了链接
-            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE_LINK %}
-               更新了链接
-            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE_LINK %}
-               移除了链接
-            {% endif %}
-         </div>
+                {% if log.kind == PIECE_EDIT_KIND.CREATE %}
+                    分享了句子
+                {% elif log.kind == PIECE_EDIT_KIND.ADD_TO_COLLECTION %}
+                    添加了话题
+                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
+                    移除了话题
+                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
+                    编辑了句子
+                {% elif log.kind == PIECE_EDIT_KIND.CHANGE_TO_ORIGINAL %}
+                    将句子设为原创
+                {% elif log.kind == PIECE_EDIT_KIND.CHANGE_TO_NON_ORIGINAL %}
+                    将句子设为引用
+                {% elif log.kind == PIECE_EDIT_KIND.ADD_AUTHOR %}
+                    添加了原作者
+                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_AUTHOR %}
+                    更新了原作者
+                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_AUTHOR %}
+                    移除了原作者
+                {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE %}
+                    添加了出处
+                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE %}
+                    更新了出处
+                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE %}
+                    移除了出处
+                {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE_LINK %}
+                    添加了链接
+                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE_LINK %}
+                    更新了链接
+                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE_LINK %}
+                    移除了链接
+                {% endif %}
+            </div>
 
-         <div class="content">
-            {% if log.kind == PIECE_EDIT_KIND.ADD_TO_COLLECTION %}
-               <a href="{{ url_for('collection.view', uid=log.after_id) }}" target="_blank">
-                  <ins class="collection">{{ log.after }}</ins>
-               </a>
-            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
-               <a href="{{ url_for('collection.view', uid=log.before_id) }}" target="_blank">
-                  <del class="collection">{{ log.before }}</del>
-               </a>
-            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
-               {{ log.compare|safe }}
-            {% elif log.kind == PIECE_EDIT_KIND.ADD_AUTHOR %}
-               <ins>{{ log.after }}</ins>
-            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_AUTHOR %}
-               <del>{{ log.before }}</del>
-               <span class="fa fa-long-arrow-right"></span>
-               <ins>{{ log.after }}</ins>
-            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_AUTHOR %}
-               <del>{{ log.before }}</del>
-            {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE %}
-               <ins>{{ log.after }}</ins>
-            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE %}
-               <del>{{ log.before }}</del>
-               <span class="fa fa-long-arrow-right"></span>
-               <ins>{{ log.after }}</ins>
-            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE %}
-               <del>{{ log.before }}</del>
-            {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE_LINK %}
-               <a href="{{ log.after }}" target="_blank">
-                  <ins class="link">{{ log.after }}</ins>
-               </a>
-            {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE_LINK %}
-               <a href="{{ log.before }}" target="_blank">
-                  <del class="link">{{ log.before }}</del>
-               </a>
-               <span class="fa fa-long-arrow-right"></span>
-               <a href="{{ log.after }}" target="_blank">
-                  <ins class="link">{{ log.after }}</ins>
-               </a>
-            {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE_LINK %}
-               <a href="{{ log.before }}" target="_blank">
-                  <del class="link">{{ log.before }}</del>
-               </a>
-            {% endif %}
-         </div>
+            <div class="content">
+                {% if log.kind == PIECE_EDIT_KIND.ADD_TO_COLLECTION %}
+                    <a href="{{ url_for('collection.view', uid=log.after_id) }}" target="_blank">
+                        <ins class="collection">{{ log.after }}</ins>
+                    </a>
+                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_FROM_COLLECTION %}
+                    <a href="{{ url_for('collection.view', uid=log.before_id) }}" target="_blank">
+                        <del class="collection">{{ log.before }}</del>
+                    </a>
+                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_CONTENT %}
+                    {{ log.compare|safe }}
+                {% elif log.kind == PIECE_EDIT_KIND.ADD_AUTHOR %}
+                    <ins>{{ log.after }}</ins>
+                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_AUTHOR %}
+                    <del>{{ log.before }}</del>
+                    <span class="fa fa-long-arrow-right"></span>
+                    <ins>{{ log.after }}</ins>
+                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_AUTHOR %}
+                    <del>{{ log.before }}</del>
+                {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE %}
+                    <ins>{{ log.after }}</ins>
+                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE %}
+                    <del>{{ log.before }}</del>
+                    <span class="fa fa-long-arrow-right"></span>
+                    <ins>{{ log.after }}</ins>
+                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE %}
+                    <del>{{ log.before }}</del>
+                {% elif log.kind == PIECE_EDIT_KIND.ADD_SOURCE_LINK %}
+                    <a href="{{ log.after }}" target="_blank">
+                        <ins class="link">{{ log.after }}</ins>
+                    </a>
+                {% elif log.kind == PIECE_EDIT_KIND.UPDATE_SOURCE_LINK %}
+                    <a href="{{ log.before }}" target="_blank">
+                        <del class="link">{{ log.before }}</del>
+                    </a>
+                    <span class="fa fa-long-arrow-right"></span>
+                    <a href="{{ log.after }}" target="_blank">
+                        <ins class="link">{{ log.after }}</ins>
+                    </a>
+                {% elif log.kind == PIECE_EDIT_KIND.REMOVE_SOURCE_LINK %}
+                    <a href="{{ log.before }}" target="_blank">
+                        <del class="link">{{ log.before }}</del>
+                    </a>
+                {% endif %}
+            </div>
 
-         <div class="log-meta">
-            {{ log.created_at|timesince }}
+            <div class="log-meta">
+                {{ log.created_at|timesince }}
 
-            {% if with_options and g.user %}
-               <div class="wap-report-abuse {% if log.reported_by_user() %}reported{% endif %}">
-                  <a href="javascript: void(0)" data-id="{{ log.id }}"
-                     class="need-signed-in btn-report-abuse">举报</a>
-                  <span class="flag-reported">已举报</span>
-               </div>
-            {% endif %}
-         </div>
-      </div>
-   </div>
+                {% if with_options and g.user %}
+                    <div class="wap-report-abuse {% if log.reported_by_user() %}reported{% endif %}">
+                        <a href="javascript: void(0)" data-id="{{ log.id }}"
+                           class="need-signed-in btn-report-abuse">举报</a>
+                        <span class="flag-reported">已举报</span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 {% endmacro %}
 
 
 {% macro render_piece_logs(piece) %}
-   <div class="subtitle">句子编辑日志</div>
+    <div class="subtitle">句子编辑日志</div>
 
-   {% for log in piece.logs %}
-      {{ render_piece_log(log, True) }}
-   {% endfor %}
+    {% for log in piece.logs %}
+        {{ render_piece_log(log, True) }}
+    {% endfor %}
 
-   <script type="text/javascript">
-      (function () {
-         $(document).onOnce('click', '.btn-report-abuse', function () {
-            var id = $(this).data('id');
-            var _this = $(this);
+    <script type="text/javascript">
+        (function () {
+            $(document).onOnce('click', '.btn-report-abuse', function () {
+                var id = $(this).data('id');
+                var _this = $(this);
 
-            $.ajax({
-               url: urlFor('piece.report_log', {uid: id}),
-               method: 'post',
-               dataType: 'json'
-            }).done(function (response) {
-               if (response.result) {
-                  _this.parent().addClass('reported');
-               }
+                $.ajax({
+                    url: urlFor('piece.report_log', {uid: id}),
+                    method: 'post',
+                    dataType: 'json'
+                }).done(function (response) {
+                    if (response.result) {
+                        _this.parent().addClass('reported');
+                    }
+                });
             });
-         });
-      })();
-   </script>
+        })();
+    </script>
 {% endmacro %}
 
 
 {% macro render_piece_details_wap(piece) %}
-   <div class="piece-details-wap" data-piece-id="{{ piece.id }}">
-   <div class="media piece-header">
-      <div class="media-left">
-         <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
-              data-piece-id={{ piece.id }}>
-            <div class="vote-icon">
-               <span class="fa fa-angle-up"></span>
+    <div class="piece-details-wap" data-piece-id="{{ piece.id }}">
+        <div class="media piece-header">
+            <div class="media-left">
+                <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
+                     data-piece-id={{ piece.id }}>
+                    <div class="vote-icon">
+                        <span class="fa fa-angle-up"></span>
+                    </div>
+                    <div class="votes-count">{{ piece.votes_count }}</div>
+                </div>
             </div>
-            <div class="votes-count">{{ piece.votes_count }}</div>
-         </div>
-      </div>
 
-      <div class="media-body">
-         <div class="content">{{ piece.content }}</div>
+            <div class="media-body">
+                <div class="content">{{ piece.content }}</div>
 
-         {{ render_piece_source(piece) }}
-      </div>
-   </div>
+                {{ render_piece_source(piece) }}
+            </div>
+        </div>
 
-   <div class="meta clearfix">
-      <div class="pull-left">
-         {{ render_user_avatar(piece.user) }}
-         <span class="created-time hidden-xs">发布于 {{ piece.created_at|timesince }}</span>
-      </div>
+        <div class="meta clearfix">
+            <div class="pull-left">
+                {{ render_user_avatar(piece.user) }}
+                <span class="created-time hidden-xs">发布于 {{ piece.created_at|timesince }}</span>
+            </div>
 
-      <div class="actions pull-right">
-         {% if permissions.PieceEditPermission(piece).check() %}
-            <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece"
-               title="编辑句子">
-               <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span></a>
-         {% endif %}
+            <div class="actions pull-right">
+                {% if permissions.PieceEditPermission(piece).check() %}
+                    <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece"
+                       title="编辑句子">
+                        <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span></a>
+                {% endif %}
 
-         <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
-            data-id="{{ piece.id }}"
-            data-content="{{ piece.content }}"
-            data-source-string="{{ piece.source_string }}">
-            <span class="fa fa-arrows-alt "></span> 全屏</a>
+                <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
+                   data-id="{{ piece.id }}"
+                   data-content="{{ piece.content }}"
+                   data-source-string="{{ piece.source_string }}">
+                    <span class="fa fa-arrows-alt "></span> 全屏</a>
 
-         <a class="btn-show-logs-wap" href="javascript: void(0)" title="句子编辑日志">
-            <span class="fa fa-file-text-o"></span> 日志
-         </a>
+                <a class="btn-show-logs-wap" href="javascript: void(0)" title="句子编辑日志">
+                    <span class="fa fa-file-text-o"></span> 日志
+                </a>
 
-         <a href="javascript: void(0)" class="btn-share">
-            <span class="fa fa-share"></span> 分享</a>
-      </div>
-   </div>
+                <a href="javascript: void(0)" class="btn-share">
+                    <span class="fa fa-share"></span> 分享</a>
+            </div>
+        </div>
 
-   <div class="collections-container {% if not piece.collections.count() %}empty{% endif %}">
-      <div class="collections-inner-container">
+        <div class="collections-container {% if not piece.collections.count() %}empty{% endif %}">
+            <div class="collections-inner-container">
          <span class="collections">
             {% for collection in piece.collections %}
-               {% set collection = collection.collection %}
-               {{ render_collection_tag_wap(collection) }}
+                {% set collection = collection.collection %}
+                {{ render_collection_tag_wap(collection) }}
             {% endfor %}
          </span>
 
-         {% if g.user %}
-            <a href="javascript: void(0)" class="btn-edit-collection" title="编辑句集">
-               <span class="fa fa-pencil"></span></a>
-            <a href="javascript: void(0)" class="btn-add-collection">
-               <span class="fa fa-plus"></span> 添加句集</a>
-         {% endif %}
-      </div>
-
-      <div class="form-group collection-input-wap">
-         <input type="text" id="input-collection" class="form-control"
-                placeholder="输入句集，回车确认"/>
-         <span class="btn-finish-add-collection">完成</span>
-      </div>
-   </div>
-
-   <div class="subtitle">{{ piece.votes_count }} 顶</div>
-
-   <div class="voters">
-      {% for voter in piece.voters %}
-         {{ render_user_avatar(voter.user) }}
-      {% endfor %}
-   </div>
-
-   {{ render_piece_comments(piece) }}
-
-   <div class="piece-logs-wap">
-      <span class="btn-close-logs-wap">×</span>
-      {{ render_piece_logs(piece) }}
-   </div>
-
-   <div class="share-wap">
-      <span class="btn-close-share-wap">×</span>
-
-      <div class="inner-wap">
-         <a href="{{ piece.weibo_share_url }}"
-            class="btn btn-default btn-share-to-weibo" target="_blank">
-            <img src="{{ static('image/media/weibo.png') }}"
-                 class="weibo-icon" alt=""/>&nbsp;分享到微博
-         </a>
-
-         <div class="devider">或</div>
-
-         <div class="share-to-weixin-wap">
-            <img src="{{ piece.qrcode_url }}" class="piece-qrcode" alt=""/>
-
-            <div>
-               <span class="fa fa-weixin"></span>&nbsp;&nbsp;分享到微信
+                {% if g.user %}
+                    <a href="javascript: void(0)" class="btn-edit-collection" title="编辑句集">
+                        <span class="fa fa-pencil"></span></a>
+                    <a href="javascript: void(0)" class="btn-add-collection">
+                        <span class="fa fa-plus"></span> 添加句集</a>
+                {% endif %}
             </div>
-         </div>
-      </div>
-   </div>
 
-   <script type="text/javascript">
-      (function () {
-         var timerForTypeahead = null;
-         var pieceId = {{ piece.id }};
-         var $collectionInput = $('#input-collection');
-         var $detailsParentWap = $('.piece-details-wap').parent();
-         var isModal = $detailsParentWap.hasClass('piece-modal-wap');   //是否为右侧弹出框
+            <div class="form-group collection-input-wap">
+                <input type="text" id="input-collection" class="form-control"
+                       placeholder="输入句集，回车确认"/>
+                <span class="btn-finish-add-collection">完成</span>
+            </div>
+        </div>
 
-         if (isModal) {
-            $('.share-wap').isolatedScroll();
-            $('.piece-logs-wap').isolatedScroll();
-         }
+        <div class="subtitle">{{ piece.votes_count }} 顶</div>
 
-         // 弹出分享框
-         $('.btn-share').click(function () {
-            var $shareInnerWap = $('.share-wap .inner-wap');
-            var marginTop;
+        <div class="voters">
+            {% for voter in piece.voters %}
+                {{ render_user_avatar(voter.user) }}
+            {% endfor %}
+        </div>
 
-            $('.share-wap').show();
-            marginTop = ($detailsParentWap.outerHeight() - $shareInnerWap.outerHeight()) * 0.4;
+        {{ render_piece_comments(piece) }}
 
-            if (isModal) {
-               if (marginTop < 30) {
-                  marginTop = 30;
-               }
-            } else {
-               if (marginTop > 150) {
-                  marginTop = 150;
-               }
-            }
+        <div class="piece-logs-wap">
+            <span class="btn-close-logs-wap">×</span>
+            {{ render_piece_logs(piece) }}
+        </div>
 
-            $shareInnerWap.css('marginTop', marginTop + 'px');
-            $('.share-wap').transition({
-               'top': '0',
-               'opacity': 1
-            }, 300);
-         });
+        <div class="share-wap">
+            <span class="btn-close-share-wap">×</span>
 
-         // 关闭分享框
-         $('.btn-close-share-wap').click(function () {
-            $('.share-wap').transition({
-               'top': '15px',
-               'opacity': 0
-            }, 300, function () {
-               $('.share-wap').hide();
-            });
-         });
+            <div class="inner-wap">
+                <a href="{{ piece.weibo_share_url }}"
+                   class="btn btn-default btn-share-to-weibo" target="_blank">
+                    <img src="{{ static('image/media/weibo.png') }}"
+                         class="weibo-icon" alt=""/>&nbsp;分享到微博
+                </a>
 
-         // 弹出编辑记录框
-         $('.btn-show-logs-wap').click(function () {
-            $('.piece-logs-wap').show().transition({
-               'top': '0',
-               'opacity': 1
-            }, 300);
-         });
+                <div class="devider">或</div>
 
-         // 关闭编辑记录框
-         $('.btn-close-logs-wap').click(function () {
-            $('.piece-logs-wap').transition({
-               'top': '15px',
-               'opacity': 0
-            }, 300, function () {
-               $('.piece-logs-wap').hide();
-            });
-         });
+                <div class="share-to-weixin-wap">
+                    <img src="{{ piece.qrcode_url }}" class="piece-qrcode" alt=""/>
 
-         // 启动Typeahead自动完成
-         $collectionInput.typeahead({
-            minLength: 1,
-            highlight: true,
-            hint: false
-         }, {
-            displayKey: 'value',
-            source: function (q, cb) {
-               if (timerForTypeahead) {
-                  clearTimeout(timerForTypeahead);
-               }
+                    <div>
+                        <span class="fa fa-weixin"></span>&nbsp;&nbsp;分享到微信
+                    </div>
+                </div>
+            </div>
+        </div>
 
-               timerForTypeahead = setTimeout(function () {
-                  $.ajax({
-                     url: urlFor('collection.query'),
-                     method: 'post',
-                     dataType: 'json',
-                     data: {
-                        q: q,
-                        piece_id: pieceId
-                     }
-                  }).done(function (matchs) {
-                     cb(matchs);
-                  });
-               }, 300);
-            },
-            templates: {
-               'suggestion': function (data) {
-                  return '<p>' + data.value + '</p>';
-               }
-            }
-         });
+        <script type="text/javascript">
+            (function () {
+                var timerForTypeahead = null;
+                var pieceId = {{ piece.id }};
+                var $collectionInput = $('#input-collection');
+                var $detailsParentWap = $('.piece-details-wap').parent();
+                var isModal = $detailsParentWap.hasClass('piece-modal-wap');   //是否为右侧弹出框
 
-         // Fix the vertical align bug of .btn-finish-add-collection
-         $collectionInput.css('verticalAlign', 'baseline');
+                if (isModal) {
+                    $('.share-wap').isolatedScroll();
+                    $('.piece-logs-wap').isolatedScroll();
+                }
 
-         // 通过选择autocomplete菜单项添加句集
-         $collectionInput.on('typeahead:selected', function (e, collection) {
-            addToCollection(pieceId, {collection_id: collection.id});
-         });
+                // 弹出分享框
+                $('.btn-share').click(function () {
+                    var $shareInnerWap = $('.share-wap .inner-wap');
+                    var marginTop;
 
-         // 通过回车添加句集
-         $collectionInput.on('keypress', function (e) {
-            if (e.which === 13) {
-               addToCollection(pieceId, {title: $(this).val()});
-            }
-         });
+                    $('.share-wap').show();
+                    marginTop = ($detailsParentWap.outerHeight() - $shareInnerWap.outerHeight()) * 0.4;
 
-         // 进入添加句集模式
-         $('.btn-add-collection, .btn-edit-collection').click(function () {
-            enterEditCollectionMode();
-         });
+                    if (isModal) {
+                        if (marginTop < 30) {
+                            marginTop = 30;
+                        }
+                    } else {
+                        if (marginTop > 150) {
+                            marginTop = 150;
+                        }
+                    }
 
-         // 删除句集
-         $('.collections-container').on('click', '.btn-delete-collection', function () {
-            var collectionId = $(this).data('id');
-            var _this = $(this);
+                    $shareInnerWap.css('marginTop', marginTop + 'px');
+                    $('.share-wap').transition({
+                        'top': '0',
+                        'opacity': 1
+                    }, 300);
+                });
 
-            $.ajax({
-               url: urlFor('piece.remove_from_collection', {uid: pieceId, collection_id: collectionId}),
-               method: 'post',
-               dataType: 'json'
-            }).done(function (response) {
-               if (response.result) {
-                  _this.parent().detach();
-                  checkCollectionsCount();
-               }
-            });
-         });
+                // 关闭分享框
+                $('.btn-close-share-wap').click(function () {
+                    $('.share-wap').transition({
+                        'top': '15px',
+                        'opacity': 0
+                    }, 300, function () {
+                        $('.share-wap').hide();
+                    });
+                });
 
-         // 完成添加句集
-         $('.btn-finish-add-collection').click(function () {
-            var title = $.trim($('#input-collection').typeahead('val'));
+                // 弹出编辑记录框
+                $('.btn-show-logs-wap').click(function () {
+                    $('.piece-logs-wap').show().transition({
+                        'top': '0',
+                        'opacity': 1
+                    }, 300);
+                });
 
-            // 如果此时输入框中有值，则进行句集添加
-            if (title !== "") {
-               addToCollection(pieceId, {title: title});
-            }
-            quitEditCollectionMode();
-         });
+                // 关闭编辑记录框
+                $('.btn-close-logs-wap').click(function () {
+                    $('.piece-logs-wap').transition({
+                        'top': '15px',
+                        'opacity': 0
+                    }, 300, function () {
+                        $('.piece-logs-wap').hide();
+                    });
+                });
 
-         /**
-          * 将句子添加到句集
-          * @param {int|string} pieceId - 句子的id
-          * @param {Object} data - Ajax请求的data部分，key为title或collection_id
-          */
-         function addToCollection(pieceId, data) {
-            $.ajax({
-               url: urlFor('piece.add_to_collection', {uid: pieceId}),
-               method: 'post',
-               dataType: 'json',
-               data: data
-            }).done(function (response) {
-               if (response.result) {
-                  if (!$(".collection-tag-wap[data-id='" + response.id + "']").length) {
-                     $(".collections").append(response.html);
-                     checkCollectionsCount();
-                  }
-                  $('#input-collection').typeahead('val', '');
-               }
-            });
-         }
+                // 启动Typeahead自动完成
+                $collectionInput.typeahead({
+                    minLength: 1,
+                    highlight: true,
+                    hint: false
+                }, {
+                    displayKey: 'value',
+                    source: function (q, cb) {
+                        if (timerForTypeahead) {
+                            clearTimeout(timerForTypeahead);
+                        }
 
-         /**
-          * Check if there is no collection, and update elements status.
-          */
-         function checkCollectionsCount() {
-            if ($('.collection-tag').length === 0) {
-               $('.collections-container').addClass('empty');
-            } else {
-               $('.collections-container').removeClass('empty');
-            }
-         }
+                        timerForTypeahead = setTimeout(function () {
+                            $.ajax({
+                                url: urlFor('collection.query'),
+                                method: 'post',
+                                dataType: 'json',
+                                data: {
+                                    q: q,
+                                    piece_id: pieceId
+                                }
+                            }).done(function (matchs) {
+                                cb(matchs);
+                            });
+                        }, 300);
+                    },
+                    templates: {
+                        'suggestion': function (data) {
+                            return '<p>' + data.value + '</p>';
+                        }
+                    }
+                });
 
-         /**
-          * Enter edit collection mode.
-          */
-         function enterEditCollectionMode() {
-            $('.collections-container').addClass('edit-mode');
-            $('#input-collection').focus();
-         }
+                // Fix the vertical align bug of .btn-finish-add-collection
+                $collectionInput.css('verticalAlign', 'baseline');
 
-         /**
-          * Quit edit collection mode.
-          */
-         function quitEditCollectionMode() {
-            $('#input-collection').typeahead('val', '');
-            $('.collections-container').removeClass('edit-mode');
-         }
-      })();
-   </script>
-   </div>
+                // 通过选择autocomplete菜单项添加句集
+                $collectionInput.on('typeahead:selected', function (e, collection) {
+                    addToCollection(pieceId, {collection_id: collection.id});
+                });
+
+                // 通过回车添加句集
+                $collectionInput.on('keypress', function (e) {
+                    if (e.which === 13) {
+                        addToCollection(pieceId, {title: $(this).val()});
+                    }
+                });
+
+                // 进入添加句集模式
+                $('.btn-add-collection, .btn-edit-collection').click(function () {
+                    enterEditCollectionMode();
+                });
+
+                // 删除句集
+                $('.collections-container').on('click', '.btn-delete-collection', function () {
+                    var collectionId = $(this).data('id');
+                    var _this = $(this);
+
+                    $.ajax({
+                        url: urlFor('piece.remove_from_collection', {uid: pieceId, collection_id: collectionId}),
+                        method: 'post',
+                        dataType: 'json'
+                    }).done(function (response) {
+                        if (response.result) {
+                            _this.parent().detach();
+                            checkCollectionsCount();
+                        }
+                    });
+                });
+
+                // 完成添加句集
+                $('.btn-finish-add-collection').click(function () {
+                    var title = $.trim($('#input-collection').typeahead('val'));
+
+                    // 如果此时输入框中有值，则进行句集添加
+                    if (title !== "") {
+                        addToCollection(pieceId, {title: title});
+                    }
+                    quitEditCollectionMode();
+                });
+
+                /**
+                 * 将句子添加到句集
+                 * @param {int|string} pieceId - 句子的id
+                 * @param {Object} data - Ajax请求的data部分，key为title或collection_id
+                 */
+                function addToCollection(pieceId, data) {
+                    $.ajax({
+                        url: urlFor('piece.add_to_collection', {uid: pieceId}),
+                        method: 'post',
+                        dataType: 'json',
+                        data: data
+                    }).done(function (response) {
+                        if (response.result) {
+                            if (!$(".collection-tag-wap[data-id='" + response.id + "']").length) {
+                                $(".collections").append(response.html);
+                                checkCollectionsCount();
+                            }
+                            $('#input-collection').typeahead('val', '');
+                        }
+                    });
+                }
+
+                /**
+                 * Check if there is no collection, and update elements status.
+                 */
+                function checkCollectionsCount() {
+                    if ($('.collection-tag').length === 0) {
+                        $('.collections-container').addClass('empty');
+                    } else {
+                        $('.collections-container').removeClass('empty');
+                    }
+                }
+
+                /**
+                 * Enter edit collection mode.
+                 */
+                function enterEditCollectionMode() {
+                    $('.collections-container').addClass('edit-mode');
+                    $('#input-collection').focus();
+                }
+
+                /**
+                 * Quit edit collection mode.
+                 */
+                function quitEditCollectionMode() {
+                    $('#input-collection').typeahead('val', '');
+                    $('.collections-container').removeClass('edit-mode');
+                }
+            })();
+        </script>
+    </div>
 {% endmacro %}
 
 
 {% macro render_piece_modal_wap(piece) %}
-   <div class="piece-modal-wap" data-piece-id="{{ piece.id if piece }}">
-      {% if piece %}
-         {{ render_piece_details_wap(piece) }}
-      {% endif %}
-   </div>
+    <div class="piece-modal-wap" data-piece-id="{{ piece.id if piece }}">
+        {% if piece %}
+            {{ render_piece_details_wap(piece) }}
+        {% endif %}
+    </div>
 
-   <script type="text/javascript">
-      (function () {
-         var $pieceModal = $('.piece-modal-wap');
+    <script type="text/javascript">
+        (function () {
+            var $pieceModal = $('.piece-modal-wap');
 
-         // 弹出侧边栏
-         $(document).on('click', '.pieces-wap .piece', function (event) {
-            // 链接和vote不触发此事件
-            if (event.target.tagName.toLowerCase() === 'a'
-                  || $(event.target).parent('a').length
-                  || $(event.target).hasClass('user-avatar')
-                  || $(event.target).hasClass('vote')
-                  || $(event.target).parents('.vote').length) {
-               return true;
-            }
+            // 弹出侧边栏
+            $(document).on('click', '.pieces-wap .piece', function (event) {
+                // 链接和vote不触发此事件
+                if (event.target.tagName.toLowerCase() === 'a'
+                        || $(event.target).parent('a').length
+                        || $(event.target).hasClass('user-avatar')
+                        || $(event.target).hasClass('vote')
+                        || $(event.target).parents('.vote').length) {
+                    return true;
+                }
 
-            var pieceId = parseInt($(this).attr('data-piece-id')),
-                  pieceIdOfModal = parseInt($pieceModal.attr('data-piece-id'));
+                var pieceId = parseInt($(this).attr('data-piece-id')),
+                        pieceIdOfModal = parseInt($pieceModal.attr('data-piece-id'));
 
-            if ($(window).width() < 767) {
-               window.location = urlFor('piece.view', {uid: pieceId});
-               return;
-            }
+                if ($(window).width() < 767) {
+                    window.location = urlFor('piece.view', {uid: pieceId});
+                    return;
+                }
 
-            // 点击的piece与modal的piece一致
-            if (pieceId === pieceIdOfModal) {
-               if ($pieceModal.hasClass('open')) {
-                  closeModal(pieceId);
-               } else {
-                  openModal(pieceId);
-               }
-            } else {
-               showLoadingFlag();
+                // 点击的piece与modal的piece一致
+                if (pieceId === pieceIdOfModal) {
+                    if ($pieceModal.hasClass('open')) {
+                        closeModal(pieceId);
+                    } else {
+                        openModal(pieceId);
+                    }
+                } else {
+                    showLoadingFlag();
 
-               if ($pieceModal.hasClass('open')) {
-                  $('.piece').removeClass('selected');
-                  $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
-                  $pieceModal.attr('data-piece-id', pieceId);
-                  addClicksCount(pieceId);
+                    if ($pieceModal.hasClass('open')) {
+                        $('.piece').removeClass('selected');
+                        $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
+                        $pieceModal.attr('data-piece-id', pieceId);
+                        addClicksCount(pieceId);
 
-                  $.ajax({
-                     url: urlFor('piece.modal', {uid: pieceId}),
-                     success: function (modal) {
-                        $('.piece-modal-wap').html(modal);
-                     }
-                  });
-               } else {
-                  openModal(pieceId, function () {
-                     $pieceModal.attr('data-piece-id', pieceId);
-                     $.ajax({
-                        url: urlFor('piece.modal', {uid: pieceId}),
-                        success: function (modal) {
-                           $('.piece-modal-wap').html(modal);
-                        }
-                     });
-                  });
-               }
-            }
-         });
-
-         $(document).on('click', function (event) {
-            if (!($(event.target).hasClass('full-screen-backdrop')
-                  || $(event.target).parents('.full-screen-backdrop').length
-                  || $(event.target).hasClass('piece')
-                  || $(event.target).parents('.piece').length
-                  || $(event.target).hasClass('piece-modal-wap')
-                  || $(event.target).parents('.piece-modal-wap').length)
-                  && $pieceModal.hasClass('open')) {
-               closeModal();
-            }
-         });
-
-         /**
-          * Open the piece modal.
-          * @param pieceId
-          * @param callback
-          */
-         function openModal(pieceId, callback) {
-            var $modal = $('.piece-modal-wap');
-            var modalWidth = $modal.outerWidth();
-
-            addClicksCount(pieceId);
-            $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
-            $modal.css('right', -(modalWidth + 3)).show();
-
-            $modal.stop().transition({'right': 0}, 400, function () {
-               $(this).addClass('open');
-
-               if ($.isFunction(callback)) {
-                  callback();
-               }
+                        $.ajax({
+                            url: urlFor('piece.modal', {uid: pieceId}),
+                            success: function (modal) {
+                                $('.piece-modal-wap').html(modal);
+                            }
+                        });
+                    } else {
+                        openModal(pieceId, function () {
+                            $pieceModal.attr('data-piece-id', pieceId);
+                            $.ajax({
+                                url: urlFor('piece.modal', {uid: pieceId}),
+                                success: function (modal) {
+                                    $('.piece-modal-wap').html(modal);
+                                }
+                            });
+                        });
+                    }
+                }
             });
-         }
 
-         /**
-          * Close the piece modal.
-          * @param callback
-          */
-         function closeModal(callback) {
-            var $modal = $('.piece-modal-wap');
-            var modalWidth = $modal.outerWidth();
-
-            $('.piece').removeClass('selected');
-
-            $modal.stop().transition({
-               'right': -(modalWidth + 3)
-            }, 400, function () {
-               $('.piece-modal-wap').hide();
-               quitEditCollectionMode();
-               closeUpperLayers();
-               $(this).removeClass('open');
-
-               if ($.isFunction(callback)) {
-                  callback();
-               }
+            $(document).on('click', function (event) {
+                if (!($(event.target).hasClass('full-screen-backdrop')
+                        || $(event.target).parents('.full-screen-backdrop').length
+                        || $(event.target).hasClass('piece')
+                        || $(event.target).parents('.piece').length
+                        || $(event.target).hasClass('piece-modal-wap')
+                        || $(event.target).parents('.piece-modal-wap').length)
+                        && $pieceModal.hasClass('open')) {
+                    closeModal();
+                }
             });
-         }
 
-         /**
-          * Add piece's clicks count.
-          * @param pieceId
-          */
-         function addClicksCount(pieceId) {
-            $.ajax({
-               url: urlFor('piece.click', {uid: pieceId}),
-               method: 'post'
-            });
-         }
+            /**
+             * Open the piece modal.
+             * @param pieceId
+             * @param callback
+             */
+            function openModal(pieceId, callback) {
+                var $modal = $('.piece-modal-wap');
+                var modalWidth = $modal.outerWidth();
 
-         /**
-          * Show the loading flag.
-          * @param pieceModal
-          */
-         function showLoadingFlag() {
-            $('.piece-modal-wap').html("<span class='fa fa-spinner fa-spin flag-loading-piece'></span>");
-         }
+                addClicksCount(pieceId);
+                $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
+                $modal.css('right', -(modalWidth + 3)).show();
 
-         /**
-          * Quit edit collection mode.
-          */
-         function quitEditCollectionMode() {
-            $('#input-collection').typeahead('val', '');
-            $('.collections-container').removeClass('edit-mode');
-         }
+                $modal.stop().transition({'right': 0}, 400, function () {
+                    $(this).addClass('open');
 
-         /**
-          * Close layers upon piece modal.
-          */
-         function closeUpperLayers() {
-            $('.share-wap').hide();
-         }
-      })();
-   </script>
+                    if ($.isFunction(callback)) {
+                        callback();
+                    }
+                });
+            }
+
+            /**
+             * Close the piece modal.
+             * @param callback
+             */
+            function closeModal(callback) {
+                var $modal = $('.piece-modal-wap');
+                var modalWidth = $modal.outerWidth();
+
+                $('.piece').removeClass('selected');
+
+                $modal.stop().transition({
+                    'right': -(modalWidth + 3)
+                }, 400, function () {
+                    $('.piece-modal-wap').hide();
+                    quitEditCollectionMode();
+                    closeUpperLayers();
+                    $(this).removeClass('open');
+
+                    if ($.isFunction(callback)) {
+                        callback();
+                    }
+                });
+            }
+
+            /**
+             * Add piece's clicks count.
+             * @param pieceId
+             */
+            function addClicksCount(pieceId) {
+                $.ajax({
+                    url: urlFor('piece.click', {uid: pieceId}),
+                    method: 'post'
+                });
+            }
+
+            /**
+             * Show the loading flag.
+             * @param pieceModal
+             */
+            function showLoadingFlag() {
+                $('.piece-modal-wap').html("<span class='fa fa-spinner fa-spin flag-loading-piece'></span>");
+            }
+
+            /**
+             * Quit edit collection mode.
+             */
+            function quitEditCollectionMode() {
+                $('#input-collection').typeahead('val', '');
+                $('.collections-container').removeClass('edit-mode');
+            }
+
+            /**
+             * Close layers upon piece modal.
+             */
+            function closeUpperLayers() {
+                $('.share-wap').hide();
+            }
+        })();
+    </script>
 {% endmacro %}
 
 
 {% macro render_pieces(pieces, attr=None, show_modal=True) %}
-   <div class="pieces-wap">
-      {% for piece in pieces %}
-         {% if attr %}
-            {% set piece = piece[attr] %}
-         {% endif %}
+    <div class="pieces-wap">
+        {% for piece in pieces %}
+            {% if attr %}
+                {% set piece = piece[attr] %}
+            {% endif %}
 
-         <div class="piece {% if loop.last %}last{% endif %}" data-piece-id={{ piece.id }}>
-            <div class="media">
-               <div class="media-left">
-                  <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
-                       data-piece-id={{ piece.id }}>
-                     <div class="vote-icon">
-                        <span class="fa fa-angle-up"></span>
-                     </div>
-                     <div class="votes-count">{{ piece.votes_count }}</div>
-                  </div>
-               </div>
+            <div class="piece {% if loop.last %}last{% endif %}" data-piece-id={{ piece.id }}>
+                <div class="media">
+                    <div class="media-left">
+                        <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
+                             data-piece-id={{ piece.id }}>
+                            <div class="vote-icon">
+                                <span class="fa fa-caret-up"></span>
+                            </div>
+                            <div class="votes-count">{{ piece.votes_count }}</div>
+                        </div>
+                    </div>
 
-               <div class="media-body">
-                  <div class="pull-right text-right other-info">
-                     {{ render_user_avatar(piece.user) }}
+                    <div class="media-body">
+                        <div class="pull-right other-info">
+                            <div class="comments-count pull-right">
+                                <span class="fa fa-comment-o"></span> {{ piece.comments.count() }}
+                            </div>
 
-                     <div class="comments-count text-right">
-                        {{ piece.comments.count() }} <span class="fa fa-comment"></span>
-                     </div>
-                  </div>
+                            {{ render_user_avatar(piece.user) }}
 
-                  <div class="content">
-                     {{ piece.content }}
-                  </div>
+                            <span class="fa fa-qrcode pull-right btn-show-qrcode"></span>
+                        </div>
 
-                  <div class="meta">
-                     {{ render_piece_source(piece, false) }}
-
-                     <div class="options hidden-xs">
-                        <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
-                           data-id="{{ piece.id }}"
-                           data-content="{{ piece.content }}"
-                           data-source-string="{{ piece.source_string }}">
-                           <span class="fa fa-arrows-alt "></span>
-                        </a>
-                     </div>
-                  </div>
-               </div>
+                        <div class="content">{{ piece.content }}</div>
+                    </div>
+                </div>
             </div>
-         </div>
-      {% endfor %}
-   </div>
-
-   {% if show_modal %}
-      {{ piece_full_screen_script() }}
-
-      {% set first_piece = pieces|first %}
-      {% if first_piece and attr %}
-         {% set first_piece = first_piece[attr] %}
-      {% endif %}
-      {{ render_piece_modal_wap(first_piece) }}
-   {% endif %}
+        {% endfor %}
+    </div>
 {% endmacro %}
 
 
-{#{% macro render_pieces_by_date(pieces_data, page, pre_page, next_page) %}#}
-{#   <div class="panel panel-primary pieces-by-date-wap">#}
-{#      <div class="panel-heading date">{{ pieces_data.date_string }}</div>#}
-{##}
-{#      <div class="panel-body">#}
-{#         {% if pieces_data.pieces.count() %}#}
-{#            {{ render_pieces(pieces_data.pieces) }}#}
-{#         {% else %}#}
-{#            <div class="text-center share-piece">#}
-{#               {% if page == 1 %}#}
-{#                  <a href="{{ url_for('piece.add') }}" class="need-signed-in">#}
-{#                     <span class="fa fa-plus"></span> 分享句子#}
-{#                  </a>#}
-{#               {% else %}#}
-{#                  <span class="text-light">无</span>#}
-{#               {% endif %}#}
-{#            </div>#}
-{#         {% endif %}#}
-{##}
-{#         {% if pieces_data.hide_pieces_count %}#}
-{#            <div class="hide-pieces">#}
-{#               {{ render_pieces(pieces_data.hide_pieces) }}#}
-{#            </div>#}
-{#         {% endif %}#}
-{#      </div>#}
-{##}
-{#      {% if pieces_data.hide_pieces_count %}#}
-{#         <div class="panel-footer text-center">#}
-{#            <div class="btn-show-hide-pieces">#}
-{#               展开其余 {{ pieces_data.hide_pieces_count }} 段文字#}
-{#            </div>#}
-{#         </div>#}
-{#      {% endif %}#}
-{##}
-{#      <div class="pieces-pager clearfix">#}
-{#         <a class="pre-page {% if not pre_page %}disabled{% endif %}"#}
-{#            {% if pre_page %}href="{{ url_for('site.index', page=pre_page) }}"{% endif %}>#}
-{#            <span class="fa fa-angle-left"></span>#}
-{#         </a>#}
-{#         <a class="next-page" href="{{ url_for('site.index', page=next_page) }}">#}
-{#            <span class="fa fa-angle-right"></span>#}
-{#         </a>#}
-{#      </div>#}
-{#   </div>#}
-{##}
-{#   <script type="text/javascript">#}
-{#      (function () {#}
-{#         // 显示被隐藏的句子#}
-{#         $(document).on('click', '.btn-show-hide-pieces', function () {#}
-{#            $(this).parents('.pieces-by-date-wap').first().find('.hide-pieces').show();#}
-{#            $(this).parents('.panel-footer').first().detach();#}
-{#         });#}
-{#      })();#}
-{#   </script>#}
-{#{% endmacro %}#}
-
 {% macro render_pieces_by_date(pieces_data, show_modal=False) %}
-   <div class="panel panel-primary pieces-by-date-wap">
-      <div class="panel-heading date">{{ pieces_data.date_string }}</div>
+    <div class="pieces-by-date-wap">
+        <div class="date">
+            <div class="date-cn">{{ pieces_data.date|date_cn }}</div>
+            <div class="date-en">{{ pieces_data.date|date_number }}，{{ pieces_data.date|weekday_cn }}</div>
+        </div>
 
-      <div class="panel-body">
-         {{ render_pieces(pieces_data.pieces, show_modal=show_modal) }}
+        <div class="pieces-outer-wap">
+            {{ render_pieces(pieces_data.pieces, show_modal=show_modal) }}
 
-         {% if not pieces_data.pieces.count() %}
-            <div class="text-center share-piece">
-               {#               {% if page == 1 %}#}
-               {% if show_modal %}
-                  <a href="{{ url_for('piece.add') }}" class="need-signed-in">
-                     <span class="fa fa-plus"></span> 分享句子
-                  </a>
-               {% else %}
-                  <span class="text-light">无</span>
-               {% endif %}
+            {% if not pieces_data.pieces.count() %}
+                <div class="text-center share-piece">
+                    {% if show_modal %}
+                        <a href="{{ url_for('piece.add') }}" class="need-signed-in">
+                            + 创建新词条
+                        </a>
+                    {% else %}
+                        <span class="text-light">无</span>
+                    {% endif %}
+                </div>
+            {% endif %}
+
+            {% if pieces_data.hide_pieces_count %}
+                <div class="hide-pieces">
+                    {{ render_pieces(pieces_data.hide_pieces) }}
+                </div>
+            {% endif %}
+        </div>
+
+        {% if pieces_data.hide_pieces_count %}
+            <div class="panel-footer text-center">
+                <div class="btn-show-hide-pieces">
+                    展开其余 {{ pieces_data.hide_pieces_count }} 段文字
+                </div>
             </div>
-         {% endif %}
+        {% endif %}
+    </div>
 
-         {% if pieces_data.hide_pieces_count %}
-            <div class="hide-pieces">
-               {{ render_pieces(pieces_data.hide_pieces) }}
-            </div>
-         {% endif %}
-      </div>
-
-      {% if pieces_data.hide_pieces_count %}
-         <div class="panel-footer text-center">
-            <div class="btn-show-hide-pieces">
-               展开其余 {{ pieces_data.hide_pieces_count }} 段文字
-            </div>
-         </div>
-      {% endif %}
-
-      {#      <div class="pieces-pager clearfix">#}
-      {#         <a class="pre-page {% if not pre_page %}disabled{% endif %}"#}
-      {#            {% if pre_page %}href="{{ url_for('site.index', page=pre_page) }}"{% endif %}>#}
-      {#            <span class="fa fa-angle-left"></span>#}
-      {#         </a>#}
-      {#         <a class="next-page" href="{{ url_for('site.index', page=next_page) }}">#}
-      {#            <span class="fa fa-angle-right"></span>#}
-      {#         </a>#}
-      {#      </div>#}
-   </div>
-
-   {% if show_modal %}
-      <script type="text/javascript">
-         (function () {
-            // 显示被隐藏的句子
-            $(document).onOnce('click', '.btn-show-hide-pieces', function () {
-               $(this).parents('.pieces-by-date-wap').first().find('.hide-pieces').show();
-               $(this).parents('.panel-footer').first().detach();
-            });
-         })();
-      </script>
-   {% endif %}
+    {% if show_modal %}
+        <script type="text/javascript">
+            (function () {
+                // 显示被隐藏的句子
+                $(document).onOnce('click', '.btn-show-hide-pieces', function () {
+                    $(this).parents('.pieces-by-date-wap').first().find('.hide-pieces').show();
+                    $(this).parents('.panel-footer').first().detach();
+                });
+            })();
+        </script>
+    {% endif %}
 {% endmacro %}
 
 
 {% macro render_piece_form(form, add=True) %}
-   <form method="post" class="form-piece">
-      {{ form.csrf_token() }}
+    <form method="post" class="form-piece">
+        {{ form.csrf_token() }}
 
-      <div class="form-group">
-         <label for="content">句子</label>
+        <div class="form-group">
+            <label for="content">句子</label>
 
          <span class="tip">
             <span class="positive">还可以输入 <span class="content-length"></span> 字</span>
@@ -1081,225 +994,225 @@
 
          <textarea class="form-control" id="content" name="content" placeholder=""
                    rows="5">{{ form.content.data or "" }}</textarea>
-         {{ field_error(form.content) }}
-      </div>
+            {{ field_error(form.content) }}
+        </div>
 
-      {% set original = form.original.data %}
-      <div class="btn-group btn-group-sm btn-group-original clearfix" data-toggle="buttons">
-         <label class="btn btn-default {% if not original %}active{% endif %}">
-            <input type="radio" name="original" value="false" autocomplete="off"
-                   {% if not original %}checked="checked"{% endif %}> 引用
-         </label>
-         <label class="btn btn-default {% if original %}active{% endif %}">
-            <input type="radio" name="original" value="true" autocomplete="off"
-                   {% if original %}checked="checked"{% endif %}> 原创
-         </label>
-      </div>
-
-      <div class="external">
-         {{ vertical_field(form.author) }}
-
-         <div class="form-group">
-            <label for="source">
-               出处 <span class="fa fa-question-circle source-help"></span>
+        {% set original = form.original.data %}
+        <div class="btn-group btn-group-sm btn-group-original clearfix" data-toggle="buttons">
+            <label class="btn btn-default {% if not original %}active{% endif %}">
+                <input type="radio" name="original" value="false" autocomplete="off"
+                       {% if not original %}checked="checked"{% endif %}> 引用
             </label>
-            <input class="form-control" id="source" name="source" placeholder="选填"
-                   type="text" value="{{ form.source.data or "" }}">
-            {{ field_error(form.source) }}
-         </div>
+            <label class="btn btn-default {% if original %}active{% endif %}">
+                <input type="radio" name="original" value="true" autocomplete="off"
+                       {% if original %}checked="checked"{% endif %}> 原创
+            </label>
+        </div>
 
-         <div class="form-group">
-            <label for="source_link">链接</label>
+        <div class="external">
+            {{ vertical_field(form.author) }}
 
-            <div class="source-url-wap">
-               <input class="form-control" id="source_link" name="source_link"
-                      placeholder="选填" type="text"
-                      value="{{ form.source_link.data or "" }}">
-               <img class="source-favicon" src="" alt=""/>
+            <div class="form-group">
+                <label for="source">
+                    出处 <span class="fa fa-question-circle source-help"></span>
+                </label>
+                <input class="form-control" id="source" name="source" placeholder="选填"
+                       type="text" value="{{ form.source.data or "" }}">
+                {{ field_error(form.source) }}
             </div>
-            {{ field_error(form.source_link) }}
-         </div>
-      </div>
 
-      {% if add %}
-         {{ vertical_field(form.comment, rows=4) }}
-      {% endif %}
+            <div class="form-group">
+                <label for="source_link">链接</label>
 
-      <div class="submit-wap submit-right">
-         <button type="submit" class="btn btn-submit btn-primary">
-            {% if add %}分享{% else %}保存{% endif %}
-         </button>
-      </div>
-   </form>
+                <div class="source-url-wap">
+                    <input class="form-control" id="source_link" name="source_link"
+                           placeholder="选填" type="text"
+                           value="{{ form.source_link.data or "" }}">
+                    <img class="source-favicon" src="" alt=""/>
+                </div>
+                {{ field_error(form.source_link) }}
+            </div>
+        </div>
 
-   <script type="text/javascript">
-      (function () {
-         var timerForContent = null;
-         var timerForSourceLink = null;
-         var $sourceFavicon = $('.source-favicon');
-         var $sourceLinkInput = $('#source_link');
-         var $authorInput = $('#author');
-         var timerForAuthorTypeahead = null;
-         var $sourceInput = $('#source');
-         var timerForSourceTypeahead = null;
+        {% if add %}
+            {{ vertical_field(form.comment, rows=4) }}
+        {% endif %}
 
-         $('.source-help').popover({
-            trigger: 'hover',
-            container: 'body',
-            content: '如：书籍、电影、歌曲、文章标题等。'
-         });
+        <div class="submit-wap submit-right">
+            <button type="submit" class="btn btn-submit btn-primary">
+                {% if add %}分享{% else %}保存{% endif %}
+            </button>
+        </div>
+    </form>
 
-         // 字数更新
-         updateWordCount();
+    <script type="text/javascript">
+        (function () {
+            var timerForContent = null;
+            var timerForSourceLink = null;
+            var $sourceFavicon = $('.source-favicon');
+            var $sourceLinkInput = $('#source_link');
+            var $authorInput = $('#author');
+            var timerForAuthorTypeahead = null;
+            var $sourceInput = $('#source');
+            var timerForSourceTypeahead = null;
 
-         $('#content').keyup(function () {
-            clearTimeout(timerForContent);
-            timerForContent = setTimeout(updateWordCount, 100);
-         });
+            $('.source-help').popover({
+                trigger: 'hover',
+                container: 'body',
+                content: '如：书籍、电影、歌曲、文章标题等。'
+            });
 
-         // 若为原创，则无需填写其他内容
-         if ($('input[name=original]:checked').val() === 'true') {
-            $('.external').hide();
-         }
+            // 字数更新
+            updateWordCount();
 
-         $('input[name=original]').change(function () {
-            if ($(this).val() === 'true') {
-               $('.external').slideUp('fast');
-            } else {
-               $('.external').slideDown('fast');
+            $('#content').keyup(function () {
+                clearTimeout(timerForContent);
+                timerForContent = setTimeout(updateWordCount, 100);
+            });
+
+            // 若为原创，则无需填写其他内容
+            if ($('input[name=original]:checked').val() === 'true') {
+                $('.external').hide();
             }
-         });
 
-         if ($.trim($sourceLinkInput.val()) !== "") {
-            $sourceFavicon.attr('src', 'http://g.soz.im/' + $sourceLinkInput.val());
-         }
+            $('input[name=original]').change(function () {
+                if ($(this).val() === 'true') {
+                    $('.external').slideUp('fast');
+                } else {
+                    $('.external').slideDown('fast');
+                }
+            });
 
-         // 输入source url时，加载favicon
-         $sourceLinkInput.keyup(function () {
-            var $input = $(this);
-            clearTimeout(timerForSourceLink);
-            timerForSourceLink = setTimeout(function () {
-               var url = $.trim($input.val());
-
-               if (url !== "" && !startsWith(url, 'http')) {
-                  url = "http://" + url.replace(new RegExp("^:?/*"), '');
-                  $input.val(url);
-               }
-
-               $sourceFavicon.attr('src', 'http://g.soz.im/' + url);
-            }, 500);
-         });
-
-         // change或input事件时，加载favicon
-         $sourceLinkInput.on('change input', function () {
-            $sourceFavicon.attr('src', 'http://g.soz.im/' + $(this).val());
-         });
-
-         // Favicon加载失败时，隐藏
-         $sourceFavicon.load(function () {
-            $(this).fadeIn('fast');
-         }).error(function () {
-            $(this).hide();
-         });
-
-         // 启动author的Typeahead自动完成
-         $authorInput.typeahead({
-            minLength: 1,
-            highlight: true,
-            hint: false
-         }, {
-            displayKey: 'value',
-            source: function (q, cb) {
-               if (timerForAuthorTypeahead) {
-                  clearTimeout(timerForAuthorTypeahead);
-               }
-
-               timerForAuthorTypeahead = setTimeout(function () {
-                  $.ajax({
-                     url: urlFor('piece.query_author'),
-                     method: 'post',
-                     dataType: 'json',
-                     data: {
-                        q: q
-                     }
-                  }).done(function (matchs) {
-                     cb(matchs);
-                  });
-               }, 300);
-            },
-            templates: {
-               'suggestion': function (data) {
-                  return '<p>' + data.value + '</p>';
-               }
+            if ($.trim($sourceLinkInput.val()) !== "") {
+                $sourceFavicon.attr('src', 'http://g.soz.im/' + $sourceLinkInput.val());
             }
-         });
 
-         // 启动source的Typeahead自动完成
-         $sourceInput.typeahead({
-            minLength: 1,
-            highlight: true,
-            hint: false
-         }, {
-            displayKey: 'value',
-            source: function (q, cb) {
-               if (timerForSourceTypeahead) {
-                  clearTimeout(timerForSourceTypeahead);
-               }
+            // 输入source url时，加载favicon
+            $sourceLinkInput.keyup(function () {
+                var $input = $(this);
+                clearTimeout(timerForSourceLink);
+                timerForSourceLink = setTimeout(function () {
+                    var url = $.trim($input.val());
 
-               timerForSourceTypeahead = setTimeout(function () {
-                  $.ajax({
-                     url: urlFor('piece.query_source'),
-                     method: 'post',
-                     dataType: 'json',
-                     data: {
-                        q: q
-                     }
-                  }).done(function (matchs) {
-                     cb(matchs);
-                  });
-               }, 300);
-            },
-            templates: {
-               'suggestion': function (data) {
-                  return '<p>' + data.value + '</p>';
-               }
+                    if (url !== "" && !startsWith(url, 'http')) {
+                        url = "http://" + url.replace(new RegExp("^:?/*"), '');
+                        $input.val(url);
+                    }
+
+                    $sourceFavicon.attr('src', 'http://g.soz.im/' + url);
+                }, 500);
+            });
+
+            // change或input事件时，加载favicon
+            $sourceLinkInput.on('change input', function () {
+                $sourceFavicon.attr('src', 'http://g.soz.im/' + $(this).val());
+            });
+
+            // Favicon加载失败时，隐藏
+            $sourceFavicon.load(function () {
+                $(this).fadeIn('fast');
+            }).error(function () {
+                $(this).hide();
+            });
+
+            // 启动author的Typeahead自动完成
+            $authorInput.typeahead({
+                minLength: 1,
+                highlight: true,
+                hint: false
+            }, {
+                displayKey: 'value',
+                source: function (q, cb) {
+                    if (timerForAuthorTypeahead) {
+                        clearTimeout(timerForAuthorTypeahead);
+                    }
+
+                    timerForAuthorTypeahead = setTimeout(function () {
+                        $.ajax({
+                            url: urlFor('piece.query_author'),
+                            method: 'post',
+                            dataType: 'json',
+                            data: {
+                                q: q
+                            }
+                        }).done(function (matchs) {
+                            cb(matchs);
+                        });
+                    }, 300);
+                },
+                templates: {
+                    'suggestion': function (data) {
+                        return '<p>' + data.value + '</p>';
+                    }
+                }
+            });
+
+            // 启动source的Typeahead自动完成
+            $sourceInput.typeahead({
+                minLength: 1,
+                highlight: true,
+                hint: false
+            }, {
+                displayKey: 'value',
+                source: function (q, cb) {
+                    if (timerForSourceTypeahead) {
+                        clearTimeout(timerForSourceTypeahead);
+                    }
+
+                    timerForSourceTypeahead = setTimeout(function () {
+                        $.ajax({
+                            url: urlFor('piece.query_source'),
+                            method: 'post',
+                            dataType: 'json',
+                            data: {
+                                q: q
+                            }
+                        }).done(function (matchs) {
+                            cb(matchs);
+                        });
+                    }, 300);
+                },
+                templates: {
+                    'suggestion': function (data) {
+                        return '<p>' + data.value + '</p>';
+                    }
+                }
+            });
+
+            $('.twitter-typeahead').css('display', 'block');
+
+            /**
+             * 更新字数
+             */
+            function updateWordCount() {
+                var content = $('#content').val();
+                var contentRemainLength = 200 - calculateWordLength(content);
+
+                $('.content-length').text(Math.abs(contentRemainLength));
+
+                if (contentRemainLength >= 0) {
+                    $('.tip .positive').show();
+                    $('.tip .negative').hide();
+                } else {
+                    $('.tip .positive').hide();
+                    $('.tip .negative').show();
+                }
             }
-         });
 
-         $('.twitter-typeahead').css('display', 'block');
+            /**
+             * Count word.
+             * 总字数 = 中文字数 + 英文字数 / 2
+             * @param content
+             * @returns {number}
+             */
+            function calculateWordLength(content) {
+                // 去除首尾空格，多个空格替换为1个空格
+                content = $.trim(content).replace(/\s+/g, ' ');
 
-         /**
-          * 更新字数
-          */
-         function updateWordCount() {
-            var content = $('#content').val();
-            var contentRemainLength = 200 - calculateWordLength(content);
-
-            $('.content-length').text(Math.abs(contentRemainLength));
-
-            if (contentRemainLength >= 0) {
-               $('.tip .positive').show();
-               $('.tip .negative').hide();
-            } else {
-               $('.tip .positive').hide();
-               $('.tip .negative').show();
+                var cnLength = content.match(/[^ -~]/g) ? content.match(/[^ -~]/g).length : 0;
+                var enLength = content.length - cnLength;
+                return cnLength + Math.ceil(enLength / 2);
             }
-         }
-
-         /**
-          * Count word.
-          * 总字数 = 中文字数 + 英文字数 / 2
-          * @param content
-          * @returns {number}
-          */
-         function calculateWordLength(content) {
-            // 去除首尾空格，多个空格替换为1个空格
-            content = $.trim(content).replace(/\s+/g, ' ');
-
-            var cnLength = content.match(/[^ -~]/g) ? content.match(/[^ -~]/g).length : 0;
-            var enLength = content.length - cnLength;
-            return cnLength + Math.ceil(enLength / 2);
-         }
-      })();
-   </script>
+        })();
+    </script>
 {% endmacro %}

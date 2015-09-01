@@ -36,7 +36,7 @@ def live():
     for filepath in formic.FileSet(include="application/static/css/**/*.css"):
         server.watch(filepath)
     # html
-    for filepath in formic.FileSet(include="application/templates/css/**/*.html"):
+    for filepath in formic.FileSet(include="application/templates/**/*.html"):
         server.watch(filepath)
     # js
     for filepath in formic.FileSet(include="application/static/js/**/*.js"):

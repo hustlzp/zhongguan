@@ -72,7 +72,10 @@ def register_jinja(app):
 
     app.jinja_env.filters.update({
         'timesince': filters.timesince,
-        'markdown': filters.markdown
+        'markdown': filters.markdown,
+        'date_cn': filters.date_cn,
+        'date_number': filters.date_number,
+        'weekday_cn': filters.weekday_cn
     })
 
     @app.context_processor

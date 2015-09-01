@@ -1,3 +1,11 @@
+/*!
+ *  Fonts.css -- Cross-platform Chinese fonts solution
+ * 
+ *  Copyright (C) 2013-2014 Zeno Zeng
+ *  Released under the MIT license
+ * 
+ *  Github: https://github.com/zenozeng/fonts.css
+ */
 .piece-modal-wap {
   display: none;
   position: fixed;
@@ -396,57 +404,20 @@
 .pieces-by-date-wap {
   margin-bottom: 40px;
 }
-.pieces-by-date-wap .panel-body {
-  padding: 0;
+.pieces-by-date-wap .date {
+  text-align: center;
+  margin-bottom: 25px;
 }
-.pieces-by-date-wap .panel-footer .btn-show-hide-pieces {
-  cursor: pointer;
-  color: #999;
+.pieces-by-date-wap .date .date-cn {
+  font-size: 24px;
+  font-family: Baskerville, Georgia, "Liberation Serif", "Kaiti SC", STKaiti, "AR PL UKai CN", "AR PL UKai HK", "AR PL UKai TW", "AR PL UKai TW MBE", "AR PL KaitiM GB", KaiTi, KaiTi_GB2312, "TW\-Kai", serif;
 }
-.pieces-by-date-wap .panel-footer .btn-show-hide-pieces:hover {
-  color: #1e88a8;
+.pieces-by-date-wap .date .date-en {
+  color: #AAA;
 }
 .pieces-by-date-wap .hide-pieces {
   border-top: 1px solid #e2e2e2;
   display: none;
-}
-.pieces-by-date-wap .pieces-pager {
-  border-top: 1px solid #e2e2e2;
-}
-.pieces-by-date-wap .pieces-pager .pre-page,
-.pieces-by-date-wap .pieces-pager .next-page {
-  text-align: center;
-  width: 50%;
-  padding: 10px 0;
-  font-size: 20px;
-  cursor: pointer;
-}
-.pieces-by-date-wap .pieces-pager .pre-page.disabled,
-.pieces-by-date-wap .pieces-pager .next-page.disabled {
-  color: #aaa;
-}
-.pieces-by-date-wap .pieces-pager .pre-page.disabled:hover,
-.pieces-by-date-wap .pieces-pager .next-page.disabled:hover {
-  background-color: #ffffff;
-  cursor: default;
-}
-.pieces-by-date-wap .pieces-pager .pre-page:hover,
-.pieces-by-date-wap .pieces-pager .next-page:hover,
-.pieces-by-date-wap .pieces-pager .pre-page:focus,
-.pieces-by-date-wap .pieces-pager .next-page:focus {
-  text-decoration: none;
-}
-.pieces-by-date-wap .pieces-pager .pre-page:hover,
-.pieces-by-date-wap .pieces-pager .next-page:hover {
-  background-color: #f6f6f6;
-}
-.pieces-by-date-wap .pieces-pager .pre-page {
-  float: left;
-  border-bottom-left-radius: 5px;
-}
-.pieces-by-date-wap .pieces-pager .next-page {
-  float: right;
-  border-bottom-right-radius: 5px;
 }
 .pieces-by-date-wap .share-piece {
   padding: 20px 0;
@@ -461,22 +432,12 @@
 }
 .pieces-wap .piece {
   border-bottom: 1px solid #e2e2e2;
-  padding: 25px 20px 20px 20px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
   cursor: pointer;
-}
-.pieces-wap .piece.last {
-  border-bottom: none;
 }
 .pieces-wap .piece.selected {
   background-color: #f8f8f8;
-}
-.pieces-wap .piece:hover {
-  background-color: #f8f8f8;
-}
-.pieces-wap .piece:hover .meta .options .collect,
-.pieces-wap .piece:hover .meta .options .btn-edit-piece,
-.pieces-wap .piece:hover .meta .options .btn-full-screen {
-  visibility: visible;
 }
 .pieces-wap .piece .media-left {
   padding-right: 18px;
@@ -491,16 +452,26 @@
     display: none;
   }
 }
-.pieces-wap .piece .user-avatar {
+.pieces-wap .piece .other-info .btn-show-qrcode {
+  line-height: 32px;
+  margin-right: 30px;
+  color: gray;
+  font-size: 20px;
+}
+.pieces-wap .piece .other-info .user-avatar-link {
+  display: block;
+  float: right;
+  margin-right: 20px;
+}
+.pieces-wap .piece .other-info .user-avatar-link .user-avatar {
   width: 32px;
   height: 32px;
 }
-.pieces-wap .piece .comments-count {
-  text-align: center;
-  margin-top: 8px;
+.pieces-wap .piece .other-info .comments-count {
   color: #bbb;
+  line-height: 32px;
 }
-.pieces-wap .piece .comments-count .fa {
+.pieces-wap .piece .other-info .comments-count .fa {
   font-size: 12px;
   margin-left: 1px;
 }
@@ -553,20 +524,18 @@
   margin-right: 10px;
 }
 .pieces-wap .piece .vote {
-  background-color: #ffffff;
-  border: 1px solid #E0E3E6;
+  background-color: #f2f9f3;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
   padding: 5px 10px;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
   text-align: center;
-}
-.pieces-wap .piece .vote:hover {
-  border-color: #bbb;
+  color: #74b05d;
+  border-radius: 2px;
 }
 .pieces-wap .piece .vote.voted {
-  border-color: #1e88a8;
-  color: #1e88a8;
+  background-color: #74b05d;
+  color: white;
 }
 .pieces-wap .piece .vote .votes-count {
   line-height: 1;

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% from "macros/_piece.html" import render_pieces_by_date %}
 
-{% block page_title %}壹经典{% endblock %}
+{% block page_title %}中关村词典{% endblock %}
 {% block page_vars %}
    <script type="text/javascript">
       g.startDate = "{{ start_date }}";
@@ -9,8 +9,6 @@
 {% endblock %}`
 {% block page_content %}
    <div class="container">
-      {#      {{ render_pieces_by_date(pieces, page, pre_page, next_page) }}#}
-
       <div class="pieces-container">
          {% for pieces in pieces_data %}
             {{ render_pieces_by_date(pieces, show_modal=loop.first) }}

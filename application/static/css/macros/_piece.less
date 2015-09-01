@@ -1,4 +1,5 @@
 @import "../utils";
+@import "../fonts";
 
 .piece-modal-wap {
   display: none;
@@ -486,65 +487,23 @@
 .pieces-by-date-wap {
   margin-bottom: 40px;
 
-  .panel-body {
-    padding: 0;
-  }
+  .date {
+    text-align: center;
+    margin-bottom: 25px;
 
-  .panel-footer {
-    .btn-show-hide-pieces {
-      cursor: pointer;
-      color: #999;
+    .date-cn {
+      font-size: 24px;
+      .font-kai();
+    }
 
-      &:hover {
-        color: @main-color;
-      }
+    .date-en {
+      color: #AAA;
     }
   }
 
   .hide-pieces {
     border-top: 1px solid @border-color;
     display: none;
-  }
-
-  .pieces-pager {
-    border-top: 1px solid @border-color;
-
-    .pre-page,
-    .next-page {
-      text-align: center;
-      width: 50%;
-      padding: 10px 0;
-      font-size: 20px;
-      cursor: pointer;
-
-      &.disabled {
-        color: #aaa;
-
-        &:hover {
-          background-color: #ffffff;
-          cursor: default;
-        }
-      }
-
-      &:hover,
-      &:focus {
-        text-decoration: none;
-      }
-
-      &:hover {
-        background-color: #f6f6f6;
-      }
-    }
-
-    .pre-page {
-      float: left;
-      border-bottom-left-radius: 5px;
-    }
-
-    .next-page {
-      float: right;
-      border-bottom-right-radius: 5px;
-    }
   }
 
   .share-piece {
@@ -565,27 +524,12 @@
 .pieces-wap {
   .piece {
     border-bottom: 1px solid @border-color;
-    padding: 25px 20px 20px 20px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
     cursor: pointer;
-
-    &.last {
-      border-bottom: none;
-    }
 
     &.selected {
       background-color: #f8f8f8;
-    }
-
-    &:hover {
-      background-color: #f8f8f8;
-
-      .meta .options {
-        .collect,
-        .btn-edit-piece,
-        .btn-full-screen {
-          visibility: visible;
-        }
-      }
     }
 
     .media-left {
@@ -600,21 +544,33 @@
       @media (max-width: @screen-xxs-max) {
         display: none;
       }
-    }
 
-    .user-avatar {
-      width: 32px;
-      height: 32px;
-    }
+      .btn-show-qrcode {
+        line-height: 32px;
+        margin-right: 30px;
+        color: gray;
+        font-size: 20px;
+      }
 
-    .comments-count {
-      text-align: center;
-      margin-top: 8px;
-      color: #bbb;
+      .user-avatar-link {
+        display: block;
+        float: right;
+        margin-right: 20px;
 
-      .fa {
-        font-size: 12px;
-        margin-left: 1px;
+        .user-avatar {
+          width: 32px;
+          height: 32px;
+        }
+      }
+
+      .comments-count {
+        color: #bbb;
+        line-height: 32px;
+
+        .fa {
+          font-size: 12px;
+          margin-left: 1px;
+        }
       }
     }
 
@@ -673,21 +629,18 @@
     }
 
     .vote {
-      background-color: #ffffff;
-      border: 1px solid #E0E3E6;
+      background-color: #f2f9f3;
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
       padding: 5px 10px;
-      font-size: 16px;
+      font-size: 18px;
       cursor: pointer;
       text-align: center;
-
-      &:hover {
-        border-color: #bbb;
-      }
+      color: #74b05d;
+      border-radius: 2px;
 
       &.voted {
-        border-color: @main-color;
-        color: @main-color;
+        background-color: #74b05d;
+        color: white;
       }
 
       .votes-count {

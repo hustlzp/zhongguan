@@ -16,5 +16,5 @@ def add():
         db.session.add(feedback)
         db.session.commit()
         return render_template('site/message.html', title='提交成功',
-                               message="反馈已经送达，感谢你对壹经典的支持！")
+                               message="反馈已经送达，感谢你对中关村词典的支持！")
     return render_template('feedback/add.html', form=form)

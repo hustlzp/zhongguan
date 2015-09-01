@@ -113,7 +113,6 @@ class Piece(db.Model):
 
         return {
             'date': day,
-            'date_string': date_string,
             'pieces': pieces,
             'hide_pieces': hide_pieces,
             'hide_pieces_count': hide_pieces_count
