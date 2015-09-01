@@ -1,4 +1,4 @@
-中关村词典
+中关村字典
 =========
 
 http://www.1jingdian.com
