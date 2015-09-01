@@ -9,7 +9,7 @@ host_string = config.HOST_STRING
 def deploy():
     """部署"""
     env.host_string = config.HOST_STRING
-    with cd('/var/www/1jingdian'):
+    with cd('/var/www/zhongguan'):
         with shell_env(MODE='PRODUCTION'):
             run('git reset --hard HEAD')
             run('git pull')
@@ -17,10 +17,10 @@ def deploy():
                 run('pip install -r requirements.txt')
                 run('python manage.py build_assets')
                 run('python manage.py db upgrade')
-            run('supervisorctl restart 1jingdian')
+            run('supervisorctl restart zhongguan')
 
 
 def restart():
     """重启"""
     env.host_string = config.HOST_STRING
-    run('supervisorctl restart 1jingdian')
+    run('supervisorctl restart zhongguan')
