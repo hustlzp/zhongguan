@@ -10,7 +10,6 @@ libs:
   - bower_components/typeahead.js/dist/typeahead.bundle.min.js
   - bower_components/jquery-mousewheel/jquery.mousewheel.min.js
   - bower_components/Jcrop/js/jquery.Jcrop.min.js
-  - bower_components/jquery-s2t/jquery.s2t.js
   - libs/jquery.animate-colors-min.js
   - js/init.js
 
