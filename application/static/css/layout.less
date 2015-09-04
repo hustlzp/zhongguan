@@ -6,7 +6,7 @@ html {
 }
 
 body {
-  margin-bottom: 100px;
+  margin-bottom: 400px;
 }
 
 // Flash message
@@ -85,22 +85,50 @@ body {
   position: absolute;
   bottom: 0;
   width: 100%;
-  text-align: center;
-  font-size: 12px;
-  /* Set the fixed height of the footer here */
-  height: 60px;
-  padding-top: 20px;
+  height: 300px;
   color: #aaa;
+  background-color: #333;
 
-  li {
-    padding: 0 6px;
+  .bottom-market {
+    .logo {
+      display: inline-block;
+      margin-top: 80px;
+      margin-bottom: 10px;
+      width: 45px;
+    }
+
+    .product-name {
+      font-size: 22px;
+      color: #fff;
+    }
+
+    .slogan {
+      margin-bottom: 8px;
+    }
+
+    .domain {
+      font-family: 'Krungthep', 'Krungthep';
+    }
   }
 
-  a {
-    color: #aaa;
+  .other {
+    position: absolute;
+    bottom: 15px;
+    left: 0;
+    width: 100%;
 
-    &:hover {
-      color: @main-color;
+    .copyright {
+      padding-left: 20px;
+
+    }
+
+    .about-us {
+      padding-right: 20px;
+
+      a {
+        color: #aaa;
+      }
     }
   }
 }
+
