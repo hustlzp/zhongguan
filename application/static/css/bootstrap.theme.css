@@ -37,9 +37,10 @@ ol li {
 }
 .navbar-brand {
   height: auto;
+  padding: 15px 30px 15px 20px;
 }
 .navbar-brand img {
-  height: 28px;
+  height: 40px;
   display: inline-block;
 }
 .navbar-brand small {
@@ -52,29 +53,44 @@ ol li {
   margin-top: 18px;
   margin-bottom: 18px;
 }
-.navbar-nav > li > a {
-  padding-top: 19px !important;
-  padding-bottom: 19px !important;
+.navbar-collapse .navbar-nav > li > a {
+  padding-top: 25px;
+  padding-bottom: 25px;
   display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
 }
 @media (max-width: 767px) {
-  .navbar-nav > li > a {
+  .navbar-collapse .navbar-nav > li > a {
     padding-top: 10px !important;
     padding-bottom: 10px !important;
     display: block;
   }
 }
-.navbar-nav > li > a.disabled {
+.navbar-collapse .navbar-nav > li > a.disabled {
   color: #aaa;
   cursor: default;
 }
-.navbar-nav > li > a.disabled:focus,
-.navbar-nav > li > a.disabled:hover {
+.navbar-collapse .navbar-nav > li > a.disabled:focus,
+.navbar-collapse .navbar-nav > li > a.disabled:hover {
   color: #aaa;
 }
-.navbar-btn {
-  margin-top: 12px;
-  margin-bottom: 12px;
+.navbar-collapse .dropdown-menu {
+  padding: 0;
+}
+.navbar-collapse .dropdown-menu > li > a {
+  padding: 8px 20px;
+  border-bottom: 1px solid #eee;
+}
+.navbar-collapse .dropdown-menu > li:last-child > a {
+  border-bottom: none;
+}
+.navbar-collapse .navbar-btn {
+  margin-top: 18px;
+  margin-bottom: 18px;
+  border-radius: 0;
+  background-color: #f2f2f2;
+  margin-right: 10px;
 }
 .col-md-4 h2:first-child {
   margin-top: 0;
