@@ -253,3 +253,16 @@ a:focus {
 .table-responsive {
   white-space: nowrap;
 }
+.btn {
+  border-radius: 2px;
+}
+.btn-default.active,
+.btn-default.focus,
+.btn-default:active,
+.btn-default:focus,
+.btn-default:hover,
+.open > .dropdown-toggle.btn-default {
+  color: #333;
+  background-color: #eeeeee;
+  border-color: #ccc;
+}

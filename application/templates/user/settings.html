@@ -4,46 +4,28 @@
 
 {% block page_title %}设置 - 中关村字典{% endblock %}
 {% block page_content %}
-   <div class="container">
-      <div class="panel panel-primary">
-         <div class="panel-heading">设置</div>
-         <div class="panel-body">
-            <form method="post" action="{{ url_for('user.settings') }}">
-               {{ form.csrf_token() }}
+    <div class="container">
+        <div class="page-title">设置</div>
 
-               <div class="form-group form-group-avatar">
-                  {{ upload_and_crop_image(
-                        g.user.avatar_url,
-                        url_for('user.upload_avatar'),
-                        url_for('user.crop_avatar'),
-                        "更新头像"
-                     ) }}
-               </div>
+        <div class="setting-item clearfix">
+            <div class="key">消息通知设置</div>
+            <div class="control">
+                <label>
+                    <input type="checkbox"> 接收评论通知
+                </label>
+                <label>
+                    <input type="checkbox"> 接收点赞通知
+                </label>
+            </div>
+        </div>
 
-               {{ vertical_field(form.motto) }}
-               {{ vertical_field(form.blog) }}
-               {{ vertical_field(form.weibo) }}
-               {{ vertical_field(form.douban) }}
-               {# {{ vertical_field(form.zhihu) }}#}
-
-               <div class="form-group">
-                  <label for="mottoa">密码</label>
-
-                  <div>
-                     <a class="btn btn-default btn-xs"
-                        href="{{ url_for('user.change_password') }}">
-                        修改密码
-                     </a>
-                  </div>
-               </div>
-
-               <div class="submit-wap submit-right">
-                  <button type="submit" class="btn btn-submit btn-primary">保存</button>
-               </div>
-            </form>
-         </div>
-      </div>
-   </div>
-
-
+        <div class="setting-item clearfix">
+            <div class="key">个人资料</div>
+            <div class="control">
+                <a href="{{ url_for('user.profile', uid=g.user.id) }}" class="btn btn-default">
+                    去个人主页修改头像、称呼、签名 <span class="fa fa-angle-double-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
 {% endblock %}
