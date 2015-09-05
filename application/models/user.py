@@ -21,6 +21,10 @@ class User(db.Model):
     voters_count = db.Column(db.Integer, default=0)
     liked_collections_count = db.Column(db.Integer, default=0)
 
+    # 设置
+    receive_comments_notification = db.Column(db.Boolean, default=True)
+    receive_votes_notification = db.Column(db.Boolean, default=True)
+
     # 社交媒体
     weibo = db.Column(db.String(100))
     zhihu = db.Column(db.String(100))
