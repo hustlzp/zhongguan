@@ -11,10 +11,12 @@
             <div class="key">消息通知设置</div>
             <div class="control">
                 <label>
-                    <input type="checkbox"> 接收评论通知
+                    <input type="checkbox" {% if g.user.receive_comments_notification %}checked{% endif %}
+                           data-key="receive_comments_notification"> 接收评论通知
                 </label>
                 <label>
-                    <input type="checkbox"> 接收点赞通知
+                    <input type="checkbox" {% if g.user.receive_votes_notification %}checked{% endif %}
+                           data-key="receive_votes_notification"> 接收点赞通知
                 </label>
             </div>
         </div>

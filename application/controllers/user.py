@@ -5,6 +5,7 @@ from ..utils.permissions import UserPermission
 from ..utils.uploadsets import avatars, crop_image, process_image_for_cropping
 from ..models import db, User, Notification
 from ..forms import SettingsForm, ChangePasswordForm
+from ..utils.decorators import jsonify
 
 bp = Blueprint('user', __name__)
 
@@ -52,6 +53,25 @@ def settings():
         flash('设置已保存')
         return redirect(url_for('.settings'))
     return render_template('user/settings.html', form=form)
+
+
+@bp.route('/my/toggle_setting', methods=['POST'])
+@UserPermission()
+@jsonify
+def toggle_setting():
+    """切换设置"""
+    key = request.args.get('key')
+    if not key or not hasattr(g.user, key):
+        abort(404)
+
+    setattr(g.user, key, not getattr(g.user, key))
+    db.session.add(g.user)
+    db.session.commit()
+
+    return {
+        'result': True,
+        'setting_result': getattr(g.user, key)
+    }
 
 
 @bp.route('/my/change_password', methods=['GET', 'POST'])
