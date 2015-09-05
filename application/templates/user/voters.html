@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% from "macros/_collection.html" import render_collections %}
+{% from "macros/_user.html" import render_user_profile_header %}
+{% from 'macros/_utils.html' import pagination %}
+
+{% block page_title %}{{ user.name }} - 给我点赞的人 - 中关村字典{% endblock %}
+{% block page_content %}
+    <div class="container">
+        {{ render_user_profile_header(user, active="voters") }}
+
+        {#        {% if collections.pages > 1 %}#}
+        {#        {% endif %}#}
+    </div>
+{% endblock %}

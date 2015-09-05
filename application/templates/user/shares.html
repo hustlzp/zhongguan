@@ -3,14 +3,14 @@
 {% from "macros/_user.html" import render_user_profile_header %}
 {% from 'macros/_utils.html' import pagination %}
 
-{% block page_title %}{{ user.name }} - 中关村字典{% endblock %}
+{% block page_title %}{{ user.name }} - 分享 - 中关村字典{% endblock %}
 {% block page_content %}
     <div class="container">
-        {{ render_user_profile_header(user, active="votes") }}
-        {{ render_pieces(votes.items, attr="piece") }}
+        {{ render_user_profile_header(user, active="shares") }}
+        {{ render_pieces(pieces.items) }}
 
-        {% if votes.pages > 1 %}
-            {{ pagination(votes) }}
+        {% if pieces.pages > 1 %}
+            {{ pagination(pieces) }}
         {% endif %}
     </div>
 {% endblock %}

@@ -40,21 +40,26 @@
 }
 .user-profile-header .tab {
   text-align: center;
+  border: 1px solid #e0e0e0;
 }
 .user-profile-header .tab .tab-item {
+  border-right: 1px solid #e0e0e0;
+  font-weight: bold;
   text-decoration: none;
   float: left;
   display: block;
   line-height: 1;
   padding: 17px 0;
+  color: #8f8f8f;
   width: 33.333333333%;
-  background-color: #eee;
-  color: #333;
+}
+.user-profile-header .tab .tab-item:last-child {
+  border-right: none;
 }
 .user-profile-header .tab .tab-item.active,
 .user-profile-header .tab .tab-item:hover {
-  background-color: #1e88a8;
-  color: #ffffff;
+  background-color: #f8f8f8;
+  color: #333;
 }
 /* 用户卡片 */
 .popover-content-wap {

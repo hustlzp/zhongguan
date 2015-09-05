@@ -51,21 +51,27 @@
 
   .tab {
     text-align: center;
+    border: 1px solid #e0e0e0;
 
     .tab-item {
+      border-right: 1px solid #e0e0e0;
+      font-weight: bold;
       text-decoration: none;
       float: left;
       display: block;
       line-height: 1;
       padding: 17px 0;
+      color: #8f8f8f;
       width: 33.333333333%;
-      background-color: #eee;
-      color: #333;
+
+      &:last-child {
+        border-right: none;
+      }
 
       &.active,
       &:hover {
-        background-color: @main-color;
-        color: #ffffff;
+        background-color: #f8f8f8;
+        color: #333;
       }
     }
   }
@@ -74,7 +80,6 @@
 /* 用户卡片 */
 .popover-content-wap {
   display: none;
-
 }
 
 .user-card {

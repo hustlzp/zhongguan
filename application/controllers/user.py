@@ -17,12 +17,19 @@ def profile(uid, page):
     return render_template('user/profile.html', user=user, votes=votes)
 
 
-@bp.route('/people/<int:uid>/share', defaults={'page': 1})
-@bp.route('/people/<int:uid>/share/page/<int:page>')
-def share(uid, page):
+@bp.route('/people/<int:uid>/shares', defaults={'page': 1})
+@bp.route('/people/<int:uid>/shares/page/<int:page>')
+def shares(uid, page):
     user = User.query.get_or_404(uid)
     pieces = user.pieces.paginate(page, 20)
-    return render_template('user/share.html', user=user, pieces=pieces)
+    return render_template('user/shares.html', user=user, pieces=pieces)
+
+
+@bp.route('/people/<int:uid>/voters', defaults={'page': 1})
+@bp.route('/people/<int:uid>/voters/page/<int:page>')
+def voters(uid, page):
+    user = User.query.get_or_404(uid)
+    return render_template('user/voters.html', user=user)
 
 
 @bp.route('/people/<int:uid>/likes', defaults={'page': 1})

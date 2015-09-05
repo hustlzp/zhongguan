@@ -18,6 +18,7 @@ class User(db.Model):
 
     votes_count = db.Column(db.Integer, default=0)
     pieces_count = db.Column(db.Integer, default=0)
+    voters_count = db.Column(db.Integer, default=0)
     liked_collections_count = db.Column(db.Integer, default=0)
 
     # 社交媒体
@@ -41,6 +42,23 @@ class User(db.Model):
 
     def __repr__(self):
         return '<User %s>' % self.name
+
+
+class Voter(db.Model):
+    """点赞者"""
+    id = db.Column(db.Integer, primary_key=True)
+    count = db.Column(db.Integer, default=0)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=None)
+    user = db.relationship('User',
+                           backref=db.backref('voters',
+                                              cascade="all, delete, delete-orphan",
+                                              uselist=False),
+                           foreign_keys=[user_id])
+
+    voter_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=None)
+    voter = db.relationship('User', foreign_keys=[voter_id])
 
 
 class InvitationCode(db.Model):

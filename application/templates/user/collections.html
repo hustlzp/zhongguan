@@ -5,16 +5,12 @@
 
 {% block page_title %}{{ user.name }} - 收藏的句集 - 中关村字典{% endblock %}
 {% block page_content %}
-   <div class="container">
-      <div class="panel panel-primary">
-         <div class="panel-body panel-body-no-padding">
-            {{ render_user_profile_header(user, active="likes") }}
-            {{ render_collections(collections.items, attr='collection') }}
+    <div class="container">
+        {{ render_user_profile_header(user, active="likes") }}
+        {{ render_collections(collections.items, attr='collection') }}
 
-            {% if collections.pages > 1 %}
-               {{ pagination(collections) }}
-            {% endif %}
-         </div>
-      </div>
-   </div>
+        {% if collections.pages > 1 %}
+            {{ pagination(collections) }}
+        {% endif %}
+    </div>
 {% endblock %}

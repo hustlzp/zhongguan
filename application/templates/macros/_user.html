@@ -45,42 +45,42 @@
                 <div class="motto">{{ user.motto }}</div>
             {% endif %}
 
-            <div class="media-icons">
-                {% if user.blog %}
-                    <a href="{{ user.blog }}" target="_blank" title="博客">
-                        <img src="{{ static('image/media/blog.png') }}" alt=""/>
-                    </a>
-                {% endif %}
-                {% if user.weibo %}
-                    <a href="{{ user.weibo }}" target="_blank" title="微博">
-                        <img src="{{ static('image/media/weibo.jpg') }}" alt=""/>
-                    </a>
-                {% endif %}
-                {% if user.douban %}
-                    <a href="{{ user.douban }}" target="_blank" title="豆瓣">
-                        <img src="{{ static('image/media/douban.png') }}" alt=""/>
-                    </a>
-                {% endif %}
-                {#            {% if user.zhihu %}#}
-                {#               <a href="{{ user.zhihu }}" target="_blank" title="知乎">#}
-                {#                  <img src="{{ static('image/media/zhihu.png') }}" alt=""/>#}
-                {#               </a>#}
-                {#            {% endif %}#}
-            </div>
+            {#            <div class="media-icons">#}
+            {#                {% if user.blog %}#}
+            {#                    <a href="{{ user.blog }}" target="_blank" title="博客">#}
+            {#                        <img src="{{ static('image/media/blog.png') }}" alt=""/>#}
+            {#                    </a>#}
+            {#                {% endif %}#}
+            {#                {% if user.weibo %}#}
+            {#                    <a href="{{ user.weibo }}" target="_blank" title="微博">#}
+            {#                        <img src="{{ static('image/media/weibo.jpg') }}" alt=""/>#}
+            {#                    </a>#}
+            {#                {% endif %}#}
+            {#                {% if user.douban %}#}
+            {#                    <a href="{{ user.douban }}" target="_blank" title="豆瓣">#}
+            {#                        <img src="{{ static('image/media/douban.png') }}" alt=""/>#}
+            {#                    </a>#}
+            {#                {% endif %}#}
+            {#            {% if user.zhihu %}#}
+            {#               <a href="{{ user.zhihu }}" target="_blank" title="知乎">#}
+            {#                  <img src="{{ static('image/media/zhihu.png') }}" alt=""/>#}
+            {#               </a>#}
+            {#            {% endif %}#}
+            {#            </div>#}
         </div>
 
         <div class="tab clearfix">
             <a class="tab-item {% if active == "votes" %}active{% endif %}"
                href="{{ url_for('user.profile', uid=user.id) }}">
-                {{ user.votes_count }} 顶
+                我点赞的 {{ user.votes_count }}
             </a>
-            <a class="tab-item {% if active == "share" %}active{% endif %}"
-               href="{{ url_for('user.share', uid=user.id) }}">
-                {{ user.pieces_count }} 分享
+            <a class="tab-item {% if active == "shares" %}active{% endif %}"
+               href="{{ url_for('user.shares', uid=user.id) }}">
+                我撰写的 {{ user.pieces_count }}
             </a>
-            <a class="tab-item {% if active == "likes" %}active{% endif %}"
-               href="{{ url_for('user.likes', uid=user.id) }}">
-                {{ user.liked_collections_count }} 收藏
+            <a class="tab-item {% if active == "voters" %}active{% endif %}"
+               href="{{ url_for('user.voters', uid=user.id) }}">
+                给我点赞的人 {{ user.lvoters_count }}
             </a>
         </div>
     </div>

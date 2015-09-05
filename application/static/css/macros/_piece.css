@@ -432,6 +432,9 @@
   text-decoration: none;
   color: #333;
 }
+.pieces-wap {
+  margin-top: 30px;
+}
 .pieces-wap .piece {
   border-bottom: 1px solid #e2e2e2;
   padding-bottom: 30px;
