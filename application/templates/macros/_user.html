@@ -1,87 +1,87 @@
 {% macro render_user_avatar(user) %}
-   <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link">
-      <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
-           data-user-id="{{ user.id }}" alt=""/></a>
-   <div class="popover-content-wap">
-      <div class="user-card">
-         <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-link">
-            <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
-         </a>
-
-         <div class="user-name">
-            {{ user.name }}
-         </div>
-
-         <div class="meta clearfix">
-            <div class="count-wap votes-count">
-               <a href="{{ url_for('user.profile', uid=user.id) }}">
-                  {{ user.votes_count }}<br/><span class="count-quantifier">顶</span>
-               </a>
-            </div>
-            <div class="count-wap pieces-count">
-               <a href="{{ url_for('user.share', uid=user.id) }}">
-                  {{ user.pieces_count }}<br/><span class="count-quantifier">分享</span>
-               </a>
-            </div>
-            <div class="count-wap collections-count">
-               <a href="{{ url_for('user.likes', uid=user.id) }}">
-                  {{ user.liked_collections_count }}<br/><span class="count-quantifier">收藏</span>
-               </a>
-            </div>
-         </div>
-      </div>
-   </div>
+    <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link">
+        <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
+             data-user-id="{{ user.id }}" title="{{ user.name }}" alt=""/></a>
+    {#    <div class="popover-content-wap">#}
+    {#        <div class="user-card">#}
+    {#            <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-link">#}
+    {#                <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>#}
+    {#            </a>#}
+    {##}
+    {#            <div class="user-name">#}
+    {#                {{ user.name }}#}
+    {#            </div>#}
+    {##}
+    {#            <div class="meta clearfix">#}
+    {#                <div class="count-wap votes-count">#}
+    {#                    <a href="{{ url_for('user.profile', uid=user.id) }}">#}
+    {#                        {{ user.votes_count }}<br/><span class="count-quantifier">顶</span>#}
+    {#                    </a>#}
+    {#                </div>#}
+    {#                <div class="count-wap pieces-count">#}
+    {#                    <a href="{{ url_for('user.share', uid=user.id) }}">#}
+    {#                        {{ user.pieces_count }}<br/><span class="count-quantifier">分享</span>#}
+    {#                    </a>#}
+    {#                </div>#}
+    {#                <div class="count-wap collections-count">#}
+    {#                    <a href="{{ url_for('user.likes', uid=user.id) }}">#}
+    {#                        {{ user.liked_collections_count }}<br/><span class="count-quantifier">收藏</span>#}
+    {#                    </a>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
 {% endmacro %}
 
 
 {% macro render_user_profile_header(user, active="creates") %}
-   <div class="user-profile-header">
-      <div class="user-info">
-         <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
+    <div class="user-profile-header">
+        <div class="user-info">
+            <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
 
-         <div class="user-name">{{ user.name }}</div>
+            <div class="user-name">{{ user.name }}</div>
 
-         {% if user.motto %}
-            <div class="motto">{{ user.motto }}</div>
-         {% endif %}
-
-         <div class="media-icons">
-            {% if user.blog %}
-               <a href="{{ user.blog }}" target="_blank" title="博客">
-                  <img src="{{ static('image/media/blog.png') }}" alt=""/>
-               </a>
+            {% if user.motto %}
+                <div class="motto">{{ user.motto }}</div>
             {% endif %}
-            {% if user.weibo %}
-               <a href="{{ user.weibo }}" target="_blank" title="微博">
-                  <img src="{{ static('image/media/weibo.jpg') }}" alt=""/>
-               </a>
-            {% endif %}
-            {% if user.douban %}
-               <a href="{{ user.douban }}" target="_blank" title="豆瓣">
-                  <img src="{{ static('image/media/douban.png') }}" alt=""/>
-               </a>
-            {% endif %}
-            {#            {% if user.zhihu %}#}
-            {#               <a href="{{ user.zhihu }}" target="_blank" title="知乎">#}
-            {#                  <img src="{{ static('image/media/zhihu.png') }}" alt=""/>#}
-            {#               </a>#}
-            {#            {% endif %}#}
-         </div>
-      </div>
 
-      <div class="tab clearfix">
-         <a class="tab-item {% if active == "votes" %}active{% endif %}"
-            href="{{ url_for('user.profile', uid=user.id) }}">
-            {{ user.votes_count }} 顶
-         </a>
-         <a class="tab-item {% if active == "share" %}active{% endif %}"
-            href="{{ url_for('user.share', uid=user.id) }}">
-            {{ user.pieces_count }} 分享
-         </a>
-         <a class="tab-item {% if active == "likes" %}active{% endif %}"
-            href="{{ url_for('user.likes', uid=user.id) }}">
-            {{ user.liked_collections_count }} 收藏
-         </a>
-      </div>
-   </div>
+            <div class="media-icons">
+                {% if user.blog %}
+                    <a href="{{ user.blog }}" target="_blank" title="博客">
+                        <img src="{{ static('image/media/blog.png') }}" alt=""/>
+                    </a>
+                {% endif %}
+                {% if user.weibo %}
+                    <a href="{{ user.weibo }}" target="_blank" title="微博">
+                        <img src="{{ static('image/media/weibo.jpg') }}" alt=""/>
+                    </a>
+                {% endif %}
+                {% if user.douban %}
+                    <a href="{{ user.douban }}" target="_blank" title="豆瓣">
+                        <img src="{{ static('image/media/douban.png') }}" alt=""/>
+                    </a>
+                {% endif %}
+                {#            {% if user.zhihu %}#}
+                {#               <a href="{{ user.zhihu }}" target="_blank" title="知乎">#}
+                {#                  <img src="{{ static('image/media/zhihu.png') }}" alt=""/>#}
+                {#               </a>#}
+                {#            {% endif %}#}
+            </div>
+        </div>
+
+        <div class="tab clearfix">
+            <a class="tab-item {% if active == "votes" %}active{% endif %}"
+               href="{{ url_for('user.profile', uid=user.id) }}">
+                {{ user.votes_count }} 顶
+            </a>
+            <a class="tab-item {% if active == "share" %}active{% endif %}"
+               href="{{ url_for('user.share', uid=user.id) }}">
+                {{ user.pieces_count }} 分享
+            </a>
+            <a class="tab-item {% if active == "likes" %}active{% endif %}"
+               href="{{ url_for('user.likes', uid=user.id) }}">
+                {{ user.liked_collections_count }} 收藏
+            </a>
+        </div>
+    </div>
 {% endmacro %}

@@ -2,44 +2,48 @@
 setTimeout(showFlash, 200);
 setTimeout(hideFlash, 2000);
 
-// 弹出用户卡片
-$(document).on('mouseenter', '.user-avatar.user-avatar-popover', function () {
-    var _this = $(this);
-
-    // 隐藏其他的用户卡片
-    $('.user-avatar.user-avatar-popover').popover('destroy');
-
-    $(this).popover({
-        content: function () {
-            return $(this).parent().nextAll('.popover-content-wap').first().html()
-        },
-        html: true,
-        container: 'body',
-        trigger: 'manual',
-        placement: 'bottom',
-        animation: false,
-        viewport: {
-            selector: 'body',
-            padding: 15
-        },
-        selector: '.user-avatar.user-avatar-popover'
-    }).popover('show');
-
-    $(".popover").one("mouseleave", function () {
-        $(_this).popover('destroy');
-    });
+// 弹出用户名
+$(document).tooltip({
+    selector: '.user-avatar-popover',
+    placement: 'bottom'
 });
+//$(document).on('mouseenter', '.user-avatar.user-avatar-popover', function () {
+//    var _this = $(this);
+//
+//    // 隐藏其他的用户卡片
+//    $('.user-avatar.user-avatar-popover').popover('destroy');
+//
+//    $(this).popover({
+//        content: function () {
+//            return $(this).parent().nextAll('.popover-content-wap').first().html()
+//        },
+//        html: true,
+//        container: 'body',
+//        trigger: 'manual',
+//        placement: 'bottom',
+//        animation: false,
+//        viewport: {
+//            selector: 'body',
+//            padding: 15
+//        },
+//        selector: '.user-avatar.user-avatar-popover'
+//    }).popover('show');
+//
+//    $(".popover").one("mouseleave", function () {
+//        $(_this).popover('destroy');
+//    });
+//});
 
 // 隐藏用户卡片
-$(document).on('mouseleave', '.user-avatar.user-avatar-popover', function () {
-    var _this = $(this);
-
-    setTimeout(function () {
-        if (!$(".popover:hover").length) {
-            $(_this).popover("destroy");
-        }
-    }, 200);
-});
+//$(document).on('mouseleave', '.user-avatar.user-avatar-popover', function () {
+//    var _this = $(this);
+//
+//    setTimeout(function () {
+//        if (!$(".popover:hover").length) {
+//            $(_this).popover("destroy");
+//        }
+//    }, 200);
+//});
 
 // 顶句子
 $(document).on('click', '.vote', function () {
