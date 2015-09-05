@@ -12,6 +12,7 @@ from ..utils.helpers import absolute_url_for
 class Piece(db.Model):
     """Model for text piece"""
     id = db.Column(db.Integer, primary_key=True)
+    word = db.Column(db.String(50), nullable=False)
     content = db.Column(db.Text)
     content_length = db.Column(db.Integer, default=0)
     original = db.Column(db.Boolean, default=False)
@@ -117,6 +118,23 @@ class Piece(db.Model):
             'hide_pieces': hide_pieces,
             'hide_pieces_count': hide_pieces_count
         }
+
+
+class Sentence(db.Model):
+    """例句"""
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref=db.backref('sentences',
+                                                      lazy='dynamic',
+                                                      order_by='desc(Sentence.created_at)'))
+
+    piece_id = db.Column(db.Integer, db.ForeignKey('piece.id'))
+    piece = db.relationship('Piece', backref=db.backref('sentences',
+                                                        lazy='dynamic',
+                                                        order_by='asc(Sentence.created_at)'))
 
 
 class PieceVote(db.Model):
