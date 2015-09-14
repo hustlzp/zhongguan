@@ -181,7 +181,7 @@
         <div class="title">创建新词条</div>
 
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="词条名称">
+            <input type="text" class="form-control word-input" placeholder="词条名称">
             <span class="input-group-btn">
                 <button class="btn btn-primary btn-go-to-second-step" type="button">😂开始</button>
             </span>
@@ -189,15 +189,16 @@
     </div>
 
     <div class="second-step">
-        <div class="word">狼窝</div>
+        <div class="word"></div>
 
-        <textarea class="form-control explanation-textarea" rows="4" placeholder="你的解释，尽量通俗易懂。"></textarea>
+        <textarea class="form-control explanation-textarea" rows="4" name="explanation"
+                  placeholder="你的解释，尽量通俗易懂。"></textarea>
 
         <button class="btn btn-default btn-block btn-add-sentence">
             + 添加例句
         </button>
 
-        <textarea class="form-control sentence-textarea" rows="4"
+        <textarea class="form-control sentence-textarea" rows="4" name="sentence"
                   placeholder="添加例句，让解释更生动形象，😂😂😂效果更加"></textarea>
 
         <div class="text-center btn-submit-piece-wap">
