@@ -83,7 +83,23 @@ $btnGoToSecondStep.click(function () {
 
 // 提交
 $btnSubmitPiece.click(function () {
-    closeAddPieceWap();
+    var explanation = $.trim($explanationTextarea.val());
+    var sentence = $.trim($sentenceTextarea.val());
+
+    $.ajax({
+        url: urlFor('piece.add'),
+        method: 'post',
+        dataType: 'json',
+        data: {
+            word: word,
+            content: explanation,
+            sentence: sentence
+        }
+    }).done(function (response) {
+        if (response.result) {
+            window.location = urlFor('site.index', {piece_id: response.piece_id});
+        }
+    });
 });
 
 // 添加例句

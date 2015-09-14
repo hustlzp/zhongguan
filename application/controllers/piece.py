@@ -8,6 +8,7 @@ from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, 
     PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog, PieceCommentVote, Notification, \
     NOTIFICATION_KIND, PieceEditLogReport, CollectionEditLog, COLLECTION_EDIT_KIND
 from ..forms import PieceForm
+from ..utils.decorators import jsonify
 
 bp = Blueprint('piece', __name__)
 
@@ -74,39 +75,20 @@ def modal(uid):
 
 @bp.route('/piece/add', methods=['GET', 'POST'])
 @UserPermission()
+@jsonify
 def add():
-    # permission = PieceAddPermission()
-    # if not permission.check():
-    # return permission.deny()
-
     form = PieceForm()
     if form.validate_on_submit():
-        comment = form.comment.data.strip()
-
-        form.original.data = request.form.get('original') == 'true'
-        params = form.data.copy()
-        params.pop('comment')
-        piece = Piece(**params)
+        piece = Piece(**form.data)
         piece.user_id = g.user.id
         db.session.add(piece)
         db.session.commit()
 
-        # comment
-        if comment:
-            piece_comment = PieceComment(content=comment, piece_id=piece.id, user_id=g.user.id)
-            db.session.add(piece_comment)
-
-        # 存储source和author
-        if piece.source:
-            _save_piece_source(piece.source)
-        if piece.author:
-            _save_piece_author(piece.author)
-
         # 自动vote
-        vote = PieceVote(piece_id=piece.id, user_id=g.user.id)
-        db.session.add(vote)
-        g.user.votes_count += 1
-        piece.votes_count += 1
+        # vote = PieceVote(piece_id=piece.id, user_id=g.user.id)
+        # db.session.add(vote)
+        # g.user.votes_count += 1
+        # piece.votes_count += 1
 
         # log
         log = PieceEditLog(piece_id=piece.id, user_id=g.user.id, kind=PIECE_EDIT_KIND.CREATE)
@@ -116,23 +98,24 @@ def add():
         piece.make_qrcode()
         db.session.add(piece)
 
-        # 如果存在title为author的句集，则自动将piece加入到此句集
-        author_collection = Collection.get_by_title(piece.author)
-        if author_collection:
-            author_collection_piece = CollectionPiece(collection_id=author_collection.id)
-            piece.collections.append(author_collection_piece)
-
-        # 如果存在title为source的句集，则自动将piece加入到此句集
-        source_collection = Collection.get_by_title(piece.source)
-        if source_collection:
-            source_collection_piece = CollectionPiece(collection_id=source_collection.id)
-            piece.collections.append(source_collection_piece)
+        # # 如果存在title为author的句集，则自动将piece加入到此句集
+        # author_collection = Collection.get_by_title(piece.author)
+        # if author_collection:
+        #     author_collection_piece = CollectionPiece(collection_id=author_collection.id)
+        #     piece.collections.append(author_collection_piece)
+        #
+        # # 如果存在title为source的句集，则自动将piece加入到此句集
+        # source_collection = Collection.get_by_title(piece.source)
+        # if source_collection:
+        #     source_collection_piece = CollectionPiece(collection_id=source_collection.id)
+        #     piece.collections.append(source_collection_piece)
 
         g.user.pieces_count += 1
         db.session.add(g.user)
         db.session.commit()
-        return redirect(url_for('.view', uid=piece.id))
-    return render_template('piece/add.html', form=form)
+        return {'result': True, 'piece_id': piece.id}
+    else:
+        return {'result': False}
 
 
 @bp.route('/piece/<int:uid>/edit', methods=['GET', 'POST'])
