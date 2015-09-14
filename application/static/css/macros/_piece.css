@@ -12,9 +12,9 @@
   top: 0;
   bottom: 0;
   background-color: #fff;
-  width: 500px;
+  width: 600px;
   z-index: 1000;
-  padding: 30px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
   overflow: auto;
   box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
 }
@@ -65,12 +65,25 @@
   border-color: #1e88a8;
   color: #ffffff;
 }
+.piece-details-wap .piece-header .commands-wap {
+  text-align: right;
+}
+.piece-details-wap .piece-header .commands-wap a {
+  display: inline-block;
+  font-size: 22px;
+  color: #999;
+  cursor: pointer;
+  padding: 0 0 0 15px;
+}
+.piece-details-wap .piece-header .commands-wap a:hover {
+  color: #666;
+}
 .piece-details-wap .piece-header .word {
   text-align: center;
   font-weight: bold;
   font-size: 28px;
   font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 .piece-details-wap .piece-header .avatar-wap {
   text-align: center;
@@ -429,9 +442,6 @@
   margin-bottom: 30px;
   cursor: pointer;
 }
-.pieces-wap .piece.selected {
-  background-color: #f8f8f8;
-}
 .pieces-wap .piece .media-left {
   padding-right: 25px;
 }
@@ -468,12 +478,15 @@
   font-size: 12px;
   margin-left: 1px;
 }
-.pieces-wap .piece .word {
+.pieces-wap .piece .body:hover .word {
+  text-decoration: underline;
+}
+.pieces-wap .piece .body .word {
   font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
   font-weight: bold;
   font-size: 24px;
 }
-.pieces-wap .piece .content {
+.pieces-wap .piece .body .content {
   padding-right: 85px;
   margin-bottom: 15px;
   line-height: 1.6;
@@ -481,12 +494,12 @@
   color: #666666;
 }
 @media (max-width: 767px) {
-  .pieces-wap .piece .content {
+  .pieces-wap .piece .body .content {
     padding-right: 50px;
   }
 }
 @media (max-width: 500px) {
-  .pieces-wap .piece .content {
+  .pieces-wap .piece .body .content {
     padding-right: 0px;
   }
 }

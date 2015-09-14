@@ -423,7 +423,10 @@
     <div class="piece-details-wap" data-piece-id="{{ piece.id }}">
         <div class="piece-header">
             <div class="commands-wap">
-
+                <a href="javascript:void(0)"><span class="fa fa-ellipsis-h"></span></a>
+                <a href="javascript:void(0)" data-placement="bottom" class="btn-copy-link" title="复制链接">
+                    <span class="fa fa-link fa-rotate-90"></span></a>
+                <a href="javascript:void(0)"><span class="fa fa-qrcode"></span></a>
             </div>
             <div class="word">{{ piece.word }}</div>
             <div class="avatar-wap">
@@ -472,14 +475,6 @@
             <span class="btn-close-share-wap">×</span>
 
             <div class="inner-wap">
-                <a href="{{ piece.weibo_share_url }}"
-                   class="btn btn-default btn-share-to-weibo" target="_blank">
-                    <img src="{{ static('image/media/weibo.png') }}"
-                         class="weibo-icon" alt=""/>&nbsp;分享到微博
-                </a>
-
-                <div class="devider">或</div>
-
                 <div class="share-to-weixin-wap">
                     <img src="{{ piece.qrcode_url }}" class="piece-qrcode" alt=""/>
 
@@ -502,6 +497,8 @@
                     $('.share-wap').isolatedScroll();
                     $('.piece-logs-wap').isolatedScroll();
                 }
+
+                $('.btn-copy-link').tooltip();
 
                 // 弹出分享框
                 $('.btn-share').click(function () {
@@ -883,9 +880,10 @@
                             <span class="fa fa-qrcode pull-right btn-show-qrcode"></span>
                         </div>
 
-                        <div class="word">{{ piece.word or "" }}</div>
-
-                        <div class="content">{{ piece.content }}</div>
+                        <div class="body">
+                            <div class="word">{{ piece.word or "" }}</div>
+                            <div class="content">{{ piece.content }}</div>
+                        </div>
 
                         {% if piece.sentence %}
                             <div class="text-light">例句</div>

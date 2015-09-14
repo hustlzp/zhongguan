@@ -7,9 +7,9 @@
   top: 0;
   bottom: 0;
   background-color: #fff;
-  width: 500px;
+  width: 600px;
   z-index: 1000;
-  padding: 30px 20px 20px 20px;
+  padding: 20px 20px 20px 20px;
   overflow: auto;
   box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
 
@@ -62,12 +62,28 @@
 
 .piece-details-wap {
   .piece-header {
+    .commands-wap {
+      text-align: right;
+
+      a {
+        display: inline-block;
+        font-size: 22px;
+        color: #999;
+        cursor: pointer;
+        padding: 0 0 0 15px;
+
+        &:hover {
+          color: #666;
+        }
+      }
+    }
+
     .word {
       text-align: center;
       font-weight: bold;
       font-size: 28px;
       .font-song();
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
 
     .avatar-wap {
@@ -516,9 +532,9 @@
     margin-bottom: 30px;
     cursor: pointer;
 
-    &.selected {
-      background-color: #f8f8f8;
-    }
+    //&.selected {
+    //  background-color: #f8f8f8;
+    //}
 
     .media-left {
       padding-right: 25px;
@@ -562,24 +578,32 @@
       }
     }
 
-    .word {
-      .font-song();
-      font-weight: bold;
-      font-size: 24px;
-    }
-
-    .content {
-      padding-right: 85px;
-      margin-bottom: 15px;
-      line-height: 1.6;
-      font-size: 16px;
-      color: #666666;
-
-      @media (max-width: @screen-xs-max) {
-        padding-right: 50px;
+    .body {
+      &:hover {
+        .word {
+          text-decoration: underline;
+        }
       }
-      @media (max-width: @screen-xxs-max) {
-        padding-right: 0px;
+
+      .word {
+        .font-song();
+        font-weight: bold;
+        font-size: 24px;
+      }
+
+      .content {
+        padding-right: 85px;
+        margin-bottom: 15px;
+        line-height: 1.6;
+        font-size: 16px;
+        color: #666666;
+
+        @media (max-width: @screen-xs-max) {
+          padding-right: 50px;
+        }
+        @media (max-width: @screen-xxs-max) {
+          padding-right: 0px;
+        }
       }
     }
 
