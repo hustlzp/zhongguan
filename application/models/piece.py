@@ -23,6 +23,13 @@ class Word(db.Model):
             super(Word, self).__setattr__('first_letter', lazy_pinyin(value)[0][0])
         super(Word, self).__setattr__(name, value)
 
+    @staticmethod
+    def add_word(word):
+        if Word.query.filter(Word.word == word).count() == 0:
+            _word = Word(word=word)
+            db.session.add(_word)
+            db.session.commit()
+
 
 class Piece(db.Model):
     """Model for text piece"""

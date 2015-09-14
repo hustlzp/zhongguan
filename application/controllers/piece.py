@@ -6,7 +6,7 @@ from ..utils.permissions import UserPermission, PieceAddPermission, PieceEditPer
 from ..utils.helpers import generate_lcs_html
 from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection, \
     PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog, PieceCommentVote, Notification, \
-    NOTIFICATION_KIND, PieceEditLogReport, CollectionEditLog, COLLECTION_EDIT_KIND
+    NOTIFICATION_KIND, PieceEditLogReport, CollectionEditLog, COLLECTION_EDIT_KIND, Word
 from ..forms import PieceForm
 from ..utils.decorators import jsonify
 
@@ -112,6 +112,9 @@ def add():
 
         g.user.pieces_count += 1
         db.session.add(g.user)
+
+        Word.add_word(form.word.data)
+
         db.session.commit()
         return {'result': True, 'piece_id': piece.id}
     else:

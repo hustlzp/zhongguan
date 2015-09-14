@@ -434,7 +434,7 @@
                 <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link">
                     <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
                          data-user-id="{{ user.id }}" title="{{ user.name }} 发布于 {{ piece.created_at|timesince }}"
-                         alt=""/>
+                         alt="" data-toggle="tooltip"/>
                 </a>
             </div>
         </div>
@@ -453,7 +453,10 @@
             <div class="media-body">
                 <div class="content">{{ piece.content }}</div>
 
-                {{ render_piece_source(piece) }}
+                {% if piece.sentence %}
+                    <div class="sentence-title">例句</div>
+                    <div class="sentence">{{ piece.sentence }}</div>
+                {% endif %}
             </div>
         </div>
 
@@ -884,12 +887,11 @@
                         <div class="body" data-piece-id="{{ piece.id }}">
                             <div class="word">{{ piece.word or "" }}</div>
                             <div class="content">{{ piece.content }}</div>
+                            {% if piece.sentence %}
+                                <div class="sentence-title">例句</div>
+                                <div>{{ piece.sentence }}</div>
+                            {% endif %}
                         </div>
-
-                        {% if piece.sentence %}
-                            <div class="text-light">例句</div>
-                            <div>{{ piece.sentence }}</div>
-                        {% endif %}
                     </div>
                 </div>
             </div>

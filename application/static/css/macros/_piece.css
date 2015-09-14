@@ -134,9 +134,17 @@
   }
 }
 .piece-details-wap .piece-body .content {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   line-height: 1.6;
   font-size: 16px;
+}
+.piece-details-wap .piece-body .sentence-title {
+  margin-top: 25px;
+  color: #999;
+  margin-bottom: 5px;
+}
+.piece-details-wap .piece-body .sentence {
+  margin-bottom: 20px;
 }
 .piece-details-wap .other-info-wap {
   background-color: transparent;
@@ -411,6 +419,10 @@
   .pieces-wap .piece .body .content {
     padding-right: 0px;
   }
+}
+.pieces-wap .piece .body .sentence-title {
+  color: #999;
+  margin-bottom: 5px;
 }
 .pieces-wap .piece .meta {
   color: #aaa;
