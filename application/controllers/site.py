@@ -24,7 +24,12 @@ def index():
         elif delta == 0:  # 无论如何，把今天的数据加上去（即使是空）
             pieces_data.append(Piece.get_pieces_data_by_day(target_day))
         delta += 1
-    return render_template('site/index.html', pieces_data=pieces_data, start_date=start_date)
+
+    piece_id = request.args.get('piece_id', type=int)
+    piece = None
+    if piece_id:
+        piece = Piece.query.get(piece_id)
+    return render_template('site/index.html', pieces_data=pieces_data, start_date=start_date, piece=piece)
 
 
 @bp.route('/about')
