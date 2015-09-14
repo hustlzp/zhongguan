@@ -47,7 +47,9 @@ $(document).on('click', '.need-signed-in', function () {
 });
 
 // 激活tooltip
-$('[data-toggle="tooltip"]').tooltip();
+$(document).tooltip({
+    selector: '[data-toggle="tooltip"]'
+});
 
 // 调整modal高度
 $('.modal-need-adjust-height').on('show.bs.modal', function () {

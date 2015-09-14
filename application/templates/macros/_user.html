@@ -1,8 +1,8 @@
 {% macro render_user_avatar(user) %}
     <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link" data-toggle="tooltip"
-            data-placement="bottom">
+            data-placement="bottom" title="{{ user.name }}">
         <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
-             data-user-id="{{ user.id }}" title="{{ user.name }}" alt=""/>
+             data-user-id="{{ user.id }}" alt=""/>
     </a>
 {% endmacro %}
 
