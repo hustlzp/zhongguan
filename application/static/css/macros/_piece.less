@@ -10,7 +10,7 @@
   left: 0;
   right: 0;
   background-color: white;
-  opacity: .8;
+  opacity: 0;
 
   &:hover .btn-close-piece-modal {
     color: #999;
@@ -22,8 +22,9 @@
     cursor: pointer;
     position: absolute;
     font-weight: 200;
-    top: 10px;
+    top: 0;
     line-height: 1;
+    opacity: 0;
   }
 }
 
@@ -33,7 +34,7 @@
   top: 0;
   bottom: 0;
   background-color: #fff;
-  width: 600px;
+  width: 700px;
   z-index: 1000;
   padding: 20px 20px 20px 20px;
   overflow: auto;
@@ -332,26 +333,24 @@
     z-index: 800;
     background-color: #ffffff;
 
-    .btn-share-to-weibo {
-      &:focus,
-      &:hover {
-        background-color: #fff;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, .175);
-        border-color: #ccc;
-      }
-
-      .weibo-icon {
-        height: 14px;
-        vertical-align: -1px;
-      }
-    }
-
-    .devider {
-      color: #999;
-      margin: 15px 0;
-    }
-
     .share-to-weixin-wap {
+      .piece-word {
+        font-weight: bold;
+        .font-song();
+        font-size: 28px;
+        margin-bottom: 5px;
+      }
+
+      .user-avatar-link {
+        display: block;
+        margin-bottom: 30px;
+
+        img {
+          width: 32px;
+          height: 32px;
+        }
+      }
+
       .piece-qrcode {
         width: 150px;
         height: 150px;
@@ -372,7 +371,8 @@
       position: absolute;
       right: 20px;
       top: 15px;
-      font-size: 40px;
+      font-size: 50px;
+      font-weight: 200;
       color: #ccc;
       cursor: pointer;
       line-height: 1;

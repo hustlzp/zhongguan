@@ -472,11 +472,20 @@
         {#            {{ render_piece_logs(piece) }}#}
         {#        </div>#}
 
+        {# 分享到微信 #}
         <div class="share-wap">
             <span class="btn-close-share-wap">×</span>
 
             <div class="inner-wap">
                 <div class="share-to-weixin-wap">
+                    <div class="piece-word">{{ piece.word }}</div>
+
+                    <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link">
+                        <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
+                             data-user-id="{{ user.id }}"
+                             alt=""/>
+                    </a>
+
                     <img src="{{ piece.qrcode_url }}" class="piece-qrcode" alt=""/>
 
                     <div>
@@ -749,10 +758,6 @@
                 }
             });
 
-            $btnClosePieceModal.click(function () {
-                closeModal();
-            });
-
             $pieceModalBackdrop.click(function () {
                 closeModal();
             });
@@ -766,8 +771,8 @@
                 var $modal = $('.piece-modal-wap');
                 var modalWidth = $modal.outerWidth();
 
-                $pieceModalBackdrop.show();
-                $btnClosePieceModal.css('right', modalWidth + 30);
+                $pieceModalBackdrop.show().animate({'opacity': '0.8'}, 400, 'linear');
+                $btnClosePieceModal.css('right', modalWidth + 20).animate({'opacity': '1'}, 400, 'linear');
 
                 addClicksCount(pieceId);
                 $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
@@ -790,13 +795,17 @@
                 var $modal = $('.piece-modal-wap');
                 var modalWidth = $modal.outerWidth();
 
-                $pieceModalBackdrop.hide();
+                $pieceModalBackdrop.animate({'opacity': '0'}, 400, 'linear' , function () {
+                    $(this).hide();
+                });
+                $btnClosePieceModal.animate({'opacity': '0'}, 400, 'linear');
 
                 $('.piece').removeClass('selected');
 
                 $modal.stop().transition({
                     'right': -(modalWidth + 3)
                 }, 400, function () {
+                    $pieceModalBackdrop.hide();
                     $('.piece-modal-wap').hide();
                     quitEditCollectionMode();
                     closeUpperLayers();
@@ -821,10 +830,9 @@
 
             /**
              * Show the loading flag.
-             * @param pieceModal
              */
             function showLoadingFlag() {
-                $('.piece-modal-wap').html("<span class='fa fa-spinner fa-spin flag-loading-piece'></span>");
+                $pieceModal.html("<span class='fa fa-spinner fa-spin flag-loading-piece'></span>");
             }
 
             /**
