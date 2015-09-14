@@ -4,6 +4,7 @@ import math
 from flask import g
 from urlparse import urlparse
 from datetime import datetime, date, timedelta
+from pypinyin import pinyin, lazy_pinyin
 from ._base import db
 from ..utils.uploadsets import qrcodes, save_image
 from ..utils.helpers import absolute_url_for
@@ -15,6 +16,12 @@ class Word(db.Model):
     word = db.Column(db.String(100))
     created_at = db.Column(db.DateTime, default=datetime.now)
     first_letter = db.Column(db.String(1))
+
+    def __setattr__(self, name, value):
+        """首字母"""
+        if name == 'word' and value != '':
+            super(Word, self).__setattr__('first_letter', lazy_pinyin(value)[0][0])
+        super(Word, self).__setattr__(name, value)
 
 
 class Piece(db.Model):
