@@ -387,8 +387,11 @@
   display: block;
   margin: 0 auto 15px auto;
 }
-.piece-details-wap .share-wap .share-to-weixin-wap .fa-weixin {
+.piece-details-wap .share-wap .share-to-weixin-wap .wechat-icon {
   color: #06B712;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
 }
 .piece-details-wap .share-wap .btn-close-share-wap {
   position: absolute;
