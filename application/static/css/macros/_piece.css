@@ -6,6 +6,29 @@
  * 
  *  Github: https://github.com/zenozeng/fonts.css
  */
+.piece-modal-backdrop {
+  z-index: 900;
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  opacity: .8;
+}
+.piece-modal-backdrop:hover .btn-close-piece-modal {
+  color: #999;
+}
+.piece-modal-backdrop .btn-close-piece-modal {
+  font-size: 80px;
+  color: #bbb;
+  cursor: pointer;
+  position: absolute;
+  font-weight: 200;
+  top: 10px;
+  line-height: 1;
+}
 .piece-modal-wap {
   display: none;
   position: fixed;
@@ -16,7 +39,7 @@
   z-index: 1000;
   padding: 20px 20px 20px 20px;
   overflow: auto;
-  box-shadow: -1px 0px 2px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.25);
 }
 @media (max-width: 767px) {
   .piece-modal-wap {
@@ -53,7 +76,7 @@
   border: 1px solid #bbb;
   border-top: 0;
   font-size: 20px;
-  padding: 0px 12px 3px 12px;
+  padding: 0 12px 3px 12px;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
   color: #aaa;
@@ -144,109 +167,6 @@
   height: 24px;
   display: inline-block;
   margin: 0 8px 8px 0;
-}
-.piece-details-wap .collections-container {
-  margin-top: 20px;
-}
-.piece-details-wap .collections-container.empty .btn-edit-collection {
-  display: none;
-}
-.piece-details-wap .collections-container.empty .btn-add-collection {
-  display: inline-block;
-}
-.piece-details-wap .collections-container.empty .collections-inner-container {
-  margin-bottom: 0;
-}
-.piece-details-wap .collections-container.edit-mode .btn-add-collection,
-.piece-details-wap .collections-container.edit-mode .btn-edit-collection {
-  display: none;
-}
-.piece-details-wap .collections-container.edit-mode .collection-tag-wap .btn-delete-collection {
-  display: inline-block;
-}
-.piece-details-wap .collections-container.edit-mode .collection-tag {
-  padding-right: 8px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.piece-details-wap .collections-container.edit-mode .collection-input-wap {
-  display: block;
-}
-.piece-details-wap .collections-container .collections-inner-container {
-  margin-bottom: -8px;
-}
-.piece-details-wap .collections-container .collection-tag-wap {
-  display: inline-block;
-  margin-right: 5px;
-  margin-bottom: 8px;
-}
-.piece-details-wap .collections-container .collection-tag-wap:last-child {
-  margin-right: 10px;
-}
-.piece-details-wap .collections-container .collection-tag-wap .collection-tag {
-  display: inline-block;
-  vertical-align: text-top;
-}
-.piece-details-wap .collections-container .collection-tag-wap .btn-delete-collection {
-  display: none;
-  vertical-align: text-top;
-  cursor: pointer;
-  background-color: #eff6fa;
-  padding-top: 6px;
-  padding-right: 8px;
-  padding-left: 5px;
-  height: 24px;
-  line-height: 1;
-  border-top-right-radius: 30px;
-  border-bottom-right-radius: 30px;
-  font-size: 12px;
-  color: #1e88a8;
-}
-.piece-details-wap .collections-container .collection-tag-wap .btn-delete-collection:hover {
-  background-color: #d0e5f0;
-}
-.piece-details-wap .collections-container .btn-add-collection,
-.piece-details-wap .collections-container .collection-tag {
-  background-color: #eff6fa;
-  padding-top: 6px;
-  padding-right: 10px;
-  padding-left: 10px;
-  height: 24px;
-  line-height: 1;
-  border-radius: 30px;
-  font-size: 12px;
-  text-decoration: none;
-  color: #1e88a8;
-}
-.piece-details-wap .collections-container .btn-add-collection:hover,
-.piece-details-wap .collections-container .collection-tag:hover {
-  background-color: #d0e5f0;
-}
-.piece-details-wap .collections-container .btn-add-collection {
-  display: none;
-}
-.piece-details-wap .collections-container .btn-edit-collection {
-  font-size: 12px;
-  color: #aaa;
-  vertical-align: -2px;
-}
-.piece-details-wap .collections-container .btn-edit-collection:hover {
-  color: #1e88a8;
-}
-.piece-details-wap .collections-container .collection-input-wap {
-  margin-top: 15px;
-  display: none;
-}
-.piece-details-wap .collections-container .collection-input-wap input {
-  display: inline-block;
-  width: 220px;
-  font-size: 12px;
-}
-.piece-details-wap .collections-container .collection-input-wap .btn-finish-add-collection {
-  color: #1e88a8;
-  font-size: 12px;
-  margin-left: 10px;
-  cursor: pointer;
 }
 .piece-details-wap .comment {
   padding: 7.5px 0;

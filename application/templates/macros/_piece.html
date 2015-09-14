@@ -467,10 +467,10 @@
 
         {{ render_piece_comments(piece) }}
 
-        <div class="piece-logs-wap">
-            <span class="btn-close-logs-wap">×</span>
-            {{ render_piece_logs(piece) }}
-        </div>
+        {#        <div class="piece-logs-wap">#}
+        {#            <span class="btn-close-logs-wap">×</span>#}
+        {#            {{ render_piece_logs(piece) }}#}
+        {#        </div>#}
 
         <div class="share-wap">
             <span class="btn-close-share-wap">×</span>
@@ -692,6 +692,10 @@
 
 
 {% macro render_piece_modal_wap(piece) %}
+    <div class="piece-modal-backdrop">
+        <div class="btn-close-piece-modal">×</div>
+    </div>
+
     <div class="piece-modal-wap" data-piece-id="{{ piece.id if piece }}">
         {% if piece %}
             {{ render_piece_details_wap(piece) }}
@@ -701,25 +705,13 @@
     <script type="text/javascript">
         (function () {
             var $pieceModal = $('.piece-modal-wap');
+            var $pieceModalBackdrop = $('.piece-modal-backdrop');
+            var $btnClosePieceModal = $('.btn-close-piece-modal');
 
             // 弹出侧边栏
-            $(document).on('click', '.pieces-wap .piece', function (event) {
-                // 链接和vote不触发此事件
-                if (event.target.tagName.toLowerCase() === 'a'
-                        || $(event.target).parent('a').length
-                        || $(event.target).hasClass('user-avatar')
-                        || $(event.target).hasClass('vote')
-                        || $(event.target).parents('.vote').length) {
-                    return true;
-                }
-
+            $(document).on('click', '.pieces-wap .body', function (event) {
                 var pieceId = parseInt($(this).attr('data-piece-id')),
                         pieceIdOfModal = parseInt($pieceModal.attr('data-piece-id'));
-
-                if ($(window).width() < 767) {
-                    window.location = urlFor('piece.view', {uid: pieceId});
-                    return;
-                }
 
                 // 点击的piece与modal的piece一致
                 if (pieceId === pieceIdOfModal) {
@@ -757,16 +749,12 @@
                 }
             });
 
-            $(document).on('click', function (event) {
-                if (!($(event.target).hasClass('full-screen-backdrop')
-                        || $(event.target).parents('.full-screen-backdrop').length
-                        || $(event.target).hasClass('piece')
-                        || $(event.target).parents('.piece').length
-                        || $(event.target).hasClass('piece-modal-wap')
-                        || $(event.target).parents('.piece-modal-wap').length)
-                        && $pieceModal.hasClass('open')) {
-                    closeModal();
-                }
+            $btnClosePieceModal.click(function () {
+                closeModal();
+            });
+
+            $pieceModalBackdrop.click(function () {
+                closeModal();
             });
 
             /**
@@ -777,6 +765,9 @@
             function openModal(pieceId, callback) {
                 var $modal = $('.piece-modal-wap');
                 var modalWidth = $modal.outerWidth();
+
+                $pieceModalBackdrop.show();
+                $btnClosePieceModal.css('right', modalWidth + 30);
 
                 addClicksCount(pieceId);
                 $(".piece[data-piece-id='" + pieceId + "']").addClass('selected');
@@ -798,6 +789,8 @@
             function closeModal(callback) {
                 var $modal = $('.piece-modal-wap');
                 var modalWidth = $modal.outerWidth();
+
+                $pieceModalBackdrop.hide();
 
                 $('.piece').removeClass('selected');
 
@@ -883,7 +876,7 @@
                             <span class="fa fa-qrcode pull-right btn-show-qrcode"></span>
                         </div>
 
-                        <div class="body">
+                        <div class="body" data-piece-id="{{ piece.id }}">
                             <div class="word">{{ piece.word or "" }}</div>
                             <div class="content">{{ piece.content }}</div>
                         </div>
