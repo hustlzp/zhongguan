@@ -29,15 +29,15 @@
   color: #666;
 }
 .collection-kinds-wap .collection-kind.active {
-  background-color: #1e88a8;
-  border-color: #1e88a8;
+  background-color: #76af61;
+  border-color: #76af61;
   color: white;
 }
 .collection-kinds-wap .collection-kind.active:hover {
   color: white;
 }
 .collection-kinds-wap .collection-kind:hover {
-  color: #1e88a8;
+  color: #76af61;
 }
 .collections-wap {
   padding-top: 18px;

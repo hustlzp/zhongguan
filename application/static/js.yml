@@ -15,5 +15,6 @@ libs:
 
 layout:
   - js/layout.js
+  - js/add-piece.js
 
 page: js/

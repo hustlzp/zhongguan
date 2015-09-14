@@ -84,8 +84,8 @@
   line-height: 1;
 }
 .piece-modal-wap .btn-close-piece-modal-wap:hover {
-  background-color: #1e88a8;
-  border-color: #1e88a8;
+  background-color: #76af61;
+  border-color: #76af61;
   color: #ffffff;
 }
 .piece-details-wap .piece-header {
@@ -171,7 +171,7 @@
   color: #333;
 }
 .piece-details-wap .other-info-wap .comment .comment-user a:hover {
-  color: #1e88a8;
+  color: #76af61;
 }
 .piece-details-wap .other-info-wap .comment .comment-user .to-target-user {
   font-size: 12px;
@@ -200,7 +200,7 @@
   color: #bbb;
 }
 .piece-details-wap .other-info-wap .comment .comment-meta .options a:hover {
-  color: #1e88a8;
+  color: #76af61;
 }
 .piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me,
 .piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment.voted-by-people {
@@ -215,7 +215,7 @@
   display: none;
 }
 .piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me {
-  color: #1e88a8;
+  color: #76af61;
 }
 .piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment .comment-votes-count {
   display: none;
@@ -251,7 +251,7 @@
   cursor: pointer;
 }
 .piece-details-wap .other-info-wap .form-sub-comment .btn-cancel-submit-sub-comment:hover {
-  color: #1e88a8;
+  color: #76af61;
 }
 .piece-details-wap .other-info-wap .comment-after-signed-in-wap {
   padding: 12px;
@@ -432,14 +432,14 @@
   outline: none;
 }
 .pieces-wap .piece .meta .options > a:hover {
-  color: #1e88a8;
+  color: #76af61;
 }
 .pieces-wap .piece .meta .options .collect {
   margin-right: 10px;
 }
 .pieces-wap .piece .meta .options .collect.collected {
   visibility: visible !important;
-  color: #1e88a8 !important;
+  color: #76af61 !important;
 }
 .pieces-wap .piece .meta .options .btn-edit-piece {
   margin-right: 10px;
@@ -536,7 +536,7 @@
   color: #aaa;
 }
 .source-wap .source-link:hover {
-  color: #1e88a8;
+  color: #76af61;
 }
 .form-piece .tip {
   font-size: 12px;
@@ -562,12 +562,12 @@
 }
 .form-piece .btn-group-original > label.active {
   box-shadow: none;
-  background-color: #1e88a8;
+  background-color: #76af61;
   color: white;
-  border-color: #1e88a8;
+  border-color: #76af61;
 }
 .form-piece .btn-group-original > label:last-child:hover {
-  border-left-color: #1e88a8;
+  border-left-color: #76af61;
 }
 .form-piece .source-url-wap {
   position: relative;
@@ -610,7 +610,7 @@
   color: #333;
 }
 .piece-log .title a:hover {
-  color: #1e88a8;
+  color: #76af61;
 }
 .piece-log .content {
   margin-bottom: 12px;
@@ -648,7 +648,7 @@
   color: #999;
 }
 .piece-log .log-meta .wap-report-abuse .btn-report-abuse:hover {
-  color: #1e88a8;
+  color: #76af61;
 }
 .piece-log .log-meta .wap-report-abuse .flag-reported {
   display: none;

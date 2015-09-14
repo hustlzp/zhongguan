@@ -1,3 +1,11 @@
+/*!
+ *  Fonts.css -- Cross-platform Chinese fonts solution
+ * 
+ *  Copyright (C) 2013-2014 Zeno Zeng
+ *  Released under the MIT license
+ * 
+ *  Github: https://github.com/zenozeng/fonts.css
+ */
 html {
   position: relative;
   min-height: 100%;
@@ -5,8 +13,14 @@ html {
 body {
   margin-bottom: 500px;
 }
+body .form-control {
+  font-size: 16px;
+}
+body .btn {
+  font-size: 16px;
+}
 .flash-message {
-  background-color: #1e88a8;
+  background-color: #76af61;
   border: 0;
   color: #ffffff;
   margin-bottom: 0;
@@ -27,7 +41,7 @@ body {
 }
 .navbar-nav .notifications-count {
   border-radius: 2px;
-  background-color: #1e88a8;
+  background-color: #76af61;
   color: white;
   display: inline-block;
   font-size: 12px;
@@ -99,4 +113,109 @@ body {
 }
 #footer .other .about-us a:hover {
   color: #fff;
+}
+.add-piece-wap {
+  display: none;
+  position: fixed;
+  left: 40px;
+  right: 40px;
+  top: 40px;
+  bottom: 40px;
+  opacity: .5;
+  background-color: white;
+  z-index: 20000;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 0 5px;
+}
+.add-piece-wap .btn-cancel-add-piece {
+  font-size: 80px;
+  color: #999;
+  cursor: pointer;
+  line-height: 1;
+  font-weight: 200;
+  position: absolute;
+  right: 20px;
+  top: 0;
+}
+.add-piece-wap .btn-cancel-add-piece:hover {
+  color: #666;
+}
+.add-piece-wap.first .first-step {
+  display: block;
+}
+.add-piece-wap.first .second-step {
+  display: none;
+}
+.add-piece-wap.second .first-step {
+  display: none;
+}
+.add-piece-wap.second .second-step {
+  display: block;
+}
+.add-piece-wap .first-step {
+  width: 550px;
+  margin: 0 auto;
+}
+.add-piece-wap .first-step .title {
+  font-size: 24px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.add-piece-wap .first-step .input-group input {
+  height: auto;
+  font-size: 24px;
+  font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
+  padding: 8px 15px;
+}
+.add-piece-wap .first-step .input-group .btn-go-to-second-step {
+  font-size: 24px;
+  padding: 8px 20px;
+  color: white;
+  background-color: #76AF61;
+  border-color: #76AF61;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+.add-piece-wap .second-step {
+  border-radius: 2px;
+  padding: 30px 30px 40px 30px;
+  background-color: #FAFAFA;
+  border: 1px solid #DDD;
+  width: 800px;
+  margin: 0 auto;
+}
+.add-piece-wap .second-step textarea {
+  resize: none;
+}
+.add-piece-wap .second-step .word {
+  font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+.add-piece-wap .second-step .explanation-textarea {
+  margin-bottom: 20px;
+}
+.add-piece-wap .second-step .btn-add-sentence {
+  display: block;
+  padding: 12px 15px;
+  color: #797979;
+  text-align: left;
+}
+.add-piece-wap .second-step .sentence-textarea {
+  display: none;
+}
+.add-piece-wap .second-step .btn-submit-piece-wap {
+  margin-top: 40px;
+}
+.add-piece-wap .second-step .btn-submit-piece-wap .btn-submit-piece {
+  padding: 15px 110px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.add-piece-wap .second-step.add-sentence .btn-add-sentence {
+  display: none;
+}
+.add-piece-wap .second-step.add-sentence .sentence-textarea {
+  display: block;
 }

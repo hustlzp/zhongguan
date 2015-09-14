@@ -1,4 +1,5 @@
 @import "utils";
+@import "fonts";
 
 html {
   position: relative;
@@ -7,6 +8,14 @@ html {
 
 body {
   margin-bottom: 500px;
+
+  .form-control {
+    font-size: 16px;
+  }
+
+  .btn {
+    font-size: 16px;
+  }
 }
 
 // Flash message
@@ -139,3 +148,133 @@ body {
   }
 }
 
+.add-piece-wap {
+  display: none;
+  position: fixed;
+  left: 40px;
+  right: 40px;
+  top: 40px;
+  bottom: 40px;
+  opacity: .5;
+  background-color: white;
+  z-index: 20000;
+  box-shadow: rgba(0, 0, 0, 0.4) 0 0 5px;
+
+  .btn-cancel-add-piece {
+    font-size: 80px;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+    font-weight: 200;
+    position: absolute;
+    right: 20px;
+    top: 0;
+
+    &:hover {
+      color: #666;
+    }
+  }
+
+  &.first {
+    .first-step {
+      display: block;
+    }
+    .second-step {
+      display: none;
+    }
+  }
+
+  &.second {
+    .first-step {
+      display: none;
+    }
+    .second-step {
+      display: block;
+    }
+  }
+
+  .first-step {
+    width: 550px;
+    margin: 0 auto;
+
+    .title {
+      font-size: 24px;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .input-group {
+      input {
+        height: auto;
+        font-size: 24px;
+        .font-song();
+        padding: 8px 15px;
+      }
+
+      .btn-go-to-second-step {
+        font-size: 24px;
+        padding: 8px 20px;
+        color: white;
+        background-color: #76AF61;
+        border-color: #76AF61;
+        border-top-right-radius: 4px;
+        border-bottom-right-radius: 4px;
+      }
+    }
+  }
+
+  .second-step {
+    border-radius: 2px;
+    padding: 30px 30px 40px 30px;
+    background-color: #FAFAFA;
+    border: 1px solid #DDD;
+    width: 800px;
+    margin: 0 auto;
+
+    textarea {
+      resize: none;
+    }
+
+    .word {
+      .font-song();
+      font-size: 28px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .explanation-textarea {
+      margin-bottom: 20px;
+    }
+
+    .btn-add-sentence {
+      display: block;
+      padding: 12px 15px;
+      color: #797979;
+      text-align: left;
+    }
+
+    .sentence-textarea {
+      display: none;
+    }
+
+    .btn-submit-piece-wap {
+      margin-top: 40px;
+
+      .btn-submit-piece {
+        padding: 15px 110px;
+        font-size: 20px;
+        font-weight: bold;
+      }
+    }
+
+    &.add-sentence {
+      .btn-add-sentence {
+        display: none;
+      }
+      .sentence-textarea {
+        display: block;
+      }
+    }
+  }
+}
