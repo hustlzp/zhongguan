@@ -114,7 +114,7 @@
 
 
 {% macro render_piece_comments(piece) %}
-    <div class="subtitle">{{ piece.comments.count() }} 条评论</div>
+    <div class="subtitle"><strong>{{ piece.comments.count() }}</strong> 条评论</div>
 
     {% if g.user %}
         <form action="" id="form-comment">
@@ -444,7 +444,7 @@
                 <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
                      data-piece-id={{ piece.id }}>
                     <div class="vote-icon">
-                        <span class="fa fa-angle-up"></span>
+                        <span class="fa fa-caret-up"></span>
                     </div>
                     <div class="votes-count">{{ piece.votes_count }}</div>
                 </div>
@@ -457,20 +457,17 @@
             </div>
         </div>
 
-        <div class="subtitle">{{ piece.votes_count }} 人觉得这个解释很赞</div>
+        <div class="other-info-wap">
+            <div class="subtitle"><strong>{{ piece.votes_count }}</strong> 人觉得这个解释很赞</div>
 
-        <div class="voters">
-            {% for voter in piece.voters %}
-                {{ render_user_avatar(voter.user) }}
-            {% endfor %}
+            <div class="voters">
+                {% for voter in piece.voters %}
+                    {{ render_user_avatar(voter.user) }}
+                {% endfor %}
+            </div>
+
+            {{ render_piece_comments(piece) }}
         </div>
-
-        {{ render_piece_comments(piece) }}
-
-        {#        <div class="piece-logs-wap">#}
-        {#            <span class="btn-close-logs-wap">×</span>#}
-        {#            {{ render_piece_logs(piece) }}#}
-        {#        </div>#}
 
         {# 分享到微信 #}
         <div class="share-wap">
@@ -795,7 +792,7 @@
                 var $modal = $('.piece-modal-wap');
                 var modalWidth = $modal.outerWidth();
 
-                $pieceModalBackdrop.animate({'opacity': '0'}, 400, 'linear' , function () {
+                $pieceModalBackdrop.animate({'opacity': '0'}, 400, 'linear', function () {
                     $(this).hide();
                 });
                 $btnClosePieceModal.animate({'opacity': '0'}, 400, 'linear');

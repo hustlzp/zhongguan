@@ -35,10 +35,9 @@
   position: fixed;
   top: 0;
   bottom: 0;
-  background-color: #fff;
+  background-color: #f3f3f3;
   width: 700px;
   z-index: 1000;
-  padding: 20px 20px 20px 20px;
   overflow: auto;
   box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.25);
 }
@@ -89,6 +88,10 @@
   border-color: #1e88a8;
   color: #ffffff;
 }
+.piece-details-wap .piece-header {
+  background-color: #fff;
+  padding: 20px 20px 10px 20px;
+}
 .piece-details-wap .piece-header .commands-wap {
   text-align: right;
 }
@@ -111,15 +114,15 @@
 }
 .piece-details-wap .piece-header .avatar-wap {
   text-align: center;
-  margin-bottom: 10px;
 }
 .piece-details-wap .piece-header .avatar-wap img {
   width: 32px;
   height: 32px;
 }
 .piece-details-wap .piece-body {
+  background-color: #fff;
   margin: 0;
-  padding-bottom: 20px;
+  padding: 0 20px 20px 20px;
   border-bottom: 1px solid #e2e2e2;
 }
 .piece-details-wap .piece-body .media-left {
@@ -130,146 +133,127 @@
     display: none;
   }
 }
-.piece-details-wap .piece-body .vote {
-  background-color: #ffffff;
-  border: 1px solid #E0E3E6;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
-  padding: 5px 10px;
-  font-size: 16px;
-  cursor: pointer;
-  text-align: center;
-}
-.piece-details-wap .piece-body .vote:hover {
-  border-color: #bbb;
-}
-.piece-details-wap .piece-body .vote.voted {
-  border-color: #1e88a8;
-  color: #1e88a8;
-}
-.piece-details-wap .piece-body .vote .votes-count {
-  line-height: 1;
-  padding-bottom: 4px;
-}
-.piece-details-wap .piece-body .vote .vote-icon {
-  line-height: 1;
-}
 .piece-details-wap .piece-body .content {
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 16px;
 }
-.piece-details-wap .subtitle {
-  font-size: 16px;
-  color: #aaa;
-  margin: 20px 0 15px 0;
+.piece-details-wap .other-info-wap {
+  background-color: transparent;
+  padding: 0 20px;
 }
-.piece-details-wap .voters img {
+.piece-details-wap .other-info-wap .subtitle {
+  font-size: 16px;
+  color: #666;
+  margin: 40px 0 15px 0;
+}
+.piece-details-wap .other-info-wap .voters img {
   width: 24px;
   height: 24px;
   display: inline-block;
   margin: 0 8px 8px 0;
 }
-.piece-details-wap .comment {
+.piece-details-wap .other-info-wap .comment {
   padding: 7.5px 0;
 }
-.piece-details-wap .comment:hover .comment-meta .options {
+.piece-details-wap .other-info-wap .comment:hover .comment-meta .options {
   visibility: visible;
 }
-.piece-details-wap .comment .user-avatar {
+.piece-details-wap .other-info-wap .comment .user-avatar {
   width: 32px;
   height: 32px;
 }
-.piece-details-wap .comment .comment-user {
+.piece-details-wap .other-info-wap .comment .comment-user {
   color: #000;
   margin-bottom: 8px;
 }
-.piece-details-wap .comment .comment-user a {
+.piece-details-wap .other-info-wap .comment .comment-user a {
   color: #333;
 }
-.piece-details-wap .comment .comment-user a:hover {
+.piece-details-wap .other-info-wap .comment .comment-user a:hover {
   color: #1e88a8;
 }
-.piece-details-wap .comment .comment-user .to-target-user {
+.piece-details-wap .other-info-wap .comment .comment-user .to-target-user {
   font-size: 12px;
   color: #999;
   margin: 0 2px;
 }
-.piece-details-wap .comment .comment-content {
+.piece-details-wap .other-info-wap .comment .comment-content {
   line-height: 1.6;
   margin-bottom: 8px;
   color: #666;
 }
-.piece-details-wap .comment .comment-meta {
+.piece-details-wap .other-info-wap .comment .comment-meta {
   font-size: 12px;
   color: #aaa;
 }
-.piece-details-wap .comment .comment-meta .options {
+.piece-details-wap .other-info-wap .comment .comment-meta .options {
   visibility: hidden;
 }
 @media (max-width: 767px) {
-  .piece-details-wap .comment .comment-meta .options {
+  .piece-details-wap .other-info-wap .comment .comment-meta .options {
     visibility: visible !important;
   }
 }
-.piece-details-wap .comment .comment-meta .options a {
+.piece-details-wap .other-info-wap .comment .comment-meta .options a {
   font-size: 12px;
   color: #bbb;
 }
-.piece-details-wap .comment .comment-meta .options a:hover {
+.piece-details-wap .other-info-wap .comment .comment-meta .options a:hover {
   color: #1e88a8;
 }
-.piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me,
-.piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-people {
+.piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me,
+.piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment.voted-by-people {
   visibility: visible !important;
 }
-.piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me .comment-votes-count,
-.piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-people .comment-votes-count {
+.piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me .comment-votes-count,
+.piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment.voted-by-people .comment-votes-count {
   display: inline-block;
 }
-.piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me .comment-vote-text,
-.piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-people .comment-vote-text {
+.piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me .comment-vote-text,
+.piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment.voted-by-people .comment-vote-text {
   display: none;
 }
-.piece-details-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me {
+.piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment.voted-by-me {
   color: #1e88a8;
 }
-.piece-details-wap .comment .comment-meta .options .btn-vote-comment .comment-votes-count {
+.piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment .comment-votes-count {
   display: none;
 }
-.piece-details-wap .comment .comment-meta .options .btn-vote-comment .comment-vote-text {
+.piece-details-wap .other-info-wap .comment .comment-meta .options .btn-vote-comment .comment-vote-text {
   display: inline-block;
 }
-.piece-details-wap .comment .comment-meta .options .btn-show-comment-form {
+.piece-details-wap .other-info-wap .comment .comment-meta .options .btn-show-comment-form {
   margin-left: 18px;
 }
-.piece-details-wap .sub-comments-wap {
+.piece-details-wap .other-info-wap .sub-comments-wap {
   padding-left: 42px;
 }
 @media (max-width: 500px) {
-  .piece-details-wap .sub-comments-wap {
+  .piece-details-wap .other-info-wap .sub-comments-wap {
     padding-left: 0;
   }
 }
-.piece-details-wap #form-comment .form-group {
+.piece-details-wap .other-info-wap #form-comment .form-group {
   margin-top: 5px;
   margin-bottom: 12px;
 }
-.piece-details-wap .form-sub-comment {
+.piece-details-wap .other-info-wap .form-sub-comment {
   display: none;
 }
-.piece-details-wap .form-sub-comment .form-group {
+.piece-details-wap .other-info-wap .form-sub-comment .form-group {
   margin-bottom: 12px;
 }
-.piece-details-wap .form-sub-comment .btn-cancel-submit-sub-comment {
+.piece-details-wap .other-info-wap .form-sub-comment .btn-cancel-submit-sub-comment {
   font-size: 12px;
   margin-right: 8px;
   color: #999;
   cursor: pointer;
 }
-.piece-details-wap .form-sub-comment .btn-cancel-submit-sub-comment:hover {
+.piece-details-wap .other-info-wap .form-sub-comment .btn-cancel-submit-sub-comment:hover {
   color: #1e88a8;
 }
-.piece-details-wap .comment-after-signed-in-wap {
+.piece-details-wap .other-info-wap .comment-after-signed-in-wap {
   padding: 12px;
   text-align: center;
   border-top: 1px solid #e2e2e2;
@@ -460,7 +444,7 @@
 .pieces-wap .piece .meta .options .btn-edit-piece {
   margin-right: 10px;
 }
-.pieces-wap .piece .vote {
+.vote {
   background-color: #f2f9f3;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
   padding: 5px 12px;
@@ -470,16 +454,16 @@
   color: #74b05d;
   border-radius: 2px;
 }
-.pieces-wap .piece .vote.voted {
+.vote.voted {
   background-color: #74b05d;
   color: white;
 }
-.pieces-wap .piece .vote .votes-count {
+.vote .votes-count {
   line-height: 1;
   font-weight: bold;
   padding-bottom: 4px;
 }
-.pieces-wap .piece .vote .vote-icon {
+.vote .vote-icon {
   line-height: 1;
 }
 .windows .pieces-wap .piece .meta .options {

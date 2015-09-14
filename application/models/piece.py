@@ -87,6 +87,10 @@ class Piece(db.Model):
         return self.comments.filter(PieceComment.root_comment_id == None)
 
     @staticmethod
+    def get_by_word(word):
+        return Piece.query.filter(Piece.word == word)
+
+    @staticmethod
     def calculate_content_length(content):
         cn_length = (len(bytes(content)) - len(content)) / 2
         en_length = len(content) - cn_length
