@@ -62,6 +62,26 @@
 
 .piece-details-wap {
   .piece-header {
+    .word {
+      text-align: center;
+      font-weight: bold;
+      font-size: 28px;
+      .font-song();
+      margin-bottom: 5px;
+    }
+
+    .avatar-wap {
+      text-align: center;
+      margin-bottom: 10px;
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+  .piece-body {
     margin: 0;
     padding-bottom: 20px;
     border-bottom: 1px solid @border-color;
@@ -106,42 +126,6 @@
       margin-bottom: 15px;
       line-height: 1.6;
       font-size: 16px;
-    }
-  }
-
-  .meta {
-    padding: 10px 0;
-    line-height: 32px;
-    border-bottom: 1px solid @border-color;
-    font-size: 12px;
-
-    .user-avatar-link {
-      margin-right: 8px;
-
-      .user-avatar {
-        width: 32px;
-        height: 32px;
-      }
-    }
-
-    .created-time {
-      color: #aaa;
-    }
-
-    .actions {
-      a {
-        color: #aaa;
-
-        &:hover {
-          color: @main-color;
-        }
-      }
-
-      .btn-show-logs-wap,
-      .btn-full-screen,
-      .btn-share {
-        margin-left: 12px;
-      }
     }
   }
 
@@ -578,11 +562,18 @@
       }
     }
 
+    .word {
+      .font-song();
+      font-weight: bold;
+      font-size: 24px;
+    }
+
     .content {
       padding-right: 85px;
       margin-bottom: 15px;
       line-height: 1.6;
       font-size: 16px;
+      color: #666666;
 
       @media (max-width: @screen-xs-max) {
         padding-right: 50px;

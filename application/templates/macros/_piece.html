@@ -114,7 +114,7 @@
 
 
 {% macro render_piece_comments(piece) %}
-    <div class="subtitle">{{ piece.comments.count() }} 评论</div>
+    <div class="subtitle">{{ piece.comments.count() }} 条评论</div>
 
     {% if g.user %}
         <form action="" id="form-comment">
@@ -418,8 +418,24 @@
 
 
 {% macro render_piece_details_wap(piece) %}
+    {% set user = piece.user %}
+
     <div class="piece-details-wap" data-piece-id="{{ piece.id }}">
-        <div class="media piece-header">
+        <div class="piece-header">
+            <div class="commands-wap">
+
+            </div>
+            <div class="word">{{ piece.word }}</div>
+            <div class="avatar-wap">
+                <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link">
+                    <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
+                         data-user-id="{{ user.id }}" title="{{ user.name }} 发布于 {{ piece.created_at|timesince }}"
+                         alt=""/>
+                </a>
+            </div>
+        </div>
+
+        <div class="media piece-body">
             <div class="media-left">
                 <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
                      data-piece-id={{ piece.id }}>
@@ -437,59 +453,7 @@
             </div>
         </div>
 
-        <div class="meta clearfix">
-            <div class="pull-left">
-                {{ render_user_avatar(piece.user) }}
-                <span class="created-time hidden-xs">发布于 {{ piece.created_at|timesince }}</span>
-            </div>
-
-            <div class="actions pull-right">
-                {% if permissions.PieceEditPermission(piece).check() %}
-                    <a href="{{ url_for('piece.edit', uid=piece.id) }}" class="btn-edit-piece"
-                       title="编辑句子">
-                        <span class="fa fa-pencil"></span> <span class="btn-text">编辑</span></a>
-                {% endif %}
-
-                <a href="javascript: void(0)" class="btn-full-screen" title="全屏"
-                   data-id="{{ piece.id }}"
-                   data-content="{{ piece.content }}"
-                   data-source-string="{{ piece.source_string }}">
-                    <span class="fa fa-arrows-alt "></span> 全屏</a>
-
-                <a class="btn-show-logs-wap" href="javascript: void(0)" title="句子编辑日志">
-                    <span class="fa fa-file-text-o"></span> 日志
-                </a>
-
-                <a href="javascript: void(0)" class="btn-share">
-                    <span class="fa fa-share"></span> 分享</a>
-            </div>
-        </div>
-
-        <div class="collections-container {% if not piece.collections.count() %}empty{% endif %}">
-            <div class="collections-inner-container">
-         <span class="collections">
-            {% for collection in piece.collections %}
-                {% set collection = collection.collection %}
-                {{ render_collection_tag_wap(collection) }}
-            {% endfor %}
-         </span>
-
-                {% if g.user %}
-                    <a href="javascript: void(0)" class="btn-edit-collection" title="编辑句集">
-                        <span class="fa fa-pencil"></span></a>
-                    <a href="javascript: void(0)" class="btn-add-collection">
-                        <span class="fa fa-plus"></span> 添加句集</a>
-                {% endif %}
-            </div>
-
-            <div class="form-group collection-input-wap">
-                <input type="text" id="input-collection" class="form-control"
-                       placeholder="输入句集，回车确认"/>
-                <span class="btn-finish-add-collection">完成</span>
-            </div>
-        </div>
-
-        <div class="subtitle">{{ piece.votes_count }} 顶</div>
+        <div class="subtitle">{{ piece.votes_count }} 人觉得这个解释很赞</div>
 
         <div class="voters">
             {% for voter in piece.voters %}
@@ -919,7 +883,14 @@
                             <span class="fa fa-qrcode pull-right btn-show-qrcode"></span>
                         </div>
 
+                        <div class="word">{{ piece.word or "" }}</div>
+
                         <div class="content">{{ piece.content }}</div>
+
+                        {% if piece.sentence %}
+                            <div class="text-light">例句</div>
+                            <div>{{ piece.sentence }}</div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

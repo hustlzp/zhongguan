@@ -9,10 +9,19 @@ from ..utils.uploadsets import qrcodes, save_image
 from ..utils.helpers import absolute_url_for
 
 
+class Word(db.Model):
+    """词"""
+    id = db.Column(db.Integer, primary_key=True)
+    word = db.Column(db.String(100))
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    first_letter = db.Column(db.String(1))
+
+
 class Piece(db.Model):
     """Model for text piece"""
     id = db.Column(db.Integer, primary_key=True)
-    word = db.Column(db.String(50), nullable=False)
+    word = db.Column(db.String(50), nullable=False)  # 词条
+    sentence = db.Column(db.Text)  # 例句
     content = db.Column(db.Text)
     content_length = db.Column(db.Integer, default=0)
     original = db.Column(db.Boolean, default=False)

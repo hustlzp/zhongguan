@@ -65,20 +65,35 @@
   border-color: #1e88a8;
   color: #ffffff;
 }
-.piece-details-wap .piece-header {
+.piece-details-wap .piece-header .word {
+  text-align: center;
+  font-weight: bold;
+  font-size: 28px;
+  font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
+  margin-bottom: 5px;
+}
+.piece-details-wap .piece-header .avatar-wap {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.piece-details-wap .piece-header .avatar-wap img {
+  width: 32px;
+  height: 32px;
+}
+.piece-details-wap .piece-body {
   margin: 0;
   padding-bottom: 20px;
   border-bottom: 1px solid #e2e2e2;
 }
-.piece-details-wap .piece-header .media-left {
+.piece-details-wap .piece-body .media-left {
   padding-right: 18px;
 }
 @media (max-width: 500px) {
-  .piece-details-wap .piece-header .media-left {
+  .piece-details-wap .piece-body .media-left {
     display: none;
   }
 }
-.piece-details-wap .piece-header .vote {
+.piece-details-wap .piece-body .vote {
   background-color: #ffffff;
   border: 1px solid #E0E3E6;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
@@ -87,51 +102,24 @@
   cursor: pointer;
   text-align: center;
 }
-.piece-details-wap .piece-header .vote:hover {
+.piece-details-wap .piece-body .vote:hover {
   border-color: #bbb;
 }
-.piece-details-wap .piece-header .vote.voted {
+.piece-details-wap .piece-body .vote.voted {
   border-color: #1e88a8;
   color: #1e88a8;
 }
-.piece-details-wap .piece-header .vote .votes-count {
+.piece-details-wap .piece-body .vote .votes-count {
   line-height: 1;
   padding-bottom: 4px;
 }
-.piece-details-wap .piece-header .vote .vote-icon {
+.piece-details-wap .piece-body .vote .vote-icon {
   line-height: 1;
 }
-.piece-details-wap .piece-header .content {
+.piece-details-wap .piece-body .content {
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 16px;
-}
-.piece-details-wap .meta {
-  padding: 10px 0;
-  line-height: 32px;
-  border-bottom: 1px solid #e2e2e2;
-  font-size: 12px;
-}
-.piece-details-wap .meta .user-avatar-link {
-  margin-right: 8px;
-}
-.piece-details-wap .meta .user-avatar-link .user-avatar {
-  width: 32px;
-  height: 32px;
-}
-.piece-details-wap .meta .created-time {
-  color: #aaa;
-}
-.piece-details-wap .meta .actions a {
-  color: #aaa;
-}
-.piece-details-wap .meta .actions a:hover {
-  color: #1e88a8;
-}
-.piece-details-wap .meta .actions .btn-show-logs-wap,
-.piece-details-wap .meta .actions .btn-full-screen,
-.piece-details-wap .meta .actions .btn-share {
-  margin-left: 12px;
 }
 .piece-details-wap .subtitle {
   font-size: 16px;
@@ -480,11 +468,17 @@
   font-size: 12px;
   margin-left: 1px;
 }
+.pieces-wap .piece .word {
+  font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
+  font-weight: bold;
+  font-size: 24px;
+}
 .pieces-wap .piece .content {
   padding-right: 85px;
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 16px;
+  color: #666666;
 }
 @media (max-width: 767px) {
   .pieces-wap .piece .content {
