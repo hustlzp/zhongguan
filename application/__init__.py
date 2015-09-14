@@ -8,6 +8,7 @@ if project_path not in sys.path:
     sys.path.insert(0, project_path)
 
 import hashlib
+import logging
 import time
 from flask import Flask, request, url_for, g, render_template
 from flask_wtf.csrf import CsrfProtect
@@ -42,9 +43,14 @@ def create_app():
 
     # Enable Sentry in production mode
     if app.production:
-        from .utils.sentry import sentry
+        app.logger.addHandler(logging.StreamHandler())
+        app.logger.setLevel(logging.ERROR)
 
-        sentry.init_app(app, dsn=app.config.get('SENTRY_DSN'))
+        # Enable Sentry
+        if app.config.get('SENTRY_DSN'):
+            from .utils.sentry import sentry
+
+            sentry.init_app(app, dsn=app.config.get('SENTRY_DSN'))
     else:
         DebugToolbarExtension(app)
 
