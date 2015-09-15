@@ -78,6 +78,7 @@ $btnGoToSecondStep.click(function () {
     if (word) {
         $addPieceWap.removeClass('first').addClass('second');
         $wordInSecondStep.text(word);
+        $explanationTextarea.focus();
     }
 });
 
@@ -105,6 +106,7 @@ $btnSubmitPiece.click(function () {
 // 添加例句
 $btnAddSentence.click(function () {
     $addPieceWapSecondStep.addClass('add-sentence');
+    $sentenceTextarea.focus();
 });
 
 /**
