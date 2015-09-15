@@ -1,44 +1,101 @@
-.pagination {
-  margin: 0 25px 25px 25px;
+/*!
+ *  Fonts.css -- Cross-platform Chinese fonts solution
+ * 
+ *  Copyright (C) 2013-2014 Zeno Zeng
+ *  Released under the MIT license
+ * 
+ *  Github: https://github.com/zenozeng/fonts.css
+ */
+.header {
+  text-align: center;
+  position: relative;
 }
-@media (max-width: 767px) {
-  .pagination {
-    margin-left: 20px;
-    margin-right: 20px;
-  }
+.header .current-selector-outer-wap {
+  margin-bottom: -1px;
+  position: relative;
+  height: 85px;
 }
-.collection-kinds-wap {
-  padding: 30px 25px 0 25px;
-}
-@media (max-width: 767px) {
-  .collection-kinds-wap {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-}
-.collection-kinds-wap .collection-kind {
-  padding: 6px 10px;
-  line-height: 1;
-  border: 1px solid #d9d9d9;
-  border-radius: 30px;
-  font-size: 12px;
-  text-decoration: none;
-  margin-right: 10px;
-  margin-bottom: 10px;
+.header .current-selector-outer-wap .current-selector-wap {
+  visibility: hidden;
   display: inline-block;
-  color: #666;
+  border: 1px solid #FFF;
+  padding: 15px 15px 10px 15px;
+  line-height: 1;
+  position: absolute;
+  background-color: white;
+  top: 0;
+  z-index: 1000;
 }
-.collection-kinds-wap .collection-kind.active {
-  background-color: #76af61;
-  border-color: #76af61;
-  color: white;
+.header .current-selector-outer-wap .current-selector-wap .current-selector {
+  font-weight: bold;
+  font-size: 28px;
+  margin-bottom: 5px;
 }
-.collection-kinds-wap .collection-kind.active:hover {
-  color: white;
+.header .current-selector-outer-wap .current-selector-wap .caret-wap {
+  color: #999;
+  font-size: 22px;
 }
-.collection-kinds-wap .collection-kind:hover {
-  color: #76af61;
+.header .current-selector-outer-wap .current-selector-wap .caret-wap .caret-up {
+  display: none;
 }
-.collections-wap {
-  padding-top: 18px;
+.header .current-selector-outer-wap .current-selector-wap .caret-wap .caret-down {
+  display: inline-block;
+}
+.header .selectors-outer-wap {
+  position: relative;
+  height: 20px;
+}
+.header .selectors-outer-wap .selectors-wap {
+  display: none;
+  position: absolute;
+  background-color: white;
+  top: 0;
+  border: 1px solid #EEEEEE;
+  padding: 15px 10px;
+  font-size: 18px;
+  z-index: 900;
+}
+.header .selectors-outer-wap .selectors-wap .selector {
+  padding: 5px 8px;
+  color: #999;
+  font-weight: bold;
+}
+.header .selectors-outer-wap .selectors-wap .selector.active {
+  background-color: #eee;
+  color: #333;
+}
+.header:hover .current-selector-outer-wap .current-selector-wap {
+  border-top-color: #EEE;
+  border-left-color: #EEE;
+  border-right-color: #EEE;
+}
+.header:hover .current-selector-outer-wap .current-selector-wap .caret-up {
+  display: inline-block;
+}
+.header:hover .current-selector-outer-wap .current-selector-wap .caret-down {
+  display: none;
+}
+.header:hover .selectors-outer-wap .selectors-wap {
+  display: inline-block;
+}
+.words {
+  margin-bottom: 20px;
+  font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
+  font-size: 18px;
+}
+.words .word {
+  background-color: #F7F7F7;
+  padding: 8px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  margin: 0 15px 15px 0;
+  color: #333;
+  font-weight: bold;
+}
+.words .word:hover {
+  background-color: #eeeeee;
+}
+.words-count {
+  text-align: center;
+  color: #ddd;
 }

@@ -1,7 +1,8 @@
 # coding: utf-8
+import string
 from datetime import date, timedelta
 from flask import render_template, Blueprint, request
-from ..models import db, Piece, Collection, CollectionKind
+from ..models import db, Piece, Word
 
 bp = Blueprint('site', __name__)
 
@@ -43,19 +44,20 @@ def search():
     return render_template('site/search.html')
 
 
-@bp.route('/collections', defaults={'page': 1})
-@bp.route('/collections/page/<int:page>')
-def collections(page):
-    kind_id = request.args.get('kind_id')
-    current_kind = CollectionKind.query.get_or_404(kind_id) if kind_id else None
-    collection_kinds = CollectionKind.query.order_by(CollectionKind.show_order.asc())
-    if kind_id:
-        collections = current_kind.collections
-    else:
-        collections = Collection.query
-    collections = collections.order_by(Collection.created_at.desc()).paginate(page, 20)
-    return render_template('site/collections.html', collections=collections,
-                           collection_kinds=collection_kinds, kind_id=kind_id)
+@bp.route('/collections')
+def collections():
+    """浏览字典"""
+    first_letter = request.args.get('first_letter')
+    words = Word.query
+    if first_letter:
+        words = words.filter(Word.first_letter == first_letter)
+
+    letters = []
+    for letter in string.ascii_lowercase:
+        if Word.query.filter(Word.first_letter == letter).count() > 0:
+            letters.append(letter)
+
+    return render_template('site/collections.html', words=words, letters=letters, first_letter=first_letter)
 
 
 @bp.route('/test')

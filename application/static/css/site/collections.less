@@ -1,50 +1,114 @@
 @import "../utils";
+@import "../fonts";
 
-.pagination {
-  margin: 0 25px 25px 25px;
+.header {
+  text-align: center;
+  position: relative;
 
-  @media (max-width: @screen-xs-max) {
-    margin-left: 20px;
-    margin-right: 20px;
+  .current-selector-outer-wap {
+    margin-bottom: -1px;
+    position: relative;
+    height: 85px;
+
+    .current-selector-wap {
+      visibility: hidden;
+      display: inline-block;
+      border: 1px solid #FFF;
+      padding: 15px 15px 10px 15px;
+      line-height: 1;
+      position: absolute;
+      background-color: white;
+      top: 0;
+      z-index: 1000;
+
+      .current-selector {
+        font-weight: bold;
+        font-size: 28px;
+        margin-bottom: 5px;
+      }
+
+      .caret-wap {
+        color: #999;
+        font-size: 22px;
+
+        .caret-up {
+          display: none;
+        }
+        .caret-down {
+          display: inline-block;
+        }
+      }
+    }
   }
-}
 
-.collection-kinds-wap {
-  padding: 30px 25px 0 25px;
+  .selectors-outer-wap {
+    position: relative;
+    height: 20px;
 
-  @media (max-width: @screen-xs-max) {
-    padding-left: 20px;
-    padding-right: 20px;
+    .selectors-wap {
+      display: none;
+      position: absolute;
+      background-color: white;
+      top: 0;
+      border: 1px solid #EEEEEE;
+      padding: 15px 10px;
+      font-size: 18px;
+      z-index: 900;
+
+      .selector {
+        padding: 5px 8px;
+        color: #999;
+        font-weight: bold;
+
+        &.active {
+          background-color: #eee;
+          color: #333;
+        }
+      }
+    }
   }
 
-  .collection-kind {
-    padding: 6px 10px;
-    line-height: 1;
-    border: 1px solid #d9d9d9;
-    border-radius: 30px;
-    font-size: 12px;
-    text-decoration: none;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    display: inline-block;
-    color: #666;
+  &:hover {
+    .current-selector-outer-wap .current-selector-wap {
+      border-top-color: #EEE;
+      border-left-color: #EEE;
+      border-right-color: #EEE;
 
-    &.active {
-      background-color: @main-color;
-      border-color: @main-color;
-      color: white;
-
-      &:hover {
-        color: white;
+      .caret-up {
+        display: inline-block;
+      }
+      .caret-down {
+        display: none;
       }
     }
 
-    &:hover {
-      color: @main-color;
+    .selectors-outer-wap .selectors-wap {
+      display: inline-block;
     }
   }
 }
 
-.collections-wap {
-  padding-top: 18px;
+.words {
+  margin-bottom: 20px;
+  .font-song();
+  font-size: 18px;
+
+  .word {
+    background-color: #F7F7F7;
+    padding: 8px 20px;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 0 15px 15px 0;
+    color: #333;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #eeeeee;
+    }
+  }
+}
+
+.words-count {
+  text-align: center;
+  color: #ddd;
 }

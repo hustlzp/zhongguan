@@ -2,30 +2,47 @@
 {% from 'macros/_utils.html' import pagination %}
 {% from "macros/_collection.html" import render_collections %}
 
-{% block page_title %}句集 - 中关村字典{% endblock %}
+{% block page_title %}浏览字典 - 中关村字典{% endblock %}
 {% block page_content %}
-   <div class="container">
-      <div class="panel panel-primary">
-         <div class="panel-heading">句集</div>
-         <div class="panel-body panel-body-no-padding">
-            <div class="collection-kinds-wap">
-               <a href="{{ url_for('site.collections') }}"
-                  class="collection-kind {% if not kind_id %}active{% endif %}">全部</a>
-               {% for kind in collection_kinds %}
-                  <a href="{{ url_for('site.collections', kind_id=kind.id) }}"
-                     class="collection-kind {% if kind_id|int == kind.id %}active{% endif %}">
-                     {{ kind.name }}
-                  </a>
-               {% endfor %}
+    <div class="container">
+        <div class="header">
+            <div class="current-selector-outer-wap">
+                <div class="current-selector-wap">
+                    <div class="current-selector">
+                        {% if first_letter %}
+                            {{ first_letter|upper }}
+                        {% else %}
+                            全部
+                        {% endif %}
+                    </div>
+
+                    <div class="caret-wap">
+                        <span class="fa fa-caret-up caret-up"></span>
+                        <span class="fa fa-caret-down caret-down"></span>
+                    </div>
+                </div>
             </div>
 
+            <div class="selectors-outer-wap">
+                <div class="selectors-wap">
+                    <a href="{{ url_for('site.collections') }}"
+                       class="selector {% if not first_letter %}active{% endif %}">全部</a>
 
-            {{ render_collections(collections.items) }}
+                    {% for letter in letters %}
+                        <a href="{{ url_for('site.collections', first_letter=letter) }}"
+                           class="selector {% if first_letter == letter %}active{% endif %}">
+                            {{ letter|upper }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
 
-            {% if collections.pages > 1 %}
-               {{ pagination(collections) }}
-            {% endif %}
-         </div>
-      </div>
-   </div>
+        <div class="words">
+            {% for word in words %}
+                <a href="{{ url_for('site.index', word_id=word.id) }}" class="word">{{ word.word }}</a>
+            {% endfor %}
+        </div>
+
+        <div class="words-count">{{ words.count() }} 个词</div>
+    </div>
 {% endblock %}
