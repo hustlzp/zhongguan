@@ -15,9 +15,10 @@
             {% endfor %}
         </div>
 
-        <div class="text-center loading-flag">
-            正在加载
-        </div>
+        <button type="button" class="btn btn-default btn-load-more-pieces">
+            <span class="for-not-loading">加载更多</span>
+            <span class="for-loading fa fa-spin fa-spinner"></span>
+        </button>
     </div>
 
     {% if piece %}
