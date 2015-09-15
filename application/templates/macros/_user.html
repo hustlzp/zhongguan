@@ -30,7 +30,7 @@
             </a>
             <a class="tab-item {% if active == "voters" %}active{% endif %}"
                href="{{ url_for('user.voters', uid=user.id) }}">
-                给我点赞的人 {{ user.lvoters_count }}
+                给我点赞的人 {{ user.voters_count }}
             </a>
         </div>
     </div>

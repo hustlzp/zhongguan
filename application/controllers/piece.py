@@ -6,7 +6,7 @@ from ..utils.permissions import UserPermission, PieceAddPermission, PieceEditPer
 from ..utils.helpers import generate_lcs_html
 from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection, \
     PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog, PieceCommentVote, Notification, \
-    NOTIFICATION_KIND, PieceEditLogReport, CollectionEditLog, COLLECTION_EDIT_KIND, Word
+    NOTIFICATION_KIND, PieceEditLogReport, CollectionEditLog, COLLECTION_EDIT_KIND, Word, Voter
 from ..forms import PieceForm
 from ..utils.decorators import jsonify
 
@@ -38,6 +38,7 @@ def pieces_by_date():
 
     data_count = 0
     delta = 1
+    next_start_date = None
 
     while data_count < days:
         target_day = start_date - timedelta(days=delta)
@@ -232,6 +233,7 @@ def edit(uid):
 
 @bp.route('/piece/<int:uid>/vote', methods=['POST'])
 @UserPermission()
+@jsonify
 def vote(uid):
     piece = Piece.query.get_or_404(uid)
     vote = g.user.voted_pieces.filter(PieceVote.piece_id == uid).first()
@@ -242,30 +244,54 @@ def vote(uid):
         piece.votes_count += 1
         db.session.add(g.user)
         db.session.add(piece)
+
+        # Update voter
+        voter = Voter.query.filter(Voter.voter_id == g.user.id, Voter.user_id == piece.user_id).first()
+        if not voter:
+            voter = Voter(voter_id=g.user.id, user_id=piece.user_id)
+        else:
+            voter.count += 1
+        db.session.add(voter)
+
+        piece.user.update_voters_count()
+        db.session.add(piece.user)
+
         db.session.commit()
-        return json.dumps({'result': True})
+        return {'result': True}
     else:
-        return json.dumps({'result': False})
+        return {'result': False}
 
 
 @bp.route('/piece/<int:uid>/unvote', methods=['POST'])
 @UserPermission()
+@jsonify
 def unvote(uid):
     piece = Piece.query.get_or_404(uid)
-    votes = g.user.voted_pieces.filter(PieceVote.piece_id == uid)
-    if not votes.count():
+    vote = g.user.voted_pieces.filter(PieceVote.piece_id == uid).first()
+    if not vote:
         return json.dumps({'result': False})
     else:
-        for vote in votes:
-            db.session.delete(vote)
-            if g.user.votes_count > 0:
-                g.user.votes_count -= 1
-            if piece.votes_count > 0:
-                piece.votes_count -= 1
+        db.session.delete(vote)
+        if g.user.votes_count > 0:
+            g.user.votes_count -= 1
+        if piece.votes_count > 0:
+            piece.votes_count -= 1
         db.session.add(g.user)
         db.session.add(piece)
+
+        # Update voter
+        voter = Voter.query.filter(Voter.voter_id == g.user.id, Voter.user_id == piece.user_id).first()
+        if voter:
+            voter.count -= 1
+            if voter.count < 0:
+                voter.count = 0
+            db.session.add(voter)
+
+            piece.user.update_voters_count()
+            db.session.add(piece.user)
+
         db.session.commit()
-        return json.dumps({'result': True})
+        return {'result': True}
 
 
 @bp.route('/piece/<int:uid>/comment', methods=['POST'])

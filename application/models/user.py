@@ -40,6 +40,9 @@ class User(db.Model):
     def check_password(self, password):
         return check_password_hash(self.password, password)
 
+    def update_voters_count(self):
+        self.voters_count = self.voters.filter(Voter.count > 0).count()
+
     @property
     def avatar_url(self):
         return avatars.url(self.avatar)
@@ -51,14 +54,14 @@ class User(db.Model):
 class Voter(db.Model):
     """点赞者"""
     id = db.Column(db.Integer, primary_key=True)
-    count = db.Column(db.Integer, default=0)
+    count = db.Column(db.Integer, default=1)
     created_at = db.Column(db.DateTime, default=datetime.now)
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=None)
     user = db.relationship('User',
                            backref=db.backref('voters',
-                                              cascade="all, delete, delete-orphan",
-                                              uselist=False),
+                                              lazy='dynamic',
+                                              cascade="all, delete, delete-orphan"),
                            foreign_keys=[user_id])
 
     voter_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=None)

@@ -1,0 +1,35 @@
+.voters {
+  margin-top: 30px;
+}
+.voters .voter {
+  display: inline-block;
+  vertical-align: top;
+  border: 1px solid #eee;
+  border-radius: 2px;
+  margin: 0 20px 20px 0;
+  width: 130px;
+  cursor: pointer;
+  text-align: center;
+  padding: 25px 10px 10px 10px;
+  color: #333;
+}
+.voters .voter:hover {
+  background-color: #F6F6F6;
+}
+.voters .voter .user-avatar {
+  display: block;
+  margin: 0 auto 10px auto;
+  width: 60px;
+  height: 60px;
+}
+.voters .voter .name {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+.voters .voter .count {
+  color: #aaa;
+  font-size: 14px;
+}
+.voters .voter .count.one {
+  visibility: hidden;
+}

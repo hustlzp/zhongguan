@@ -1,0 +1,41 @@
+.voters {
+  margin-top: 30px;
+
+  .voter {
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid #eee;
+    border-radius: 2px;
+    margin: 0 20px 20px 0;
+    width: 130px;
+    cursor: pointer;
+    text-align: center;
+    padding: 25px 10px 10px 10px;
+    color: #333;
+
+    &:hover {
+      background-color: #F6F6F6;
+    }
+
+    .user-avatar {
+      display: block;
+      margin: 0 auto 10px auto;
+      width: 60px;
+      height: 60px;
+    }
+
+    .name {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .count {
+      color: #aaa;
+      font-size: 14px;
+
+      &.one {
+        visibility: hidden;
+      }
+    }
+  }
+}
