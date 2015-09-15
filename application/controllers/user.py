@@ -114,18 +114,17 @@ def change_password():
 
 @bp.route('/my/upload_avatar', methods=['POST'])
 @UserPermission()
+@jsonify
 def upload_avatar():
     try:
         filename, (w, h) = process_image_for_cropping(request.files['file'], avatars)
     except Exception, e:
         return json.dumps({'result': False, 'error': e.__repr__()})
     else:
-        return json.dumps({
-            'result': True,
-            'image_url': avatars.url(filename),
-            'width': w,
-            'height': h
-        })
+        g.user.avatar = filename
+        db.session.add(g.user)
+        db.session.commit()
+        return {'result': True, 'url': avatars.url(filename)}
 
 
 @bp.route('/my/crop_avatar', methods=['POST'])

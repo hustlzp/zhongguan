@@ -13,7 +13,8 @@ qrcodes = UploadSet('qrcodes', IMAGES)
 def process_image_for_cropping(file_storage, upload_set):
     """将图片处理为适合裁剪的大小，即长宽均不超过1000"""
     image = open_image(file_storage)
-    image = resize_with_max(image, 1000)
+    image = center_crop(image)
+    image = resize_with_max(image, 200)
     ext = extension(file_storage.filename)
     return save_image(image, upload_set, ext), image.size
 

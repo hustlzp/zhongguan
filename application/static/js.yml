@@ -11,6 +11,8 @@ libs:
   - bower_components/jquery-mousewheel/jquery.mousewheel.min.js
   - bower_components/Jcrop/js/jquery.Jcrop.min.js
   - libs/jquery.animate-colors-min.js
+  - bower_components/simple-module/lib/module.js
+  - bower_components/simple-uploader/lib/uploader.js
   - js/init.js
 
 layout:

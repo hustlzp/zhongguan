@@ -7,10 +7,51 @@
     text-align: center;
     margin-bottom: 35px;
 
-    .user-avatar {
-      width: 80px;
-      height: 80px;
+    .avatar-wap {
       margin-bottom: 20px;
+
+      .user-avatar {
+        width: 90px;
+        height: 90px;
+      }
+    }
+
+    .avatar-wap {
+      margin: 0 auto 20px auto;
+      width: 120px;
+      height: 120px;
+      border-radius: 100px;
+      box-shadow: 0 0 2px rgba(0, 0, 0, .5);
+      position: relative;
+
+      input[type='file'] {
+        display: none;
+      }
+
+      &:hover .btn-upload-avatar {
+        display: block;
+      }
+
+      .user-avatar {
+        width: 120px;
+        height: 120px;
+      }
+
+      .btn-upload-avatar {
+        width: 120px;
+        height: 120px;
+        border-radius: 60px;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
+        padding-top: 50px;
+        background-color: rgba(0, 0, 0, .4);
+        text-align: center;
+        color: white;
+        cursor: pointer;
+      }
     }
 
     .name-wap {

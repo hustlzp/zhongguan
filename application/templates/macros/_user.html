@@ -10,8 +10,14 @@
 {% macro render_user_profile_header(user, active="creates") %}
     <div class="user-profile-header">
         <div class="user-info">
-            <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
-        
+            <div class="avatar-wap">
+                <img src="{{ user.avatar_url }}" class="img-circle user-avatar" alt=""/>
+                {% if g.user and g.user.id == user.id %}
+                    <span class="btn-upload-avatar">上传头像</span>
+                    <input type="file" name="avatar"/>
+                {% endif %}
+            </div>
+
             <div class="name-wap">
                 <div class="name-outer-wap {% if g.user and g.user.id == user.id %}myself{% endif %}
                     {% if not user.name %}empty{% endif %}">
@@ -73,6 +79,30 @@
         (function () {
             var $userHeader = $('.user-profile-header');
 
+            // 上传头像
+            var avatarUploader = simple.uploader({
+                url: urlFor('user.upload_avatar'),
+                fileKey: 'file',
+                connectionCount: 1,
+                params: {
+                    csrf_token: g.csrfToken
+                }
+            });
+
+            $('.btn-upload-avatar').click(function () {
+                $userHeader.find("input[name='avatar']").click();
+            });
+
+            $userHeader.find("input[name='avatar']").on('change', function (e) {
+                avatarUploader.upload(this.files);
+            });
+
+            avatarUploader.on('uploadsuccess', function (e, file, response) {
+                if (response.result) {
+                    $('.user-avatar').attr('src', response.url);
+                }
+            });
+
             // 显示name编辑框
             $userHeader.find('.btn-edit-name').click(function () {
                 var name = $.trim($userHeader.find('.name').text());
@@ -107,7 +137,7 @@
                     }
                 });
             });
-            
+
             // 显示motto编辑框
             $userHeader.find('.btn-edit-motto').click(function () {
                 var motto = $.trim($userHeader.find('.motto').text());
