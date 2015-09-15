@@ -371,6 +371,10 @@
     display: none;
   }
 }
+.pieces-wap .piece .media,
+.pieces-wap .piece .media-body {
+  overflow: visible;
+}
 @media (max-width: 500px) {
   .pieces-wap .piece .other-info {
     display: none;
@@ -398,6 +402,9 @@
 .pieces-wap .piece .other-info .comments-count .fa {
   font-size: 12px;
   margin-left: 1px;
+}
+.pieces-wap .piece .body {
+  margin-right: 135px;
 }
 .pieces-wap .piece .body:hover .word {
   text-decoration: underline;
@@ -697,4 +704,76 @@
 }
 .piece-logs-wap .btn-close-logs-wap:hover {
   color: #999;
+}
+.piece-qrcode {
+  position: relative;
+  text-align: center;
+}
+.piece-qrcode:hover .share-popover {
+  display: block;
+  opacity: 1;
+}
+.piece-qrcode .share-popover {
+  background-color: white;
+  position: absolute;
+  display: none;
+  opacity: .8;
+  padding: 20px;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+  top: -30px;
+  right: 10px;
+  white-space: nowrap;
+  transition: opacity 0.3s;
+}
+.piece-qrcode .share-popover .piece-word {
+  font-weight: bold;
+  font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+.piece-qrcode .share-popover .user-avatar {
+  display: block;
+  margin-bottom: 20px;
+}
+.piece-qrcode .share-popover .user-avatar img {
+  width: 32px;
+  height: 32px;
+}
+.piece-qrcode .share-popover .piece-qrcode {
+  width: 180px;
+  height: 180px;
+  display: block;
+  margin: 0 auto 15px auto;
+}
+.piece-qrcode .share-popover .tip {
+  font-size: 14px;
+}
+.piece-qrcode .share-popover .tip .wechat-icon {
+  color: #06B712;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+.piece-qrcode .share-popover:after,
+.piece-qrcode .share-popover:before {
+  left: 100%;
+  top: 45px;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.piece-qrcode .share-popover:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-left-color: #fff;
+  border-width: 10px;
+  margin-top: -10px;
+}
+.piece-qrcode .share-popover:before {
+  border-color: rgba(222, 222, 222, 0);
+  border-left-color: #ddd;
+  border-width: 11px;
+  margin-top: -11px;
 }

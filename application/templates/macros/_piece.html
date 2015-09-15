@@ -515,8 +515,9 @@
                 $('.btn-share').click(function () {
                     var $shareInnerWap = $('.share-wap .inner-wap');
                     var marginTop;
+                    var $shareWap = $('.share-wap');
 
-                    $('.share-wap').show();
+                    $shareWap.show();
                     marginTop = ($detailsParentWap.outerHeight() - $shareInnerWap.outerHeight()) * 0.4;
 
                     if (isModal) {
@@ -530,7 +531,7 @@
                     }
 
                     $shareInnerWap.css('marginTop', marginTop + 'px');
-                    $('.share-wap').transition({
+                    $shareWap.transition({
                         'top': '0',
                         'opacity': 1
                     }, 300);
@@ -727,6 +728,27 @@
 {% endmacro %}
 
 
+{% macro render_piece_qrcode(piece) %}
+    <span class="piece-qrcode">
+        <span class="fa fa-qrcode pull-right btn-show-qrcode"></span>
+
+        <div class="share-popover">
+            <div class="piece-word">{{ piece.word }}</div>
+
+            <a href="{{ url_for('user.profile', uid=piece.user.id) }}" class="user-avatar">
+                <img src="{{ piece.user.avatar_url }}" class="img-circle"/>
+            </a>
+
+            <img src="{{ piece.qrcode_url }}" class="piece-qrcode" alt=""/>
+
+            <div class="tip">
+                <img src="{{ static('image/wechat.png') }}" class="wechat-icon">&nbsp;&nbsp;微信扫一扫,分享到朋友圈
+            </div>
+        </div>
+    </span>
+{% endmacro %}
+
+
 {% macro render_pieces(pieces, attr=None, show_modal=True) %}
     <div class="pieces-wap">
         {% for piece in pieces %}
@@ -754,7 +776,7 @@
 
                             {{ render_user_avatar(piece.user) }}
 
-                            <span class="fa fa-qrcode pull-right btn-show-qrcode"></span>
+                            {{ render_piece_qrcode(piece) }}
                         </div>
 
                         <div class="body" data-piece-id="{{ piece.id }}">
