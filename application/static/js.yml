@@ -6,10 +6,10 @@ libs:
   - bower_components/jquery.scrollTo/jquery.scrollTo.min.js
   - bower_components/bootstrap/dist/js/bootstrap.min.js
   - bower_components/moment/min/moment.min.js
-  - bower_components/plupload/js/plupload.full.min.js
+#  - bower_components/plupload/js/plupload.full.min.js
   - bower_components/typeahead.js/dist/typeahead.bundle.min.js
   - bower_components/jquery-mousewheel/jquery.mousewheel.min.js
-  - bower_components/Jcrop/js/jquery.Jcrop.min.js
+#  - bower_components/Jcrop/js/jquery.Jcrop.min.js
   - libs/jquery.animate-colors-min.js
   - bower_components/simple-module/lib/module.js
   - bower_components/simple-uploader/lib/uploader.js
