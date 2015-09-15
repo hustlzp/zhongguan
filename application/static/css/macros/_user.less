@@ -13,14 +13,136 @@
       margin-bottom: 20px;
     }
 
-    .user-name {
+    .name-wap {
       font-size: 20px;
       text-align: center;
+
+      .name-outer-wap {
+        display: block;
+
+        .name-inner-wap {
+          position: relative;
+
+          .for-empty-name {
+            display: none;
+          }
+
+          .btn-edit-name {
+            cursor: pointer;
+            color: #999;
+            display: none;
+            font-size: 14px;
+            position: absolute;
+            top: 0;
+            right: -70px;
+
+            &:hover {
+              color: #666;
+            }
+          }
+        }
+
+        &.myself {
+          &.empty {
+            .name-inner-wap .for-empty-name {
+              display: inline-block;
+            }
+          }
+
+          &:hover {
+            .name-inner-wap .btn-edit-name {
+              display: inline-block;
+            }
+          }
+        }
+      }
+
+      .name-edit-wap {
+        display: none;
+
+        input {
+          display: inline-block;
+          vertical-align: middle;
+          width: 400px;
+          margin-right: 10px;
+        }
+      }
+
+      &.edit {
+        .name-outer-wap {
+          display: none;
+        }
+
+        .name-edit-wap {
+          display: block;
+        }
+      }
     }
 
-    .motto {
+    .motto-wap {
       margin-top: 12px;
       color: #999;
+
+      .motto-outer-wap {
+        display: block;
+
+        .motto-inner-wap {
+          position: relative;
+
+          .for-empty-motto {
+            display: none;
+          }
+
+          .btn-edit-motto {
+            cursor: pointer;
+            color: #999;
+            display: none;
+            font-size: 14px;
+            position: absolute;
+            top: 0;
+            right: -70px;
+
+            &:hover {
+              color: #666;
+            }
+          }
+        }
+
+        &.myself {
+          &.empty {
+            .motto-inner-wap .for-empty-motto {
+              display: inline-block;
+            }
+          }
+
+          &:hover {
+            .motto-inner-wap .btn-edit-motto {
+              display: inline-block;
+            }
+          }
+        }
+      }
+
+      .motto-edit-wap {
+        display: none;
+
+        input {
+          display: inline-block;
+          vertical-align: middle;
+          width: 400px;
+          margin-right: 10px;
+        }
+      }
+
+      &.edit {
+        .motto-outer-wap {
+          display: none;
+        }
+
+        .motto-edit-wap {
+          display: block;
+        }
+      }
     }
 
     .media-icons {

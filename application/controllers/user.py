@@ -74,6 +74,30 @@ def toggle_setting():
     }
 
 
+@bp.route('/my/update_name', methods=['POST'])
+@UserPermission()
+@jsonify
+def update_name():
+    """更新描述"""
+    name = request.form.get('name')
+    g.user.name = name
+    db.session.add(g.user)
+    db.session.commit()
+    return {'result': True}
+
+
+@bp.route('/my/update_motto', methods=['POST'])
+@UserPermission()
+@jsonify
+def update_motto():
+    """更新描述"""
+    motto = request.form.get('motto')
+    g.user.motto = motto
+    db.session.add(g.user)
+    db.session.commit()
+    return {'result': True}
+
+
 @bp.route('/my/change_password', methods=['GET', 'POST'])
 @UserPermission()
 def change_password():

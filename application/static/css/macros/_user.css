@@ -10,13 +10,97 @@
   height: 80px;
   margin-bottom: 20px;
 }
-.user-profile-header .user-info .user-name {
+.user-profile-header .user-info .name-wap {
   font-size: 20px;
   text-align: center;
 }
-.user-profile-header .user-info .motto {
+.user-profile-header .user-info .name-wap .name-outer-wap {
+  display: block;
+}
+.user-profile-header .user-info .name-wap .name-outer-wap .name-inner-wap {
+  position: relative;
+}
+.user-profile-header .user-info .name-wap .name-outer-wap .name-inner-wap .for-empty-name {
+  display: none;
+}
+.user-profile-header .user-info .name-wap .name-outer-wap .name-inner-wap .btn-edit-name {
+  cursor: pointer;
+  color: #999;
+  display: none;
+  font-size: 14px;
+  position: absolute;
+  top: 0;
+  right: -70px;
+}
+.user-profile-header .user-info .name-wap .name-outer-wap .name-inner-wap .btn-edit-name:hover {
+  color: #666;
+}
+.user-profile-header .user-info .name-wap .name-outer-wap.myself.empty .name-inner-wap .for-empty-name {
+  display: inline-block;
+}
+.user-profile-header .user-info .name-wap .name-outer-wap.myself:hover .name-inner-wap .btn-edit-name {
+  display: inline-block;
+}
+.user-profile-header .user-info .name-wap .name-edit-wap {
+  display: none;
+}
+.user-profile-header .user-info .name-wap .name-edit-wap input {
+  display: inline-block;
+  vertical-align: middle;
+  width: 400px;
+  margin-right: 10px;
+}
+.user-profile-header .user-info .name-wap.edit .name-outer-wap {
+  display: none;
+}
+.user-profile-header .user-info .name-wap.edit .name-edit-wap {
+  display: block;
+}
+.user-profile-header .user-info .motto-wap {
   margin-top: 12px;
   color: #999;
+}
+.user-profile-header .user-info .motto-wap .motto-outer-wap {
+  display: block;
+}
+.user-profile-header .user-info .motto-wap .motto-outer-wap .motto-inner-wap {
+  position: relative;
+}
+.user-profile-header .user-info .motto-wap .motto-outer-wap .motto-inner-wap .for-empty-motto {
+  display: none;
+}
+.user-profile-header .user-info .motto-wap .motto-outer-wap .motto-inner-wap .btn-edit-motto {
+  cursor: pointer;
+  color: #999;
+  display: none;
+  font-size: 14px;
+  position: absolute;
+  top: 0;
+  right: -70px;
+}
+.user-profile-header .user-info .motto-wap .motto-outer-wap .motto-inner-wap .btn-edit-motto:hover {
+  color: #666;
+}
+.user-profile-header .user-info .motto-wap .motto-outer-wap.myself.empty .motto-inner-wap .for-empty-motto {
+  display: inline-block;
+}
+.user-profile-header .user-info .motto-wap .motto-outer-wap.myself:hover .motto-inner-wap .btn-edit-motto {
+  display: inline-block;
+}
+.user-profile-header .user-info .motto-wap .motto-edit-wap {
+  display: none;
+}
+.user-profile-header .user-info .motto-wap .motto-edit-wap input {
+  display: inline-block;
+  vertical-align: middle;
+  width: 400px;
+  margin-right: 10px;
+}
+.user-profile-header .user-info .motto-wap.edit .motto-outer-wap {
+  display: none;
+}
+.user-profile-header .user-info .motto-wap.edit .motto-edit-wap {
+  display: block;
 }
 .user-profile-header .user-info .media-icons {
   text-align: center;

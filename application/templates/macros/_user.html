@@ -1,6 +1,6 @@
 {% macro render_user_avatar(user) %}
     <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link" data-toggle="tooltip"
-            data-placement="bottom" title="{{ user.name }}">
+       data-placement="bottom" title="{{ user.name }}">
         <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
              data-user-id="{{ user.id }}" alt=""/>
     </a>
@@ -11,12 +11,46 @@
     <div class="user-profile-header">
         <div class="user-info">
             <img src="{{ user.avatar_url }}" class="user-avatar img-circle" alt=""/>
+        
+            <div class="name-wap">
+                <div class="name-outer-wap {% if g.user and g.user.id == user.id %}myself{% endif %}
+                    {% if not user.name %}empty{% endif %}">
+                    <span class="name-inner-wap">
+                        <span class="name">
+                            {% if user.name %}{{ user.name }}{% endif %}
+                        </span>
+                        <span class="text-light for-empty-name">尚无描述</span>
+                        <span class="btn-edit-name">
+                            <span class="fa fa-pencil"></span> 编辑
+                        </span>
+                    </span>
+                </div>
+                <div class="name-edit-wap">
+                    <input type="text" class="form-control input-name" name="name"
+                           placeholder="一句话简介" autocomplete="off"/>
+                    <button type="button" class="btn btn-default btn-submit-name">保存</button>
+                </div>
+            </div>
 
-            <div class="user-name">{{ user.name }}</div>
-
-            {% if user.motto %}
-                <div class="motto">{{ user.motto }}</div>
-            {% endif %}
+            <div class="motto-wap">
+                <div class="motto-outer-wap {% if g.user and g.user.id == user.id %}myself{% endif %}
+                    {% if not user.motto %}empty{% endif %}">
+                    <span class="motto-inner-wap">
+                        <span class="motto">
+                            {% if user.motto %}{{ user.motto }}{% endif %}
+                        </span>
+                        <span class="text-light for-empty-motto">尚无描述</span>
+                        <span class="btn-edit-motto">
+                            <span class="fa fa-pencil"></span> 编辑
+                        </span>
+                    </span>
+                </div>
+                <div class="motto-edit-wap">
+                    <input type="text" class="form-control input-motto" name="motto"
+                           placeholder="一句话简介" autocomplete="off"/>
+                    <button type="button" class="btn btn-default btn-submit-motto">保存</button>
+                </div>
+            </div>
         </div>
 
         <div class="tab clearfix">
@@ -34,4 +68,80 @@
             </a>
         </div>
     </div>
+
+    <script>
+        (function () {
+            var $userHeader = $('.user-profile-header');
+
+            // 显示name编辑框
+            $userHeader.find('.btn-edit-name').click(function () {
+                var name = $.trim($userHeader.find('.name').text());
+
+                $(this).parents('.name-wap').addClass('edit');
+                $('.input-name').val(name).focus();
+
+            });
+
+            // 更新name
+            $userHeader.find('.btn-submit-name').click(function () {
+                var $input = $(this).prev();
+                var name = $.trim($input.val());
+
+                $.ajax({
+                    url: urlFor('user.update_name'),
+                    method: 'post',
+                    dataType: 'json',
+                    data: {
+                        name: name
+                    }
+                }).done(function (response) {
+                    if (response.result) {
+                        $userHeader.find('.name').text(name);
+                        $userHeader.find('.name-wap').removeClass('edit');
+
+                        if (name === '') {
+                            $userHeader.find('.name-outer-wap').addClass('empty');
+                        } else {
+                            $userHeader.find('.name-outer-wap').removeClass('empty');
+                        }
+                    }
+                });
+            });
+            
+            // 显示motto编辑框
+            $userHeader.find('.btn-edit-motto').click(function () {
+                var motto = $.trim($userHeader.find('.motto').text());
+
+                $(this).parents('.motto-wap').addClass('edit');
+                $('.input-motto').val(motto).focus();
+
+            });
+
+            // 更新motto
+            $userHeader.find('.btn-submit-motto').click(function () {
+                var $input = $(this).prev();
+                var motto = $.trim($input.val());
+
+                $.ajax({
+                    url: urlFor('user.update_motto'),
+                    method: 'post',
+                    dataType: 'json',
+                    data: {
+                        motto: motto
+                    }
+                }).done(function (response) {
+                    if (response.result) {
+                        $userHeader.find('.motto').text(motto);
+                        $userHeader.find('.motto-wap').removeClass('edit');
+
+                        if (motto === '') {
+                            $userHeader.find('.motto-outer-wap').addClass('empty');
+                        } else {
+                            $userHeader.find('.motto-outer-wap').removeClass('empty');
+                        }
+                    }
+                });
+            });
+        })();
+    </script>
 {% endmacro %}
