@@ -95,7 +95,7 @@
     .commands-wap {
       text-align: right;
 
-      a {
+      & > * {
         display: inline-block;
         font-size: 22px;
         color: #999;
@@ -104,6 +104,30 @@
 
         &:hover {
           color: #666;
+        }
+      }
+
+      .btn-more {
+        position: relative;
+
+        .dropdown-menu {
+          left: inherit;
+          right: -10px;
+          min-width: 120px;
+          border-radius: 2px;
+
+          & > li > a {
+            padding: 5px 15px;
+            color: #666;
+
+            &:hover {
+              color: #333;
+            }
+          }
+
+          .fa {
+            width: 15px;
+          }
         }
       }
     }

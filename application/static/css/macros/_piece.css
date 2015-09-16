@@ -96,15 +96,34 @@
 .piece-details-wap .piece-header .commands-wap {
   text-align: right;
 }
-.piece-details-wap .piece-header .commands-wap a {
+.piece-details-wap .piece-header .commands-wap > * {
   display: inline-block;
   font-size: 22px;
   color: #999;
   cursor: pointer;
   padding: 0 0 0 15px;
 }
-.piece-details-wap .piece-header .commands-wap a:hover {
+.piece-details-wap .piece-header .commands-wap > *:hover {
   color: #666;
+}
+.piece-details-wap .piece-header .commands-wap .btn-more {
+  position: relative;
+}
+.piece-details-wap .piece-header .commands-wap .btn-more .dropdown-menu {
+  left: inherit;
+  right: -10px;
+  min-width: 120px;
+  border-radius: 2px;
+}
+.piece-details-wap .piece-header .commands-wap .btn-more .dropdown-menu > li > a {
+  padding: 5px 15px;
+  color: #666;
+}
+.piece-details-wap .piece-header .commands-wap .btn-more .dropdown-menu > li > a:hover {
+  color: #333;
+}
+.piece-details-wap .piece-header .commands-wap .btn-more .dropdown-menu .fa {
+  width: 15px;
 }
 .piece-details-wap .piece-header .word {
   text-align: center;
