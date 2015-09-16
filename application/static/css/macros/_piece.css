@@ -96,6 +96,9 @@
 .piece-details-wap .piece-header .commands-wap > *:hover {
   color: #666;
 }
+.piece-details-wap .piece-header .commands-wap .btn-copy-link:focus {
+  outline: none;
+}
 .piece-details-wap .piece-header .commands-wap .btn-more {
   position: relative;
 }

@@ -13,6 +13,7 @@ libs:
   - libs/jquery.animate-colors-min.js
   - bower_components/simple-module/lib/module.js
   - bower_components/simple-uploader/lib/uploader.js
+  - bower_components/zeroclipboard/dist/ZeroClipboard.min.js
   - js/init.js
 
 layout:

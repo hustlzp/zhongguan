@@ -508,13 +508,21 @@
                 var $collectionInput = $('#input-collection');
                 var $detailsParentWap = $('.piece-details-wap').parent();
                 var isModal = $detailsParentWap.hasClass('piece-modal-wap');   //是否为右侧弹出框
+                var $btnCopyLink = $('.btn-copy-link');
 
                 if (isModal) {
                     $('.share-wap').isolatedScroll();
                     $('.piece-logs-wap').isolatedScroll();
                 }
 
-                $('.btn-copy-link').tooltip().click(function () {
+                var client = new ZeroClipboard($btnCopyLink);
+
+                client.on("copy", function (event) {
+                    var clipboard = event.clipboardData;
+                    clipboard.setData("text/plain", g.domain + urlFor('site.index', {piece_id: pieceId}));
+                });
+
+                $btnCopyLink.tooltip().click(function () {
                     $(this).parent().find('.tooltip-inner').text('链接已复制');
                 });
 
