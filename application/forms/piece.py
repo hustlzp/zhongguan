@@ -11,9 +11,7 @@ from ..models import Piece
 class PieceForm(Form):
     word = StringField('词', validators=[DataRequired('词不能为空'), trim])
     content = TextAreaField('解释', validators=[DataRequired('解释不能为空'), trim])
-    sentence = TextAreaField('例句',
-                             validators=[Optional(), trim],
-                             description='选填')
+    sentence = TextAreaField('例句', validators=[Optional(), trim], description='选填')
 
     # def validate_content(self, field):
     #     content = self.content.data
@@ -25,6 +23,11 @@ class PieceForm(Form):
     #     content_length = Piece.calculate_content_length(self.content.data)
     #     if content_length > 200:
     #         raise ValueError('不超过200字')
+
+
+class EditPieceForm(Form):
+    content = TextAreaField('解释', validators=[DataRequired('解释不能为空'), trim])
+    sentence = TextAreaField('例句', validators=[Optional(), trim], description='选填')
 
 
 class PieceCommentForm(Form):

@@ -428,7 +428,11 @@
                     <span class="fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="false"></span>
                         <ul class="dropdown-menu">
-                            <li><a href="#"><span class="fa fa-edit"></span> 编辑</a></li>
+                            <li>
+                                <a href="{{ url_for('piece.edit', uid=piece.id) }}">
+                                    <span class="fa fa-edit"></span> 编辑
+                                </a>
+                            </li>
                             <li>
                                 <a href="javascript:void(0)" class="btn-delete-piece">
                                     <span class="fa fa-trash-o"></span> 删除
@@ -916,234 +920,27 @@
         {{ form.csrf_token() }}
 
         <div class="form-group">
-            <label for="content">句子</label>
+            <label for="content">解释</label>
 
-         <span class="tip">
-            <span class="positive">还可以输入 <span class="content-length"></span> 字</span>
-            <span class="negative">已超出 <span class="content-length"></span> 字</span>
-         </span>
+            <textarea class="form-control" id="content" name="content" placeholder=""
+                      rows="4">{{ form.content.data or "" }}</textarea>
 
-         <textarea class="form-control" id="content" name="content" placeholder=""
-                   rows="5">{{ form.content.data or "" }}</textarea>
             {{ field_error(form.content) }}
         </div>
 
-        {% set original = form.original.data %}
-        <div class="btn-group btn-group-sm btn-group-original clearfix" data-toggle="buttons">
-            <label class="btn btn-default {% if not original %}active{% endif %}">
-                <input type="radio" name="original" value="false" autocomplete="off"
-                       {% if not original %}checked="checked"{% endif %}> 引用
-            </label>
-            <label class="btn btn-default {% if original %}active{% endif %}">
-                <input type="radio" name="original" value="true" autocomplete="off"
-                       {% if original %}checked="checked"{% endif %}> 原创
-            </label>
+        <div class="form-group">
+            <label for="content">例句</label>
+
+            <textarea class="form-control" id="sentence" name="sentence" placeholder=""
+                      rows="4">{{ form.sentence.data or "" }}</textarea>
+
+            {{ field_error(form.sentence) }}
         </div>
-
-        <div class="external">
-            {{ vertical_field(form.author) }}
-
-            <div class="form-group">
-                <label for="source">
-                    出处 <span class="fa fa-question-circle source-help"></span>
-                </label>
-                <input class="form-control" id="source" name="source" placeholder="选填"
-                       type="text" value="{{ form.source.data or "" }}">
-                {{ field_error(form.source) }}
-            </div>
-
-            <div class="form-group">
-                <label for="source_link">链接</label>
-
-                <div class="source-url-wap">
-                    <input class="form-control" id="source_link" name="source_link"
-                           placeholder="选填" type="text"
-                           value="{{ form.source_link.data or "" }}">
-                    <img class="source-favicon" src="" alt=""/>
-                </div>
-                {{ field_error(form.source_link) }}
-            </div>
-        </div>
-
-        {% if add %}
-            {{ vertical_field(form.comment, rows=4) }}
-        {% endif %}
 
         <div class="submit-wap submit-right">
             <button type="submit" class="btn btn-submit btn-primary">
-                {% if add %}分享{% else %}保存{% endif %}
+                保存
             </button>
         </div>
     </form>
-
-    <script type="text/javascript">
-        (function () {
-            var timerForContent = null;
-            var timerForSourceLink = null;
-            var $sourceFavicon = $('.source-favicon');
-            var $sourceLinkInput = $('#source_link');
-            var $authorInput = $('#author');
-            var timerForAuthorTypeahead = null;
-            var $sourceInput = $('#source');
-            var timerForSourceTypeahead = null;
-
-            $('.source-help').popover({
-                trigger: 'hover',
-                container: 'body',
-                content: '如：书籍、电影、歌曲、文章标题等。'
-            });
-
-            // 字数更新
-            updateWordCount();
-
-            $('#content').keyup(function () {
-                clearTimeout(timerForContent);
-                timerForContent = setTimeout(updateWordCount, 100);
-            });
-
-            // 若为原创，则无需填写其他内容
-            if ($('input[name=original]:checked').val() === 'true') {
-                $('.external').hide();
-            }
-
-            $('input[name=original]').change(function () {
-                if ($(this).val() === 'true') {
-                    $('.external').slideUp('fast');
-                } else {
-                    $('.external').slideDown('fast');
-                }
-            });
-
-            if ($.trim($sourceLinkInput.val()) !== "") {
-                $sourceFavicon.attr('src', 'http://g.soz.im/' + $sourceLinkInput.val());
-            }
-
-            // 输入source url时，加载favicon
-            $sourceLinkInput.keyup(function () {
-                var $input = $(this);
-                clearTimeout(timerForSourceLink);
-                timerForSourceLink = setTimeout(function () {
-                    var url = $.trim($input.val());
-
-                    if (url !== "" && !startsWith(url, 'http')) {
-                        url = "http://" + url.replace(new RegExp("^:?/*"), '');
-                        $input.val(url);
-                    }
-
-                    $sourceFavicon.attr('src', 'http://g.soz.im/' + url);
-                }, 500);
-            });
-
-            // change或input事件时，加载favicon
-            $sourceLinkInput.on('change input', function () {
-                $sourceFavicon.attr('src', 'http://g.soz.im/' + $(this).val());
-            });
-
-            // Favicon加载失败时，隐藏
-            $sourceFavicon.load(function () {
-                $(this).fadeIn('fast');
-            }).error(function () {
-                $(this).hide();
-            });
-
-            // 启动author的Typeahead自动完成
-            $authorInput.typeahead({
-                minLength: 1,
-                highlight: true,
-                hint: false
-            }, {
-                displayKey: 'value',
-                source: function (q, cb) {
-                    if (timerForAuthorTypeahead) {
-                        clearTimeout(timerForAuthorTypeahead);
-                    }
-
-                    timerForAuthorTypeahead = setTimeout(function () {
-                        $.ajax({
-                            url: urlFor('piece.query_author'),
-                            method: 'post',
-                            dataType: 'json',
-                            data: {
-                                q: q
-                            }
-                        }).done(function (matchs) {
-                            cb(matchs);
-                        });
-                    }, 300);
-                },
-                templates: {
-                    'suggestion': function (data) {
-                        return '<p>' + data.value + '</p>';
-                    }
-                }
-            });
-
-            // 启动source的Typeahead自动完成
-            $sourceInput.typeahead({
-                minLength: 1,
-                highlight: true,
-                hint: false
-            }, {
-                displayKey: 'value',
-                source: function (q, cb) {
-                    if (timerForSourceTypeahead) {
-                        clearTimeout(timerForSourceTypeahead);
-                    }
-
-                    timerForSourceTypeahead = setTimeout(function () {
-                        $.ajax({
-                            url: urlFor('piece.query_source'),
-                            method: 'post',
-                            dataType: 'json',
-                            data: {
-                                q: q
-                            }
-                        }).done(function (matchs) {
-                            cb(matchs);
-                        });
-                    }, 300);
-                },
-                templates: {
-                    'suggestion': function (data) {
-                        return '<p>' + data.value + '</p>';
-                    }
-                }
-            });
-
-            $('.twitter-typeahead').css('display', 'block');
-
-            /**
-             * 更新字数
-             */
-            function updateWordCount() {
-                var content = $('#content').val();
-                var contentRemainLength = 200 - calculateWordLength(content);
-
-                $('.content-length').text(Math.abs(contentRemainLength));
-
-                if (contentRemainLength >= 0) {
-                    $('.tip .positive').show();
-                    $('.tip .negative').hide();
-                } else {
-                    $('.tip .positive').hide();
-                    $('.tip .negative').show();
-                }
-            }
-
-            /**
-             * Count word.
-             * 总字数 = 中文字数 + 英文字数 / 2
-             * @param content
-             * @returns {number}
-             */
-            function calculateWordLength(content) {
-                // 去除首尾空格，多个空格替换为1个空格
-                content = $.trim(content).replace(/\s+/g, ' ');
-
-                var cnLength = content.match(/[^ -~]/g) ? content.match(/[^ -~]/g).length : 0;
-                var enLength = content.length - cnLength;
-                return cnLength + Math.ceil(enLength / 2);
-            }
-        })();
-    </script>
 {% endmacro %}

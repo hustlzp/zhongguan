@@ -7,7 +7,7 @@ from ..utils.helpers import generate_lcs_html
 from ..models import db, User, Piece, PieceVote, PieceComment, CollectionPiece, Collection, \
     PieceSource, PieceAuthor, PIECE_EDIT_KIND, PieceEditLog, PieceCommentVote, Notification, \
     NOTIFICATION_KIND, PieceEditLogReport, CollectionEditLog, COLLECTION_EDIT_KIND, Word, Voter
-from ..forms import PieceForm
+from ..forms import PieceForm, EditPieceForm
 from ..utils.decorators import jsonify
 
 bp = Blueprint('piece', __name__)
@@ -138,108 +138,15 @@ def remove(uid):
 @UserPermission()
 def edit(uid):
     piece = Piece.query.get_or_404(uid)
-    form = PieceForm(obj=piece)
+    if g.user.id != piece.user_id:
+        abort(403)
 
+    form = EditPieceForm(obj=piece)
     if form.validate_on_submit():
-        permission = PieceEditPermission(piece)
-        if not permission.check():
-            return permission.deny()
-        form.original.data = request.form.get('original') == 'true'
-
-        # 单独存储source和author
-        source = form.source.data
-        author = form.author.data
-        if source and source != piece.source:
-            _save_piece_source(source)
-        if author and author != piece.author:
-            _save_piece_author(author)
-
-        # content变更记录
-        if piece.content != form.content.data:
-            content_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
-                                       before=piece.content, after=form.content.data,
-                                       compare=generate_lcs_html(piece.content, form.content.data),
-                                       kind=PIECE_EDIT_KIND.UPDATE_CONTENT)
-            db.session.add(content_log)
-
-        # original变更记录：原创->引用
-        if piece.original and not form.original.data:
-            original_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
-                                        kind=PIECE_EDIT_KIND.CHANGE_TO_NON_ORIGINAL)
-            db.session.add(original_log)
-        # original变更记录：引用->原创
-        elif not piece.original and form.original.data:
-            original_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
-                                        kind=PIECE_EDIT_KIND.CHANGE_TO_ORIGINAL)
-            db.session.add(original_log)
-
-        # 仅当句子为引用时，才去记录其他的变更
-        if not form.original.data:
-            # author变更
-            # 此处的 or "" 是为了避免 None != "" 的情况
-            if (piece.author or "") != form.author.data:
-                author_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
-                                          before=piece.author, after=form.author.data)
-                if piece.author == "":
-                    author_log.kind = PIECE_EDIT_KIND.ADD_AUTHOR
-                elif form.author.data == "":
-                    author_log.kind = PIECE_EDIT_KIND.REMOVE_AUTHOR
-                else:
-                    author_log.kind = PIECE_EDIT_KIND.UPDATE_AUTHOR
-                db.session.add(author_log)
-
-            # source变更
-            if (piece.source or "") != form.source.data:
-                source_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
-                                          before=piece.source, after=form.source.data)
-                if piece.source == "":
-                    source_log.kind = PIECE_EDIT_KIND.ADD_SOURCE
-                elif form.source.data == "":
-                    source_log.kind = PIECE_EDIT_KIND.REMOVE_SOURCE
-                else:
-                    source_log.kind = PIECE_EDIT_KIND.UPDATE_SOURCE
-                db.session.add(source_log)
-
-            # source_link变更
-            if (piece.source_link or "") != form.source_link.data:
-                source_link_log = PieceEditLog(piece_id=uid, user_id=g.user.id,
-                                               before=piece.source_link,
-                                               after=form.source_link.data)
-                if piece.source_link == "":
-                    source_link_log.kind = PIECE_EDIT_KIND.ADD_SOURCE_LINK
-                elif form.source_link.data == "":
-                    source_link_log.kind = PIECE_EDIT_KIND.REMOVE_SOURCE_LINK
-                else:
-                    source_link_log.kind = PIECE_EDIT_KIND.UPDATE_SOURCE_LINK
-                db.session.add(source_link_log)
-
-        # 存储source和author
-        if form.source.data and form.source.data != piece.source:
-            _save_piece_source(form.source.data)
-        if form.author.data and form.author.data != piece.author:
-            _save_piece_author(form.author.data)
-
         form.populate_obj(piece)
-        if piece.original:
-            piece.author = ""
-            piece.source = ""
-            piece.source_link = ""
         db.session.add(piece)
-
-        # 如果存在title为author的句集，则自动将piece加入到此句集
-        author_collection = Collection.get_by_title(piece.author)
-        if author_collection and not author_collection.has_piece(uid):
-            author_collection_piece = CollectionPiece(collection_id=author_collection.id)
-            piece.collections.append(author_collection_piece)
-
-        # 如果存在title为source的句集，则自动将piece加入到此句集
-        source_collection = Collection.get_by_title(piece.source)
-        if source_collection and not source_collection.has_piece(uid):
-            source_collection_piece = CollectionPiece(collection_id=source_collection.id)
-            piece.collections.append(source_collection_piece)
-
         db.session.commit()
-        return redirect(url_for('.view', uid=piece.id))
+        return redirect(url_for('site.index', piece_id=piece.id))
     return render_template('piece/edit.html', piece=piece, form=form)
 
 
