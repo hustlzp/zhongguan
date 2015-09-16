@@ -423,17 +423,21 @@
     <div class="piece-details-wap" data-piece-id="{{ piece.id }}">
         <div class="piece-header">
             <div class="commands-wap">
-                <div class="btn-more">
+                {% if g.user and piece.user_id == g.user.id %}
+                    <div class="btn-more">
                     <span class="fa fa-ellipsis-h" data-toggle="dropdown" aria-haspopup="true"
                           aria-expanded="false"></span>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"><span class="fa fa-edit"></span> 编辑</a></li>
-                        <li><a href="#"><span class="fa fa-trash-o"></span> 删除</a></li>
-                    </ul>
-                </div>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><span class="fa fa-edit"></span> 编辑</a></li>
+                            <li><a href="#"><span class="fa fa-trash-o"></span> 删除</a></li>
+                        </ul>
+                    </div>
+                {% endif %}
+
                 <a href="javascript:void(0)" class="btn-copy-link" data-placement="bottom">
                     <span class="fa fa-link fa-rotate-90"></span>
                 </a>
+
                 <a href="javascript:void(0)" class="btn-share">
                     <span class="fa fa-qrcode"></span></a>
             </div>
