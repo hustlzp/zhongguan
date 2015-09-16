@@ -467,11 +467,11 @@
             </div>
 
             <div class="media-body">
-                <div class="content">{{ piece.content }}</div>
+                <div class="content">{{ piece.friendly_content|safe }}</div>
 
                 {% if piece.sentence %}
                     <div class="sentence-title">例句</div>
-                    <div class="sentence">{{ piece.sentence }}</div>
+                    <div class="sentence">{{ piece.friendly_sentence|safe }}</div>
                 {% endif %}
             </div>
         </div>
@@ -835,10 +835,10 @@
 
                         <div class="body" data-piece-id="{{ piece.id }}">
                             <div class="word">{{ piece.word or "" }}</div>
-                            <div class="content">{{ piece.content }}</div>
+                            <div class="content">{{ piece.friendly_content|safe }}</div>
                             {% if piece.sentence %}
                                 <div class="sentence-title">例句</div>
-                                <div>{{ piece.sentence }}</div>
+                                <div>{{ piece.friendly_sentence|safe }}</div>
                             {% endif %}
                         </div>
                     </div>

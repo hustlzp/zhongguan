@@ -60,6 +60,14 @@ class Piece(db.Model):
         super(Piece, self).__setattr__(name, value)
 
     @property
+    def friendly_content(self):
+        return '<br>'.join(self.content.splitlines())
+
+    @property
+    def friendly_sentence(self):
+        return '<br>'.join(self.sentence.splitlines())
+
+    @property
     def source_link_favicon(self):
         result = urlparse(self.source_link)
         host = "%s://%s" % (result.scheme or "http", result.netloc)
