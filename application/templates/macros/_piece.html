@@ -116,6 +116,13 @@
 {% macro render_piece_comments(piece) %}
     <div class="subtitle"><strong>{{ piece.comments.count() }}</strong> 条评论</div>
 
+    <div class="comments-wap">
+        {% for comment in piece.root_comments %}
+            {{ render_piece_comment(comment) }}
+            {{ render_piece_sub_comments(comment) }}
+        {% endfor %}
+    </div>
+
     {% if g.user %}
         <form action="" id="form-comment">
             <div class="form-group">
@@ -131,13 +138,6 @@
             <a href="{{ url_for('account.signin') }}">登录</a> 后评论
         </div>
     {% endif %}
-
-    <div class="comments-wap">
-        {% for comment in piece.root_comments %}
-            {{ render_piece_comment(comment) }}
-            {{ render_piece_sub_comments(comment) }}
-        {% endfor %}
-    </div>
 
     <script type="text/javascript">
         (function () {
