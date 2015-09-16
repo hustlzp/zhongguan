@@ -431,8 +431,9 @@
                         <li><a href="#"><span class="fa fa-trash-o"></span> 删除</a></li>
                     </ul>
                 </div>
-                <a href="javascript:void(0)" data-placement="bottom" class="btn-copy-link" title="复制链接">
-                    <span class="fa fa-link fa-rotate-90"></span></a>
+                <a href="javascript:void(0)" class="btn-copy-link" data-placement="bottom">
+                    <span class="fa fa-link fa-rotate-90"></span>
+                </a>
                 <a href="javascript:void(0)" class="btn-share">
                     <span class="fa fa-qrcode"></span></a>
             </div>
@@ -489,8 +490,7 @@
 
                     <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link">
                         <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
-                             data-user-id="{{ user.id }}"
-                             alt=""/>
+                             data-user-id="{{ user.id }}"/>
                     </a>
 
                     <img src="{{ piece.qrcode_url }}" class="piece-qrcode" alt=""/>
@@ -520,10 +520,24 @@
                 client.on("copy", function (event) {
                     var clipboard = event.clipboardData;
                     clipboard.setData("text/plain", g.domain + urlFor('site.index', {piece_id: pieceId}));
+                    $btnCopyLink.parent().find('.tooltip-inner').text('链接已复制');
                 });
 
-                $btnCopyLink.tooltip().click(function () {
-                    $(this).parent().find('.tooltip-inner').text('链接已复制');
+                $btnCopyLink.mouseenter(function () {
+                    $(this).tooltip({
+                        title: '复制链接',
+                        trigger: 'manual',
+                        'animation': false
+                    }).attr('data-original-title', '复制链接')
+                            .tooltip('fixTitle')
+                            .tooltip('show');
+                }).click(function () {
+                    $(this).tooltip('hide')
+                            .attr('data-original-title', '链接已复制')
+                            .tooltip('fixTitle')
+                            .tooltip('show');
+                }).mouseleave(function () {
+                    $(this).tooltip('destroy');
                 });
 
                 // 弹出分享框

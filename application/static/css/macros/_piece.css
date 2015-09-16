@@ -91,10 +91,15 @@
   font-size: 22px;
   color: #999;
   cursor: pointer;
-  padding: 0 0 0 15px;
 }
 .piece-details-wap .piece-header .commands-wap > *:hover {
   color: #666;
+}
+.piece-details-wap .piece-header .commands-wap > *.btn-share {
+  margin-left: 15px;
+}
+.piece-details-wap .piece-header .commands-wap > *.btn-more {
+  margin-right: 15px;
 }
 .piece-details-wap .piece-header .commands-wap .btn-copy-link:focus {
   outline: none;
