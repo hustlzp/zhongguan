@@ -38,6 +38,19 @@
           display: inline-block;
         }
       }
+
+      &.on {
+        border-top-color: #EEE;
+        border-left-color: #EEE;
+        border-right-color: #EEE;
+
+        .caret-up {
+          display: inline-block;
+        }
+        .caret-down {
+          display: none;
+        }
+      }
     }
   }
 
@@ -65,25 +78,6 @@
           color: #333;
         }
       }
-    }
-  }
-
-  &:hover {
-    .current-selector-outer-wap .current-selector-wap {
-      border-top-color: #EEE;
-      border-left-color: #EEE;
-      border-right-color: #EEE;
-
-      .caret-up {
-        display: inline-block;
-      }
-      .caret-down {
-        display: none;
-      }
-    }
-
-    .selectors-outer-wap .selectors-wap {
-      display: inline-block;
     }
   }
 }

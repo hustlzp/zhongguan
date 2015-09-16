@@ -41,6 +41,17 @@
 .header .current-selector-outer-wap .current-selector-wap .caret-wap .caret-down {
   display: inline-block;
 }
+.header .current-selector-outer-wap .current-selector-wap.on {
+  border-top-color: #EEE;
+  border-left-color: #EEE;
+  border-right-color: #EEE;
+}
+.header .current-selector-outer-wap .current-selector-wap.on .caret-up {
+  display: inline-block;
+}
+.header .current-selector-outer-wap .current-selector-wap.on .caret-down {
+  display: none;
+}
 .header .selectors-outer-wap {
   position: relative;
   height: 20px;
@@ -63,20 +74,6 @@
 .header .selectors-outer-wap .selectors-wap .selector.active {
   background-color: #eee;
   color: #333;
-}
-.header:hover .current-selector-outer-wap .current-selector-wap {
-  border-top-color: #EEE;
-  border-left-color: #EEE;
-  border-right-color: #EEE;
-}
-.header:hover .current-selector-outer-wap .current-selector-wap .caret-up {
-  display: inline-block;
-}
-.header:hover .current-selector-outer-wap .current-selector-wap .caret-down {
-  display: none;
-}
-.header:hover .selectors-outer-wap .selectors-wap {
-  display: inline-block;
 }
 .words {
   margin-bottom: 20px;
