@@ -185,6 +185,7 @@ class PieceVote(db.Model):
     piece_id = db.Column(db.Integer, db.ForeignKey('piece.id'))
     piece = db.relationship('Piece', backref=db.backref('voters',
                                                         lazy='dynamic',
+                                                        cascade="all, delete, delete-orphan",
                                                         order_by='asc(PieceVote.created_at)'))
 
 
@@ -215,6 +216,7 @@ class PieceComment(db.Model):
     piece_id = db.Column(db.Integer, db.ForeignKey('piece.id'))
     piece = db.relationship('Piece', backref=db.backref('comments',
                                                         lazy='dynamic',
+                                                        cascade="all, delete, delete-orphan",
                                                         order_by='asc(PieceComment.created_at)'))
 
     def voted_by_user(self):
@@ -236,6 +238,7 @@ class PieceCommentVote(db.Model):
     piece_comment = db.relationship('PieceComment',
                                     backref=db.backref('votes',
                                                        lazy='dynamic',
+                                                       cascade="all, delete, delete-orphan",
                                                        order_by='asc(PieceCommentVote.created_at)'))
 
 
@@ -304,6 +307,7 @@ class PieceEditLog(db.Model):
     piece = db.relationship('Piece',
                             backref=db.backref('logs',
                                                lazy='dynamic',
+                                               cascade="all, delete, delete-orphan",
                                                order_by='desc(PieceEditLog.created_at)'))
 
     def reported_by_user(self):
@@ -326,5 +330,5 @@ class PieceEditLogReport(db.Model):
     log = db.relationship('PieceEditLog',
                           backref=db.backref('reports',
                                              lazy='dynamic',
-                                             order_by='desc('
-                                                      'PieceEditLogReport.created_at)'))
+                                             cascade="all, delete, delete-orphan",
+                                             order_by='desc(PieceEditLogReport.created_at)'))
