@@ -4,6 +4,7 @@
   padding: 10px 0;
   display: block;
   color: #999;
+  outline: none;
 }
 .btn-load-more-pieces:hover {
   background-color: #eee;
