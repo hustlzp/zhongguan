@@ -429,7 +429,11 @@
                           aria-expanded="false"></span>
                         <ul class="dropdown-menu">
                             <li><a href="#"><span class="fa fa-edit"></span> 编辑</a></li>
-                            <li><a href="#"><span class="fa fa-trash-o"></span> 删除</a></li>
+                            <li>
+                                <a href="javascript:void(0)" class="btn-delete-piece">
+                                    <span class="fa fa-trash-o"></span> 删除
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 {% endif %}
@@ -513,12 +517,13 @@
                 var $detailsParentWap = $('.piece-details-wap').parent();
                 var isModal = $detailsParentWap.hasClass('piece-modal-wap');   //是否为右侧弹出框
                 var $btnCopyLink = $('.btn-copy-link');
+                var $btnDeletePiece = $('.btn-delete-piece');
+                var $btnMore = $('.btn-more');
 
-                if (isModal) {
-                    $('.share-wap').isolatedScroll();
-                    $('.piece-logs-wap').isolatedScroll();
-                }
+                $('.share-wap').isolatedScroll();
+                $('.piece-logs-wap').isolatedScroll();
 
+                // 复制到剪切板
                 var client = new ZeroClipboard($btnCopyLink);
 
                 client.on("copy", function (event) {
@@ -542,6 +547,22 @@
                             .tooltip('show');
                 }).mouseleave(function () {
                     $(this).tooltip('destroy');
+                });
+
+                // 删除piece
+                $btnDeletePiece.click(function () {
+                    if (confirm('确认删除此解释?')) {
+                        $.ajax({
+                            url: urlFor('piece.remove', {uid: pieceId}),
+                            method: 'post'
+                        }).done(function (response) {
+                            if (response.result) {
+                                window.location = urlFor('site.index');
+                            }
+                        });
+                    } else {
+                        $btnMore.click();
+                    }
                 });
 
                 // 弹出分享框

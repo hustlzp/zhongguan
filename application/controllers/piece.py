@@ -122,6 +122,18 @@ def add():
         return {'result': False}
 
 
+@bp.route('/piece/<int:uid>/remove', methods=['POST'])
+@UserPermission()
+@jsonify
+def remove(uid):
+    piece = Piece.query.get_or_404(uid)
+    if g.user.id != piece.user_id:
+        abort(403)
+    db.session.delete(piece)
+    db.session.commit()
+    return {'result': True}
+
+
 @bp.route('/piece/<int:uid>/edit', methods=['GET', 'POST'])
 @UserPermission()
 def edit(uid):
