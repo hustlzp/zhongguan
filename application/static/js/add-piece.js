@@ -132,9 +132,7 @@ function openAddPieceWap() {
         'right': '0',
         'top': '0',
         'bottom': '0'
-    }, 100, function () {
-
-    });
+    }, 100);
 }
 
 /**
