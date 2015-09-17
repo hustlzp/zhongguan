@@ -154,7 +154,7 @@ body {
   margin-right: 10px;
 }
 .add-piece-wap-in-index-page {
-  padding: 280px 0;
+  padding: 160px 0 280px 0;
 }
 .add-piece-wap-in-index-page.first .first-step {
   display: block;
@@ -170,7 +170,7 @@ body {
 }
 .add-piece-wap-in-index-page .first-step {
   width: 700px;
-  margin: 0 auto;
+  margin: 120px auto 0 auto;
 }
 .add-piece-wap-in-index-page .first-step .title {
   font-size: 28px;

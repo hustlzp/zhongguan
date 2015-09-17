@@ -3,6 +3,7 @@ import string
 from datetime import date, timedelta
 from flask import render_template, Blueprint, request, redirect, url_for, g
 from ..models import db, Piece, Word
+from ..utils.permissions import UserPermission
 
 bp = Blueprint('site', __name__)
 

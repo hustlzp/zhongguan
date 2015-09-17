@@ -92,7 +92,7 @@ def activate():
 def signout():
     """Signout"""
     signout_user()
-    return redirect(request.referrer or url_for('site.index'))
+    return redirect(url_for('site.index'))
 
 
 @bp.route('/forgot_password', methods=['GET', 'POST'])
