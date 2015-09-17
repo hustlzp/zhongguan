@@ -53,7 +53,7 @@ def signup():
             db.session.commit()
             signin_user(user)
             flash('注册成功，欢迎来到中关村字典。')
-            return redirect(url_for('site.index'))
+            return redirect(url_for('site.pieces'))
         else:
             send_activate_mail(user)
             email_domain = get_domain_from_email(user.email)
@@ -85,7 +85,7 @@ def activate():
     db.session.commit()
     signin_user(user)
     flash('账号激活成功，欢迎来到中关村字典。')
-    return redirect(url_for('site.index'))
+    return redirect(url_for('site.pieces'))
 
 
 @bp.route('/signout')

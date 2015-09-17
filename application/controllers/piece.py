@@ -146,7 +146,7 @@ def edit(uid):
         form.populate_obj(piece)
         db.session.add(piece)
         db.session.commit()
-        return redirect(url_for('site.index', piece_id=piece.id))
+        return redirect(url_for('site.pieces', piece_id=piece.id))
     return render_template('piece/edit.html', piece=piece, form=form)
 
 
