@@ -12,7 +12,8 @@
   outline: none;
 }
 .btn-load-more-pieces:focus,
-.btn-load-more-pieces:active {
+.btn-load-more-pieces:active,
+.btn-load-more-pieces:focus:active {
   background-color: white;
   color: #666;
   outline: none;

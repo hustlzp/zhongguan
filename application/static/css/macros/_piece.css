@@ -164,6 +164,17 @@
 .piece-details-wap .piece-body .sentence {
   margin-bottom: 20px;
 }
+.piece-details-wap .redirect-to-word {
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+  padding: 0 20px;
+  background-color: white;
+}
+.piece-details-wap .redirect-to-word a {
+  padding: 20px 0;
+  display: block;
+  color: #999;
+}
 .piece-details-wap .other-info-wap {
   background-color: transparent;
   padding: 20px 20px 0 20px;
@@ -378,8 +389,6 @@
   margin-top: 30px;
 }
 .pieces-wap .piece {
-  border-bottom: 1px solid #e2e2e2;
-  padding-bottom: 30px;
   margin-bottom: 30px;
   cursor: pointer;
 }
@@ -394,6 +403,10 @@
 .pieces-wap .piece .media,
 .pieces-wap .piece .media-body {
   overflow: visible;
+}
+.pieces-wap .piece .media-body {
+  border-bottom: 1px solid #e2e2e2;
+  padding-bottom: 30px;
 }
 @media (max-width: 500px) {
   .pieces-wap .piece .other-info {

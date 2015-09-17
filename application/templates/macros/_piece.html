@@ -480,6 +480,15 @@
             </div>
         </div>
 
+        {% set pieces_count = piece.word.pieces.count() %}
+        {% if piece.word.pieces.count() > 1 %}
+            <div class="redirect-to-word">
+                <a href="{{ url_for('site.index', word_id=piece.word_id) }}">
+                    查看 {{ piece.word.word }} 的 {{ pieces_count }} 个全部解释
+                </a>
+            </div>
+        {% endif %}
+
         <div class="other-info-wap">
             <div class="subtitle"><strong>{{ piece.votes_count }}</strong> 人觉得这个解释很赞</div>
 
