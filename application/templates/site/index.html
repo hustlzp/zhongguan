@@ -32,8 +32,20 @@
             {{ piece.word.word }}
         </div>
 
-        <div class="qrcode">
-            <span class="fa fa-qrcode"></span>
+        <div class="text-center">
+            <span class="qrcode-in-index-page">
+                <span class="fa fa-qrcode btn-show-qrcode"></span>
+
+                <div class="share-popover">
+                    <div class="piece-word">{{ piece.word.word }}</div>
+
+                    <img src="{{ piece.qrcode_url }}" class="piece-qrcode" alt=""/>
+
+                    <div class="tip">
+                        <img src="{{ static('image/wechat.png') }}" class="wechat-icon">&nbsp;&nbsp;微信扫一扫,分享到朋友圈
+                    </div>
+                </div>
+            </span>
         </div>
 
         <div class="content">{{ piece.friendly_content|safe }}</div>

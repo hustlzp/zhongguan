@@ -57,11 +57,90 @@ body {
     margin-bottom: 5px;
   }
 
-  .qrcode {
-    text-align: center;
+  .qrcode-in-index-page {
     color: #999;
+    cursor: pointer;
     font-size: 25px;
+    display: inline-block;
     margin-bottom: 30px;
+    position: relative;
+    text-align: center;
+
+    &:hover {
+      color: white;
+
+      .share-popover {
+        display: block;
+        opacity: 1;
+      }
+    }
+
+    .share-popover {
+      z-index: 1000;
+      background-color: white;
+      position: absolute;
+      display: none;
+      opacity: .8;
+      padding: 30px;
+      box-shadow: 1px 1px 5px rgba(0, 0, 0, .3);
+      top: 50px;
+      left: -124px;
+      white-space: nowrap;
+      transition: opacity 0.3s;
+      color: #333;
+      border-radius: 2px;
+
+      .piece-word {
+        font-weight: bold;
+        .font-song();
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .piece-qrcode {
+        width: 180px;
+        height: 180px;
+        display: block;
+        margin: 0 auto 20px auto;
+      }
+
+      .tip {
+        font-size: 16px;
+        font-weight: bold;
+
+        .wechat-icon {
+          color: #06B712;
+          width: 20px;
+          height: 20px;
+          display: inline-block;
+        }
+      }
+
+      &:after,
+      &:before {
+        bottom: 100%;
+        left: 50%;
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+      }
+
+      &:after {
+        border-color: rgba(255, 255, 255, 0);
+        border-bottom-color: #fff;
+        border-width: 10px;
+        margin-left: -10px;
+      }
+      &:before {
+        border-color: rgba(222, 222, 222, 0);
+        border-bottom-color: #ddd;
+        border-width: 11px;
+        margin-left: -11px;
+      }
+    }
   }
 
   .content {
