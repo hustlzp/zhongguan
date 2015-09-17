@@ -1,0 +1,76 @@
+{% from "macros/_piece.html" import render_piece_comment %}
+{% from "macros/_user.html" import render_user_avatar %}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>这是我对「{{ piece.word.word }}」的解释，哈哈哈哈哈哈😂😂😂</title>
+    <link rel="stylesheet" href="/static/bower_components/normalize-css/normalize.css">
+    <link rel="stylesheet" href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/piece/h5.css">
+</head>
+<body>
+<div id="favicon-wx-share" style="margin: 0; display: none;">
+    <img src="{{ piece.user.avatar_url }}" alt="">
+</div>
+
+<div class="header">
+    <div class="word">{{ piece.word.word }}</div>
+    <div class="author">词语解释 by {{ piece.user.name }}</div>
+
+    <div class="content">{{ piece.content|safe }}</div>
+
+    {% if piece.sentence %}
+        <div class="sentence-title">例句：</div>
+        <div class="sentence">{{ piece.sentence|safe }}</div>
+    {% endif %}
+
+    <div class="author-avatar-wap">
+        <img class="author-avatar" src="{{ piece.user.avatar_url }}" alt="">
+    </div>
+</div>
+
+{% set comments_count = piece.comments.count() %}
+{% if comments_count %}
+    <div class="comments">
+        <div class="comments-count">{{ comments_count }} 条评论</div>
+
+        {% for comment in piece.comments %}
+            <div class="comment" data-comment-id="{{ comment.id }}">
+                <div class="media">
+                    <div class="media-left">
+                        {{ render_user_avatar(comment.user) }}
+                    </div>
+
+                    <div class="media-body">
+                        <div class="comment-user">
+                            <a href="{{ url_for('user.profile', uid=comment.user_id) }}">
+                                {{ comment.user.name }}
+                            </a>
+                            {% if comment.root_comment_id %}
+                                <span class="to-target-user">回复</span>
+                                <a href="{{ url_for('user.profile', uid=comment.target_user_id) }}">
+                                    {{ comment.target_user.name }}
+                                </a>
+                            {% endif %}
+                        </div>
+                        <div class="comment-content">{{ comment.content }}</div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<div class="footer">
+    <img class="logo" src="{{ static('image/logo.png') }}" alt="">
+
+    <div class="product-name">中关村字典</div>
+    <div class="slogan">在这里解释互联网</div>
+    <div class="domain">zidian.tech</div>
+</div>
+
+<script src="/static/js/piece/h5.js"></script>
+</body>
+</html>

@@ -13,14 +13,13 @@ from ..utils.decorators import jsonify
 bp = Blueprint('piece', __name__)
 
 
-@bp.route('/piece/<int:uid>')
-def view(uid):
-    """Single piece page"""
+@bp.route('/piece/<int:uid>/h5')
+def h5(uid):
     piece = Piece.query.get_or_404(uid)
     piece.clicks_count += 1
     db.session.add(piece)
     db.session.commit()
-    return render_template("piece/view.html", piece=piece)
+    return render_template("piece/h5.html", piece=piece)
 
 
 @bp.route('/pieces/json', methods=['POST'])

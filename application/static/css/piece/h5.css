@@ -1,0 +1,116 @@
+/*!
+ *  Fonts.css -- Cross-platform Chinese fonts solution
+ * 
+ *  Copyright (C) 2013-2014 Zeno Zeng
+ *  Released under the MIT license
+ * 
+ *  Github: https://github.com/zenozeng/fonts.css
+ */
+body {
+  background-color: #f3f3f3;
+  font-family: "Microsoft YaHei";
+  font-size: 14px;
+}
+.header {
+  background-color: white;
+  padding: 30px 20px 30px 20px;
+}
+.header .word {
+  text-align: center;
+  font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.header .author {
+  text-align: center;
+  font-size: 14px;
+  color: #999;
+  margin-bottom: 30px;
+}
+.header .content {
+  font-size: 17px;
+  margin-bottom: 25px;
+  color: #666;
+}
+.header .sentence-title {
+  color: #999;
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+.header .sentence {
+  font-size: 17px;
+  margin-bottom: 35px;
+  color: #666;
+}
+.header .author-avatar-wap {
+  text-align: center;
+}
+.header .author-avatar-wap img {
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+}
+.comments {
+  font-size: 16px;
+  padding: 20px 20px 0 20px;
+}
+.comments .comments-count {
+  text-align: center;
+  color: #999;
+  margin-bottom: 25px;
+}
+.comments .comment {
+  padding-bottom: 20px;
+}
+.comments .comment .media-left {
+  padding-right: 15px;
+}
+.comments .comment .user-avatar {
+  width: 47px;
+  height: 47px;
+}
+.comments .comment .comment-user {
+  color: #999;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+.comments .comment .comment-user a {
+  text-decoration: none;
+  color: #999;
+}
+.comments .comment .comment-user .to-target-user {
+  color: #999;
+  margin: 0 2px;
+}
+.comments .comment .comment-content {
+  line-height: 1.6;
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #666;
+}
+.footer {
+  text-align: center;
+  padding: 70px 0 70px 0;
+}
+.footer .logo {
+  display: inline-block;
+  margin-bottom: 10px;
+  width: 45px;
+}
+.footer .product-name {
+  line-height: 1;
+  font-size: 21px;
+  color: #333;
+  margin-bottom: 2px;
+}
+.footer .slogan {
+  margin-bottom: 5px;
+  color: #999;
+  font-size: 14px;
+}
+.footer .domain {
+  color: #999;
+  font-size: 14px;
+  font-family: 'Krungthep', 'Krungthep';
+}

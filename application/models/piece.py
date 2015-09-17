@@ -131,7 +131,7 @@ class Piece(db.Model):
 
     def make_qrcode(self):
         qr = qrcode.QRCode(box_size=10, border=0)
-        qr.add_data(absolute_url_for('piece.view', uid=self.id))
+        qr.add_data(absolute_url_for('piece.h5', uid=self.id))
         qr.make(fit=True)
         img = qr.make_image()
         self.qrcode = save_image(img, qrcodes, 'png')
