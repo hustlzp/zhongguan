@@ -876,7 +876,7 @@
             {% if not pieces_data.pieces.count() %}
                 <div class="text-center share-piece">
                     {% if show_modal %}
-                        <a href="{{ url_for('piece.add') }}" class="need-signed-in">
+                        <a href="javascript: void(0)" class="need-signed-in btn-add-piece-in-date-wap">
                             + 创建新词条
                         </a>
                     {% else %}
@@ -908,6 +908,10 @@
                 $(document).onOnce('click', '.btn-show-hide-pieces', function () {
                     $(this).parents('.pieces-by-date-wap').first().find('.hide-pieces').show();
                     $(this).parents('.panel-footer').first().detach();
+                });
+
+                $('.btn-add-piece-in-date-wap').click(function () {
+                    openAddPieceWap();
                 });
             })();
         </script>

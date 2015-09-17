@@ -174,3 +174,5 @@ function closeAddPieceWap() {
         $(this).hide();
     });
 }
+
+window.openAddPieceWap = openAddPieceWap;
