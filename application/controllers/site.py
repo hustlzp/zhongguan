@@ -9,7 +9,13 @@ bp = Blueprint('site', __name__)
 
 @bp.route('/')
 def index():
-    """Index page."""
+    # piece = Piece.query.order_by(db.func.random()).first()
+    piece = Piece.query.get(45)
+    return render_template('site/index.html', piece=piece)
+
+
+@bp.route('/pieces')
+def pieces():
     pieces_data = []
     pieces_data_count = 0
     start_date = None
@@ -36,7 +42,7 @@ def index():
     if word_id:
         word = Word.query.get(word_id)
 
-    return render_template('site/index.html', pieces_data=pieces_data, start_date=start_date, piece=piece, word=word)
+    return render_template('site/pieces.html', pieces_data=pieces_data, start_date=start_date, piece=piece, word=word)
 
 
 @bp.route('/about')

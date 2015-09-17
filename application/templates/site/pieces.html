@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% from "macros/_piece.html" import render_pieces_by_date, render_piece_modal_wap %}
+{% from "macros/_word.html" import render_word_modal_wap %}
+
+{% block page_title %}中关村字典{% endblock %}
+{% block page_vars %}
+    <script type="text/javascript">
+        g.startDate = "{{ start_date }}";
+    </script>
+{% endblock %}
+{% block page_content %}
+    <div class="container">
+        <div class="pieces-container">
+            {% for pieces in pieces_data %}
+                {{ render_pieces_by_date(pieces, show_modal=loop.first != 0 and not piece) }}
+            {% endfor %}
+        </div>
+
+        <button type="button" class="btn btn-default btn-load-more-pieces">
+            <span class="for-not-loading">加载更多</span>
+            <span class="for-loading fa fa-refresh fa-spin"></span>
+        </button>
+    </div>
+
+    {% if piece %}
+        {{ render_piece_modal_wap(piece, open=True) }}
+    {% elif word %}
+        {{ render_word_modal_wap(word) }}
+    {% endif %}
+{% endblock %}

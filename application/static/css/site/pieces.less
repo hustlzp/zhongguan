@@ -1,0 +1,40 @@
+@import "../utils";
+
+.btn-load-more-pieces {
+  width: 200px;
+  margin: 50px auto 0 auto;
+  padding: 10px 0;
+  display: block;
+  color: #999;
+  outline: none;
+
+  &:hover {
+    background-color: #eee;
+    color: #666;
+    outline: none;
+  }
+
+  &:focus,
+  &:active,
+  &:focus:active {
+    background-color: white;
+    color: #666;
+    outline: none;
+  }
+
+  .for-not-loading {
+    display: inline-block;
+  }
+  .for-loading {
+    display: none;
+  }
+
+  &.loading {
+    .for-not-loading {
+      display: none;
+    }
+    .for-loading {
+      display: inline-block;
+    }
+  }
+}

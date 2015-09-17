@@ -20,11 +20,11 @@
     <div class="word">{{ piece.word.word }}</div>
     <div class="author">词语解释 by {{ piece.user.name }}</div>
 
-    <div class="content">{{ piece.content|safe }}</div>
+    <div class="content">{{ piece.friendly_content|safe }}</div>
 
     {% if piece.sentence %}
         <div class="sentence-title">例句：</div>
-        <div class="sentence">{{ piece.sentence|safe }}</div>
+        <div class="sentence">{{ piece.friendly_sentence|safe }}</div>
     {% endif %}
 
     <div class="author-avatar-wap">

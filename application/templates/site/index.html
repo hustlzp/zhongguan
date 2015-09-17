@@ -9,22 +9,90 @@
     </script>
 {% endblock %}
 {% block page_content %}
-    <div class="container">
-        <div class="pieces-container">
-            {% for pieces in pieces_data %}
-                {{ render_pieces_by_date(pieces, show_modal=loop.first != 0 and not piece) }}
-            {% endfor %}
+    <div class="header clearfix">
+        <div class="logo-wap pull-left">
+            <div class="media">
+                <div class="media-left">
+                    <img src="{{ static('image/logo.png') }}" alt="">
+                </div>
+                <div class="media-body">
+                    <div class="product-name">中关村字典</div>
+                    <div class="slogan">在这里解释互联网</div>
+                </div>
+            </div>
         </div>
 
-        <button type="button" class="btn btn-default btn-load-more-pieces">
-            <span class="for-not-loading">加载更多</span>
-            <span class="for-loading fa fa-refresh fa-spin"></span>
-        </button>
+        <div class="commands-wap pull-right">
+            <button class="btn-add-piece-from-index btn btn-default">+ 创建新词条</button>
+        </div>
     </div>
 
-    {% if piece %}
-        {{ render_piece_modal_wap(piece, open=True) }}
-    {% elif word %}
-        {{ render_word_modal_wap(word) }}
-    {% endif %}
+    <div class="piece">
+        <div class="word">
+            {{ piece.word.word }}
+        </div>
+
+        <div class="qrcode">
+            <span class="fa fa-qrcode"></span>
+        </div>
+
+        <div class="content">{{ piece.friendly_content|safe }}</div>
+
+        {% if piece.sentence %}
+            <div class="sentence-wap">
+                <div class="sentence-title">例句</div>
+                <div class="sentence">{{ piece.friendly_sentence|safe }}</div>
+            </div>
+        {% endif %}
+
+        <div class="piece-commands-wap">
+            <button class="btn btn-primary btn-lg">
+                <span class="fa fa-caret-up"></span>&nbsp;&nbsp;解释到位
+            </button>
+
+            <button class="btn btn-danger btn-lg">
+                <span class="fa fa-caret-down"></span>&nbsp;&nbsp;不给力呀老湿
+            </button>
+        </div>
+    </div>
+
+    <div class="add-piece-wap-in-index-page first">
+        <div class="first-step">
+            <div class="title">创建新词条</div>
+
+            <div class="input-group">
+                <input type="text" class="form-control word-input" placeholder="词条名称">
+            <span class="input-group-btn">
+                <button class="btn btn-primary btn-go-to-second-step" type="button">😂开始</button>
+            </span>
+            </div>
+        </div>
+
+        <div class="second-step">
+            <div class="word"></div>
+
+        <textarea class="form-control explanation-textarea" rows="4" name="explanation"
+                  placeholder="你的解释，尽量通俗易懂。"></textarea>
+
+            <button class="btn btn-default btn-block btn-add-sentence">
+                + 添加例句
+            </button>
+
+        <textarea class="form-control sentence-textarea" rows="4" name="sentence"
+                  placeholder="添加例句，让解释更生动形象，😂😂😂效果更加"></textarea>
+
+            <div class="text-center btn-submit-piece-wap">
+                <button class="btn btn-lg btn-primary btn-submit-piece">发布</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer clearfix">
+        <div class="copyright pull-left">
+            © 2015 <strong>zidian.tech</strong>
+        </div>
+        <div class="about-us pull-right">
+            Made with 😂in Beijing. <a href="{{ url_for('site.about') }}">关于我们</a>
+        </div>
+    </div>
 {% endblock %}

@@ -19,7 +19,7 @@ def signin():
     referer = request.form.get('referer')
     if form.validate_on_submit():
         signin_user(form.user)
-        return redirect(referer or url_for('site.index'))
+        return redirect(referer or url_for('site.pieces'))
     return render_template('account/signin.html', form=form)
 
 

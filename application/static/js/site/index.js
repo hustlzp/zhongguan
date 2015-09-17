@@ -1,37 +1,104 @@
-// 下拉加载往期文字
-$.extend(g, {
-    // 是否正在加载
-    loading: false,
-    // 下一次加载的起始日期
-    startDate: moment(g.startDate),
-    // 每次加载多少天的数据
-    DAYS: 2
-});
+(function () {
+    var word;
 
-$('.btn-load-more-pieces').click(function () {
-    var _this = $(this);
+    var $btnAddPieceFromIndex = $('.btn-add-piece-from-index');
 
-    if (!g.loading) {
-        g.loading = true;
+    var timerForTypeahead = null;
+    var $addPieceWap = $('.add-piece-wap-in-index-page');
 
-        _this.addClass('loading');
+    var $addPieceWapFirstStep = $addPieceWap.find('.first-step');
+    var $wordInput = $addPieceWapFirstStep.find('input');
+    var $btnGoToSecondStep = $('.btn-go-to-second-step');
+    var $titleInFirstStep = $addPieceWapFirstStep.find('.title');
 
-        setTimeout(function () {
-            $.ajax({
-                url: urlFor('piece.pieces_by_date'),
-                method: 'post',
-                dataType: 'json',
-                data: {
-                    'start': g.startDate.format('YYYY-MM-DD'),
-                    'days': g.DAYS
-                }
-            }).done(function (response) {
-                $('.pieces-container').append(response.html);
-                g.startDate = moment(response.start)
-            }).always(function () {
-                g.loading = false;
-                _this.removeClass('loading');
-            });
-        }, 800);
-    }
-});
+    var $addPieceWapSecondStep = $addPieceWap.find('.second-step');
+    var $btnSubmitPiece = $addPieceWapSecondStep.find('.btn-submit-piece');
+    var $btnAddSentence = $addPieceWapSecondStep.find('.btn-add-sentence');
+    var $explanationTextarea = $addPieceWapSecondStep.find('.explanation-textarea');
+    var $sentenceTextarea = $addPieceWapSecondStep.find('.sentence-textarea');
+    var $wordInSecondStep = $addPieceWapSecondStep.find('.word');
+
+    $btnAddPieceFromIndex.click(function () {
+       $(window).scrollTo($addPieceWap, 200);
+    });
+
+    // 启动Typeahead自动完成
+    $wordInput.typeahead({
+        minLength: 1,
+        highlight: true,
+        hint: false
+    }, {
+        displayKey: 'value',
+        source: function (q, cb) {
+            if (timerForTypeahead) {
+                clearTimeout(timerForTypeahead);
+            }
+
+            timerForTypeahead = setTimeout(function () {
+                $.ajax({
+                    url: urlFor('word.query'),
+                    method: 'post',
+                    dataType: 'json',
+                    data: {
+                        q: q
+                    }
+                }).done(function (matchs) {
+                    cb(matchs);
+                });
+            }, 300);
+        },
+        templates: {
+            'suggestion': function (data) {
+                return '<span>' + data.value + '</span>';
+            }
+        }
+    });
+
+    $('.twitter-typeahead').css({
+        'display': 'block',
+        'height': $wordInput.outerHeight()
+    });
+
+    // 选择autocomplete菜单项完成添加
+    $wordInput.on('typeahead:selected', function (e, collection) {
+        $titleInFirstStep.text('给老词添加一条解释');
+    });
+
+    // 进入第二步
+    $btnGoToSecondStep.click(function () {
+        word = $.trim($wordInput.val());
+
+        if (word) {
+            $addPieceWap.removeClass('first').addClass('second');
+            $wordInSecondStep.text(word);
+            $explanationTextarea.focus();
+        }
+    });
+
+    // 提交
+    //$btnSubmitPiece.click(function () {
+    //    var explanation = $.trim($explanationTextarea.val());
+    //    var sentence = $.trim($sentenceTextarea.val());
+    //
+    //    $.ajax({
+    //        url: urlFor('piece.add'),
+    //        method: 'post',
+    //        dataType: 'json',
+    //        data: {
+    //            word: word,
+    //            content: explanation,
+    //            sentence: sentence
+    //        }
+    //    }).done(function (response) {
+    //        if (response.result) {
+    //            window.location = urlFor('site.index', {piece_id: response.piece_id});
+    //        }
+    //    });
+    //});
+
+    // 添加例句
+    $btnAddSentence.click(function () {
+        $addPieceWapSecondStep.addClass('add-sentence');
+        $sentenceTextarea.focus();
+    });
+})();

@@ -1,32 +1,201 @@
-.btn-load-more-pieces {
-  width: 200px;
-  margin: 50px auto 0 auto;
-  padding: 10px 0;
-  display: block;
+/*!
+ *  Fonts.css -- Cross-platform Chinese fonts solution
+ * 
+ *  Copyright (C) 2013-2014 Zeno Zeng
+ *  Released under the MIT license
+ * 
+ *  Github: https://github.com/zenozeng/fonts.css
+ */
+nav,
+#footer {
+  display: none;
+}
+body {
+  background-color: #333;
+  color: white;
+  padding: 15px 20px;
+  font-family: "Microsoft YaHei";
+  margin-bottom: 50px;
+}
+.header {
+  margin-bottom: 40px;
+}
+.header .logo-wap img {
+  height: 43px;
+}
+.header .logo-wap .media-body {
+  width: auto;
+}
+.header .logo-wap .product-name {
+  font-size: 21px;
+  font-weight: bold;
+}
+.header .logo-wap .slogan {
   color: #999;
-  outline: none;
+  font-size: 12px;
 }
-.btn-load-more-pieces:hover {
-  background-color: #eee;
-  color: #666;
-  outline: none;
+.header .commands-wap .btn-add-piece-from-index {
+  background-color: #555;
+  border: none;
+  font-size: 14px;
+  color: #ccc;
+  border-radius: 4px;
+  padding: 5px 12px;
 }
-.btn-load-more-pieces:focus,
-.btn-load-more-pieces:active,
-.btn-load-more-pieces:focus:active {
-  background-color: white;
-  color: #666;
-  outline: none;
+.piece .word {
+  text-align: center;
+  font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
+  font-weight: bold;
+  font-size: 48px;
+  margin-bottom: 5px;
 }
-.btn-load-more-pieces .for-not-loading {
-  display: inline-block;
+.piece .qrcode {
+  text-align: center;
+  color: #999;
+  font-size: 25px;
+  margin-bottom: 30px;
 }
-.btn-load-more-pieces .for-loading {
+.piece .content {
+  width: 800px;
+  margin: 0 auto 40px auto;
+  font-size: 22px;
+}
+.piece .sentence-wap {
+  width: 800px;
+  margin: 0 auto 40px auto;
+  font-size: 22px;
+}
+.piece .sentence-wap .sentence-title {
+  color: #999;
+  margin-bottom: 10px;
+}
+.piece .piece-commands-wap {
+  margin-top: 150px;
+  text-align: center;
+}
+.piece .piece-commands-wap button {
+  font-size: 18px;
+  font-weight: bold;
+}
+.piece .piece-commands-wap button .fa {
+  font-size: 22px;
+}
+.piece .piece-commands-wap button:first-child {
+  margin-right: 10px;
+}
+.add-piece-wap-in-index-page {
+  padding: 280px 0;
+}
+.add-piece-wap-in-index-page.first .first-step {
+  display: block;
+}
+.add-piece-wap-in-index-page.first .second-step {
   display: none;
 }
-.btn-load-more-pieces.loading .for-not-loading {
+.add-piece-wap-in-index-page.second .first-step {
   display: none;
 }
-.btn-load-more-pieces.loading .for-loading {
+.add-piece-wap-in-index-page.second .second-step {
+  display: block;
+}
+.add-piece-wap-in-index-page .first-step {
+  width: 700px;
+  margin: 0 auto;
+}
+.add-piece-wap-in-index-page .first-step .title {
+  font-size: 28px;
+  margin-bottom: 35px;
+  text-align: center;
+}
+.add-piece-wap-in-index-page .first-step .input-group {
+  color: #333;
+}
+.add-piece-wap-in-index-page .first-step .input-group input {
+  height: auto;
+  font-size: 24px;
+  font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
+  padding: 9px 15px;
+  border: 0;
+  box-shadow: none;
+  transition: none;
+}
+.add-piece-wap-in-index-page .first-step .input-group .btn-go-to-second-step {
+  font-size: 24px;
+  padding: 8px 20px;
+  color: white;
+  background-color: #76AF61;
+  border: 1px solid #76AF61;
+}
+.add-piece-wap-in-index-page .second-step {
+  border-radius: 2px;
+  padding: 0 30px 0 30px;
+  width: 800px;
+  margin: 0 auto;
+}
+.add-piece-wap-in-index-page .second-step textarea {
+  resize: none;
+  font-size: 18px;
+  padding: 10px 12px;
+  border: 0;
+  box-shadow: none;
+  transition: none;
+}
+.add-piece-wap-in-index-page .second-step .word {
+  font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
+  font-size: 32px;
+  margin-bottom: 35px;
+  text-align: center;
+  font-weight: bold;
+}
+.add-piece-wap-in-index-page .second-step .explanation-textarea {
+  margin-bottom: 20px;
+}
+.add-piece-wap-in-index-page .second-step .btn-add-sentence {
+  display: block;
+  padding: 12px 15px;
+  color: #797979;
+  text-align: left;
+  font-size: 18px;
+  border: none;
+  box-shadow: none;
+  transition: none;
+}
+.add-piece-wap-in-index-page .second-step .sentence-textarea {
+  display: none;
+}
+.add-piece-wap-in-index-page .second-step .btn-submit-piece-wap {
+  margin-top: 40px;
+}
+.add-piece-wap-in-index-page .second-step .btn-submit-piece-wap .btn-submit-piece {
+  padding: 15px 110px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.add-piece-wap-in-index-page .second-step.add-sentence .btn-add-sentence {
+  display: none;
+}
+.add-piece-wap-in-index-page .second-step.add-sentence .sentence-textarea {
+  display: block;
+}
+.footer {
+  position: absolute;
+  bottom: 15px;
+  color: #aaa;
+  left: 0;
+  width: 100%;
+  font-size: 14px;
+}
+.footer .copyright {
+  padding-left: 20px;
+}
+.footer .about-us {
+  padding-right: 20px;
+}
+.footer .about-us a {
+  color: #aaa;
   display: inline-block;
+  padding-left: 5px;
+}
+.footer .about-us a:hover {
+  color: #fff;
 }
