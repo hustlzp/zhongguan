@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 {% from 'macros/_piece.html' import render_piece_form %}
 
-{% block page_title %}编辑句子 - 中关村字典{% endblock %}
+{% block page_title %}编辑解释 - 中关村字典{% endblock %}
 {% block page_content %}
     <div class="container">
         <div class="panel panel-primary">
-            <div class="panel-heading">编辑「{{ piece.word }}」的解释</div>
+            <div class="panel-heading">编辑「{{ piece.wordw.word }}」的解释</div>
             <div class="panel-body">
                 {{ render_piece_form(form) }}
             </div>
