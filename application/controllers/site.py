@@ -1,7 +1,7 @@
 # coding: utf-8
 import string
 from datetime import date, timedelta
-from flask import render_template, Blueprint, request
+from flask import render_template, Blueprint, request, redirect, url_for, g
 from ..models import db, Piece, Word
 
 bp = Blueprint('site', __name__)
@@ -9,6 +9,8 @@ bp = Blueprint('site', __name__)
 
 @bp.route('/')
 def index():
+    if g.user:
+        return redirect(url_for('.pieces'))
     piece = Piece.query.order_by(db.func.random()).first()
     return render_template('site/index.html', piece=piece)
 
