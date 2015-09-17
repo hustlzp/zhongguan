@@ -390,7 +390,6 @@
 }
 .pieces-wap .piece {
   margin-bottom: 30px;
-  cursor: pointer;
 }
 .pieces-wap .piece .media-left {
   padding-right: 25px;
@@ -438,6 +437,7 @@
 }
 .pieces-wap .piece .body {
   margin-right: 135px;
+  cursor: pointer;
 }
 .pieces-wap .piece .body:hover .word {
   text-decoration: underline;
