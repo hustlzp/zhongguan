@@ -449,7 +449,7 @@
                 <a href="javascript:void(0)" class="btn-share">
                     <span class="fa fa-qrcode"></span></a>
             </div>
-            <div class="word">{{ piece.word }}</div>
+            <div class="word">{{ piece.word.word }}</div>
             <div class="avatar-wap">
                 <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link">
                     <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
@@ -498,7 +498,7 @@
 
             <div class="inner-wap">
                 <div class="share-to-weixin-wap">
-                    <div class="piece-word">{{ piece.word }}</div>
+                    <div class="piece-word">{{ piece.word.word }}</div>
 
                     <a href="{{ url_for('user.profile', uid=user.id) }}" class="user-avatar-link">
                         <img src="{{ user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
@@ -791,7 +791,7 @@
         <span class="fa fa-qrcode pull-right btn-show-qrcode"></span>
 
         <div class="share-popover">
-            <div class="piece-word">{{ piece.word }}</div>
+            <div class="piece-word">{{ piece.word.word }}</div>
 
             <a href="{{ url_for('user.profile', uid=piece.user.id) }}" class="user-avatar">
                 <img src="{{ piece.user.avatar_url }}" class="img-circle"/>
@@ -838,7 +838,7 @@
                         </div>
 
                         <div class="body" data-piece-id="{{ piece.id }}">
-                            <div class="word">{{ piece.word or "" }}</div>
+                            <div class="word">{{ piece.word.word }}</div>
                             <div class="content">{{ piece.friendly_content|safe }}</div>
                             {% if piece.sentence %}
                                 <div class="sentence-title">例句</div>

@@ -112,10 +112,15 @@ $btnAddSentence.click(function () {
 /**
  * 打开 add piece wap
  */
-function openAddPieceWap() {
+function openAddPieceWap(word, callback) {
     resetAddPieceWapContent();
 
     $addPieceWap.show();
+
+    if (typeof word !== 'undefined') {
+        $wordInput.val(word);
+        $titleInFirstStep.text('给老词添加一条解释');
+    }
 
     $('.twitter-typeahead').css({
         'display': 'block',
@@ -132,7 +137,11 @@ function openAddPieceWap() {
         'right': '0',
         'top': '0',
         'bottom': '0'
-    }, 100);
+    }, 100, function () {
+        if (typeof callback !== 'undefined') {
+            callback();
+        }
+    });
 }
 
 /**

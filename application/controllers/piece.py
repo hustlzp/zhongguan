@@ -80,8 +80,9 @@ def modal(uid):
 def add():
     form = PieceForm()
     if form.validate_on_submit():
-        piece = Piece(**form.data)
-        piece.user_id = g.user.id
+        word = Word.get_word(form.word.data)
+
+        piece = Piece(content=form.content.data, sentence=form.sentence.data, word_id=word.id, user_id=g.user.id)
         db.session.add(piece)
         db.session.commit()
 

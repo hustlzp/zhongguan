@@ -1,0 +1,136 @@
+/*!
+ *  Fonts.css -- Cross-platform Chinese fonts solution
+ * 
+ *  Copyright (C) 2013-2014 Zeno Zeng
+ *  Released under the MIT license
+ * 
+ *  Github: https://github.com/zenozeng/fonts.css
+ */
+.word-modal-backdrop {
+  z-index: 900;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  opacity: .8;
+}
+.word-modal-backdrop:hover .btn-close-word-modal {
+  color: #999;
+}
+.word-modal-backdrop .btn-close-word-modal {
+  font-size: 80px;
+  color: #bbb;
+  cursor: pointer;
+  position: absolute;
+  font-weight: 200;
+  top: 0;
+  right: 720px;
+  line-height: 1;
+}
+.word-modal-wap {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding: 30px 25px;
+  background-color: white;
+  width: 700px;
+  z-index: 1000;
+  overflow: auto;
+  box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.25);
+}
+@media (max-width: 767px) {
+  .word-modal-wap {
+    width: 100%;
+    padding-top: 35px;
+  }
+}
+.word-modal-wap .word {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
+  text-align: center;
+}
+.word-modal-wap .pieces-count {
+  color: #999;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.word-modal-wap .piece-in-word {
+  margin-bottom: 25px;
+}
+.word-modal-wap .piece-in-word .media-left {
+  padding-right: 25px;
+}
+@media (max-width: 500px) {
+  .word-modal-wap .piece-in-word .media-left {
+    display: none;
+  }
+}
+.word-modal-wap .piece-in-word .media,
+.word-modal-wap .piece-in-word .media-body {
+  overflow: visible;
+}
+.word-modal-wap .piece-in-word .media-body {
+  border-bottom: 1px solid #e2e2e2;
+  padding-bottom: 25px;
+}
+@media (max-width: 500px) {
+  .word-modal-wap .piece-in-word .other-info {
+    display: none;
+  }
+}
+.word-modal-wap .piece-in-word .other-info .btn-show-qrcode {
+  line-height: 26px;
+  margin-right: 20px;
+  color: gray;
+  font-size: 20px;
+}
+.word-modal-wap .piece-in-word .other-info .comments-count {
+  color: #bbb;
+  line-height: 26px;
+}
+.word-modal-wap .piece-in-word .other-info .comments-count .fa {
+  font-size: 12px;
+  margin-left: 1px;
+}
+.word-modal-wap .piece-in-word .body {
+  margin-right: 70px;
+}
+.word-modal-wap .piece-in-word .body .user-wap {
+  margin-bottom: 15px;
+}
+.word-modal-wap .piece-in-word .body .user-wap img {
+  width: 26px;
+  height: 26px;
+}
+.word-modal-wap .piece-in-word .body .user-wap .username {
+  color: #333;
+  font-weight: bold;
+  line-height: 26px;
+  margin-left: 5px;
+  font-size: 14px;
+}
+.word-modal-wap .piece-in-word .body .content {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  font-size: 16px;
+  color: #666666;
+}
+@media (max-width: 767px) {
+  .word-modal-wap .piece-in-word .body .content {
+    padding-right: 50px;
+  }
+}
+@media (max-width: 500px) {
+  .word-modal-wap .piece-in-word .body .content {
+    padding-right: 0px;
+  }
+}
+.word-modal-wap .piece-in-word .body .sentence-title {
+  color: #999;
+  margin-bottom: 5px;
+}

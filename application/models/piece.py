@@ -30,11 +30,19 @@ class Word(db.Model):
             db.session.add(_word)
             db.session.commit()
 
+    @staticmethod
+    def get_word(word_content):
+        word = Word.query.filter(Word.word == word_content).first()
+        if not word:
+            word = Word(word=word_content)
+            db.session.add(word)
+            db.session.commit()
+        return word
+
 
 class Piece(db.Model):
     """Model for text piece"""
     id = db.Column(db.Integer, primary_key=True)
-    word = db.Column(db.String(50), nullable=False)  # 词条
     sentence = db.Column(db.Text)  # 例句
     content = db.Column(db.Text)
     content_length = db.Column(db.Integer, default=0)
@@ -50,6 +58,11 @@ class Piece(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship('User', backref=db.backref('pieces',
+                                                      lazy='dynamic',
+                                                      order_by='desc(Piece.created_at)'))
+
+    word_id = db.Column(db.Integer, db.ForeignKey('word.id'))
+    word = db.relationship('Word', backref=db.backref('pieces',
                                                       lazy='dynamic',
                                                       order_by='desc(Piece.created_at)'))
 

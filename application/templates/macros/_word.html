@@ -1,10 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+{% from "macros/_piece.html" import render_piece_qrcode %}
+{% from "macros/_user.html" import render_user_avatar %}
 
-</body>
-</html>
+{% macro render_word_modal_wap(word) %}
+    <div class="word-modal-backdrop">
+        <div class="btn-close-word-modal">×</div>
+    </div>
+
+    <div class="word-modal-wap" data-piece-id="{{ piece.id if piece }}">
+        <div class="word">{{ word.word }}</div>
+
+        <div class="pieces-count">{{ word.pieces.count() }} 个解释</div>
+
+        {% for piece in word.pieces %}
+            <div class="piece-in-word {% if loop.last %}last{% endif %}" data-piece-id={{ piece.id }}>
+                <div class="media">
+                    <div class="media-left">
+                        <div class="vote {% if piece.voted_by_user() %}voted{% endif %} need-signed-in"
+                             data-piece-id={{ piece.id }}>
+                            <div class="vote-icon">
+                                <span class="fa fa-caret-up"></span>
+                            </div>
+                            <div class="votes-count">{{ piece.votes_count }}</div>
+                        </div>
+                    </div>
+
+                    <div class="media-body">
+                        <div class="pull-right other-info">
+                            <div class="comments-count pull-right">
+                                <span class="fa fa-comment-o"></span> {{ piece.comments.count() }}
+                            </div>
+
+                            {{ render_piece_qrcode(piece) }}
+                        </div>
+
+                        <div class="body" data-piece-id="{{ piece.id }}">
+                            <div class="user-wap">
+                                {{ render_user_avatar(piece.user) }}
+
+                                <a class="username"
+                                   href="{{ url_for('user.profile', uid=piece.user_id) }}">
+                                    {{ piece.user.name }}</a>
+                            </div>
+
+                            <div class="content">{{ piece.friendly_content|safe }}</div>
+                            {% if piece.sentence %}
+                                <div class="sentence-title">例句</div>
+                                <div>{{ piece.friendly_sentence|safe }}</div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="text-center">
+            <a href="javascript: void(0)" class="btn-add-piece-to-word btn-lg btn btn-default"
+               data-word="{{ word.word }}">添加你对{{ word.word }}的解释</a>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        (function () {
+            var $wordModalBackdrop = $('.word-modal-backdrop');
+            var $btnCloseWordModal = $('.btn-close-word-modal');
+            var $wordModal = $('.word-modal-wap');
+            var $addPieceToWord = $('.btn-add-piece-to-word');
+
+            $wordModalBackdrop.click(function () {
+                closeModal();
+            });
+
+            $addPieceToWord.click(function () {
+                var word = $(this).data('word');
+
+                openAddPieceWap(word, function () {
+                    closeModal();
+                });
+            });
+
+            /**
+             * Close the piece modal.
+             * @param callback
+             */
+            function closeModal(callback) {
+                var modalWidth = $wordModal.outerWidth();
+
+                $wordModalBackdrop.animate({'opacity': '0'}, 400, 'linear', function () {
+                    $(this).hide();
+                });
+                $btnCloseWordModal.animate({'opacity': '0'}, 400, 'linear');
+
+                $('.piece').removeClass('selected');
+
+                $wordModal.stop().transition({
+                    'right': -(modalWidth + 3)
+                }, 400, function () {
+                    $(this).hide();
+                    $(this).removeClass('open');
+
+                    if ($.isFunction(callback)) {
+                        callback();
+                    }
+                });
+            }
+        })();
+    </script>
+{% endmacro %}

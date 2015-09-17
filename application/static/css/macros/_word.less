@@ -1,0 +1,144 @@
+@import "../utils";
+@import "../fonts";
+
+.word-modal-backdrop {
+  z-index: 900;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  opacity: .8;
+
+  &:hover .btn-close-word-modal {
+    color: #999;
+  }
+
+  .btn-close-word-modal {
+    font-size: 80px;
+    color: #bbb;
+    cursor: pointer;
+    position: absolute;
+    font-weight: 200;
+    top: 0;
+    right: 720px;
+    line-height: 1;
+  }
+}
+
+.word-modal-wap {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding: 30px 25px;
+  background-color: white;
+  width: 700px;
+  z-index: 1000;
+  overflow: auto;
+  box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.25);
+
+  @media (max-width: @screen-xs-max) {
+    width: 100%;
+    padding-top: 35px;
+  }
+
+  .word {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    .font-song();
+    text-align: center;
+  }
+
+  .pieces-count {
+    color: #999;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .piece-in-word {
+    margin-bottom: 25px;
+
+    .media-left {
+      padding-right: 25px;
+
+      @media (max-width: @screen-xxs-max) {
+        display: none;
+      }
+    }
+
+    .media, .media-body {
+      overflow: visible;
+    }
+
+    .media-body {
+      border-bottom: 1px solid @border-color;
+      padding-bottom: 25px;
+    }
+
+    .other-info {
+      @media (max-width: @screen-xxs-max) {
+        display: none;
+      }
+
+      .btn-show-qrcode {
+        line-height: 26px;
+        margin-right: 20px;
+        color: gray;
+        font-size: 20px;
+      }
+
+      .comments-count {
+        color: #bbb;
+        line-height: 26px;
+
+        .fa {
+          font-size: 12px;
+          margin-left: 1px;
+        }
+      }
+    }
+
+    .body {
+      margin-right: 70px;
+
+      .user-wap {
+        margin-bottom: 15px;
+
+        img {
+          width: 26px;
+          height: 26px;
+        }
+
+        .username {
+          color: #333;
+          font-weight: bold;
+          line-height: 26px;
+          margin-left: 5px;
+          font-size: 14px;
+        }
+      }
+
+      .content {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        font-size: 16px;
+        color: #666666;
+
+        @media (max-width: @screen-xs-max) {
+          padding-right: 50px;
+        }
+        @media (max-width: @screen-xxs-max) {
+          padding-right: 0px;
+        }
+      }
+
+      .sentence-title {
+        color: #999;
+        margin-bottom: 5px;
+      }
+    }
+  }
+}

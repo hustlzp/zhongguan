@@ -30,7 +30,13 @@ def index():
     piece = None
     if piece_id:
         piece = Piece.query.get(piece_id)
-    return render_template('site/index.html', pieces_data=pieces_data, start_date=start_date, piece=piece)
+
+    word_id = request.args.get('word_id', type=int)
+    word = None
+    if word_id:
+        word = Word.query.get(word_id)
+
+    return render_template('site/index.html', pieces_data=pieces_data, start_date=start_date, piece=piece, word=word)
 
 
 @bp.route('/about')

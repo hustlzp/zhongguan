@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% from "macros/_piece.html" import render_pieces_by_date, render_piece_modal_wap %}
+{% from "macros/_word.html" import render_word_modal_wap %}
 
 {% block page_title %}中关村字典{% endblock %}
 {% block page_vars %}
@@ -23,5 +24,7 @@
 
     {% if piece %}
         {{ render_piece_modal_wap(piece, open=True) }}
+    {% elif word %}
+        {{ render_word_modal_wap(word) }}
     {% endif %}
 {% endblock %}
