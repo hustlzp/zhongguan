@@ -172,4 +172,6 @@
     window.registerContext = registerContext;
     window.startsWith = startsWith;
     window.endsWith = endsWith;
+
+    ZeroClipboard.config({swfPath: "/static/bower_components/zeroclipboard/dist/ZeroClipboard.swf"});
 })();
