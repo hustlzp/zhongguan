@@ -9,8 +9,7 @@ bp = Blueprint('site', __name__)
 
 @bp.route('/')
 def index():
-    # piece = Piece.query.order_by(db.func.random()).first()
-    piece = Piece.query.get(45)
+    piece = Piece.query.order_by(db.func.random()).first()
     return render_template('site/index.html', piece=piece)
 
 
