@@ -78,6 +78,9 @@
   border-bottom: 1px solid #e2e2e2;
   padding-bottom: 25px;
 }
+.word-modal-wap .piece-in-word:hover .piece-header .other-info .btn-show-qrcode {
+  visibility: visible;
+}
 .word-modal-wap .piece-in-word .piece-header .user-wap {
   margin-bottom: 10px;
 }
@@ -102,12 +105,13 @@
   margin-right: 20px;
   color: gray;
   font-size: 20px;
+  visibility: hidden;
 }
 .word-modal-wap .piece-in-word .piece-header .other-info .comments-count {
   color: #bbb;
+  font-size: 14px;
 }
 .word-modal-wap .piece-in-word .piece-header .other-info .comments-count .fa {
-  font-size: 14px;
   margin-left: 1px;
 }
 .word-modal-wap .piece-in-word .body {

@@ -391,6 +391,9 @@
 .pieces-wap .piece {
   margin-bottom: 30px;
 }
+.pieces-wap .piece:hover .other-info .btn-show-qrcode {
+  visibility: visible;
+}
 .pieces-wap .piece .media-left {
   padding-right: 25px;
 }
@@ -413,6 +416,7 @@
   }
 }
 .pieces-wap .piece .other-info .btn-show-qrcode {
+  visibility: hidden;
   line-height: 32px;
   margin-right: 30px;
   color: gray;
@@ -430,9 +434,9 @@
 .pieces-wap .piece .other-info .comments-count {
   color: #bbb;
   line-height: 28px;
+  font-size: 14px;
 }
 .pieces-wap .piece .other-info .comments-count .fa {
-  font-size: 14px;
   margin-left: 1px;
 }
 .pieces-wap .piece .body {

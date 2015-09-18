@@ -467,6 +467,10 @@
   .piece {
     margin-bottom: 30px;
 
+    &:hover .other-info .btn-show-qrcode {
+      visibility: visible;
+    }
+
     .media-left {
       padding-right: 25px;
 
@@ -490,6 +494,7 @@
       }
 
       .btn-show-qrcode {
+        visibility: hidden;
         line-height: 32px;
         margin-right: 30px;
         color: gray;
@@ -510,9 +515,9 @@
       .comments-count {
         color: #bbb;
         line-height: 28px;
+        font-size: 14px;
 
         .fa {
-          font-size: 14px;
           margin-left: 1px;
         }
       }
