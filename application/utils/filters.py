@@ -51,19 +51,23 @@ def weekday_cn(day):
     weekday = day.weekday()
 
     if weekday == 0:
-        return "星期日"
-    elif weekday == 1:
         return "星期一"
-    elif weekday == 2:
+    elif weekday == 1:
         return "星期二"
-    elif weekday == 3:
+    elif weekday == 2:
         return "星期三"
-    elif weekday == 4:
+    elif weekday == 3:
         return "星期四"
-    elif weekday == 5:
+    elif weekday == 4:
         return "星期五"
-    elif weekday == 6:
+    elif weekday == 5:
         return "星期六"
+    elif weekday == 6:
+        return "星期日"
+
+
+def is_today(day):
+    return day == datetime.date.today()
 
 
 def markdown(text):

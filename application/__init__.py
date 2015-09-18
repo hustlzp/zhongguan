@@ -81,7 +81,8 @@ def register_jinja(app):
         'markdown': filters.markdown,
         'date_cn': filters.date_cn,
         'date_number': filters.date_number,
-        'weekday_cn': filters.weekday_cn
+        'weekday_cn': filters.weekday_cn,
+        'is_today': filters.is_today
     })
 
     @app.context_processor
