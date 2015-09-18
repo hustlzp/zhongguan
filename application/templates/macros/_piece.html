@@ -736,6 +736,8 @@
                 var $modal = $('.piece-modal-wap');
                 var modalWidth = $modal.outerWidth();
 
+                history.replaceState(null, null, urlFor('site.pieces'));
+
                 $pieceModalBackdrop.animate({'opacity': '0'}, 400, 'linear', function () {
                     $(this).hide();
                 });

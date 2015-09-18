@@ -93,6 +93,8 @@
             function closeModal(callback) {
                 var modalWidth = $wordModal.outerWidth();
 
+                history.replaceState(null, null, urlFor('site.pieces'));
+
                 $wordModalBackdrop.animate({'opacity': '0'}, 400, 'linear', function () {
                     $(this).hide();
                 });
