@@ -26,7 +26,7 @@
   position: absolute;
   font-weight: 200;
   top: 0;
-  right: 720px;
+  right: 820px;
   line-height: 1;
 }
 .word-modal-wap {
@@ -36,7 +36,7 @@
   right: 0;
   padding: 30px 25px;
   background-color: white;
-  width: 700px;
+  width: 800px;
   z-index: 1000;
   overflow: auto;
   box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.25);
@@ -78,41 +78,40 @@
   border-bottom: 1px solid #e2e2e2;
   padding-bottom: 25px;
 }
-@media (max-width: 500px) {
-  .word-modal-wap .piece-in-word .other-info {
-    display: none;
-  }
+.word-modal-wap .piece-in-word .piece-header .user-wap {
+  margin-bottom: 10px;
 }
-.word-modal-wap .piece-in-word .other-info .btn-show-qrcode {
-  line-height: 26px;
-  margin-right: 20px;
-  color: gray;
-  font-size: 20px;
-}
-.word-modal-wap .piece-in-word .other-info .comments-count {
-  color: #bbb;
-  line-height: 26px;
-}
-.word-modal-wap .piece-in-word .other-info .comments-count .fa {
-  font-size: 12px;
-  margin-left: 1px;
-}
-.word-modal-wap .piece-in-word .body {
-  margin-right: 70px;
-}
-.word-modal-wap .piece-in-word .body .user-wap {
-  margin-bottom: 15px;
-}
-.word-modal-wap .piece-in-word .body .user-wap img {
+.word-modal-wap .piece-in-word .piece-header .user-wap img {
   width: 26px;
   height: 26px;
 }
-.word-modal-wap .piece-in-word .body .user-wap .username {
+.word-modal-wap .piece-in-word .piece-header .user-wap .username {
   color: #333;
   font-weight: bold;
   line-height: 26px;
   margin-left: 5px;
   font-size: 14px;
+}
+@media (max-width: 500px) {
+  .word-modal-wap .piece-in-word .piece-header .other-info {
+    display: none;
+  }
+}
+.word-modal-wap .piece-in-word .piece-header .other-info .btn-show-qrcode {
+  line-height: 28px;
+  margin-right: 20px;
+  color: gray;
+  font-size: 20px;
+}
+.word-modal-wap .piece-in-word .piece-header .other-info .comments-count {
+  color: #bbb;
+}
+.word-modal-wap .piece-in-word .piece-header .other-info .comments-count .fa {
+  font-size: 14px;
+  margin-left: 1px;
+}
+.word-modal-wap .piece-in-word .body {
+  cursor: pointer;
 }
 .word-modal-wap .piece-in-word .body .content {
   margin-bottom: 15px;

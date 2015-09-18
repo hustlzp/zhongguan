@@ -37,7 +37,7 @@
   bottom: 0;
   padding-bottom: 20px;
   background-color: #f6f6f6;
-  width: 700px;
+  width: 800px;
   z-index: 1000;
   overflow: auto;
   box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.25);
@@ -429,10 +429,10 @@
 }
 .pieces-wap .piece .other-info .comments-count {
   color: #bbb;
-  line-height: 32px;
+  line-height: 28px;
 }
 .pieces-wap .piece .other-info .comments-count .fa {
-  font-size: 12px;
+  font-size: 14px;
   margin-left: 1px;
 }
 .pieces-wap .piece .body {
@@ -467,6 +467,9 @@
 .pieces-wap .piece .body .sentence-title {
   color: #999;
   margin-bottom: 5px;
+}
+.pieces-wap .piece .body .sentence {
+  color: #666666;
 }
 .pieces-wap .piece .meta {
   color: #aaa;
