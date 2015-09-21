@@ -1,4 +1,5 @@
 @import "../fonts";
+@import "../utils";
 
 nav,
 #footer {
@@ -318,6 +319,86 @@ body {
 
       &:hover {
         color: #fff;
+      }
+    }
+  }
+}
+
+#account-modal {
+  color: #333;
+
+  .modal-dialog {
+    width: 500px;
+  }
+
+  .modal-content {
+    overflow: hidden;
+    border-radius: 4px;
+  }
+
+  .modal-body {
+    overflow: hidden;
+    padding: 0;
+
+    .nav-tabs {
+      background-color: #f8f8f8;
+
+      & > li {
+        width: 50%;
+
+        & > a {
+          background-color: #f8f8f8;
+          border-bottom: 1px solid #ddd;
+          margin-right: 0;
+          text-align: center;
+          font-size: 20px;
+          padding: 18px 0;
+          border-radius: 0;
+          border-top: none;
+          color: #999;
+        }
+
+        &.active > a {
+          background-color: white;
+          border-bottom: 1px solid transparent;
+          color: #333;
+        }
+      }
+    }
+
+    .tab-content {
+      .form-control-wap {
+        padding: 40px 30px;
+
+        input {
+          display: block;
+          font-size: 20px;
+          height: auto;
+          padding: 12px 10px;
+        }
+
+        input:not(:last-child) {
+          margin-bottom: 30px;
+        }
+
+        .forgot-pwd-wap {
+          text-align: right;
+        }
+      }
+
+      button {
+        border: none;
+        display: block;
+        padding: 20px 0;
+        width: 100%;
+        font-weight: bold;
+        font-size: 20px;
+        color: white;
+        background-color: @main-color;
+
+        &:disabled {
+          background-color: lighten(@main-color, 20%);
+        }
       }
     }
   }

@@ -107,4 +107,48 @@
             Made with 😂in Beijing. <a href="{{ url_for('site.about') }}">关于我们</a>
         </div>
     </div>
+
+    <div class="modal fade modal-need-adjust-height" id="account-modal" tabindex="-1" role="dialog"
+         aria-labelledby="account-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">注册</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#signin" aria-controls="signin" role="tab" data-toggle="tab">登陆</a>
+                        </li>
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="signup">
+                            <div class="form-control-wap form-signup">
+                                <input type="text" name="email" placeholder="邮箱" class="form-control">
+                                <input type="password" name="password" placeholder="设置密码" class="form-control">
+                                <input type="text" name="name" placeholder="昵称" class="form-control">
+                            </div>
+
+                            <button type="button" class="btn-submit-signup-form" disabled>注册</button>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="signin">
+                            <div class="form-control-wap form-signin">
+                                <input type="text" name="email" placeholder="邮箱" class="form-control">
+                                <input type="password" name="password" placeholder="密码" class="form-control">
+
+                                <div class="forgot-pwd-wap">
+                                    <a href="#">忘记密码？</a>
+                                </div>
+                            </div>
+
+                            <button type="button" class="btn-submit-signin-form" disabled>登陆</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

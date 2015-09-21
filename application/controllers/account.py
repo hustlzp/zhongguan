@@ -6,63 +6,54 @@ from ..utils.permissions import VisitorPermission
 from ..utils.mail import send_activate_mail, send_reset_password_mail
 from ..utils.security import decode
 from ..utils.helpers import get_domain_from_email
+from ..utils.decorators import jsonify
 from ..models import db, User, InvitationCode
 
 bp = Blueprint('account', __name__)
 
 
-@bp.route('/signin', methods=['GET', 'POST'])
+@bp.route('/signin', methods=['GET'])
 @VisitorPermission()
 def signin():
     """Signin"""
     form = SigninForm()
-    referer = request.form.get('referer')
-    if form.validate_on_submit():
-        signin_user(form.user)
-        return redirect(referer or url_for('site.pieces'))
     return render_template('account/signin.html', form=form)
 
 
-@bp.route('/signup', methods=['GET', 'POST'])
+@bp.route('/signin', methods=['POST'])
+@VisitorPermission()
+@jsonify
+def do_signin():
+    form = SigninForm()
+    if form.validate():
+        signin_user(form.user)
+        return {'result': True}
+    else:
+        return {'result': False, 'email': _get_first_error(form.email), 'password': _get_first_error(form.password)}
+
+
+@bp.route('/signup', methods=['GET'])
 @VisitorPermission()
 def signup():
     """Signup"""
     form = SignupForm()
-    code_string = request.args.get('code')
-    if code_string:
-        form.code.data = code_string
-        code = InvitationCode.query.filter(InvitationCode.code == code_string).first()
-        if code and code.email:
-            form.email.data = code.email
+    return render_template('account/signup.html', form=form)
 
+
+@bp.route('/do_signup', methods=['POST'])
+@VisitorPermission()
+@jsonify
+def do_signup():
+    form = SignupForm()
     if form.validate_on_submit():
         user = User(name=form.name.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
-
-        code = InvitationCode.query.filter(InvitationCode.code == form.code.data).first_or_404()
-        code.used = True
-        code.user_id = user.id
-        db.session.add(code)
-        db.session.commit()
-
-        # 若用户填写的邮箱和code中的邮箱相同，则无需填写
-        if user.email == code.email:
-            user.is_active = True
-            db.session.add(user)
-            db.session.commit()
-            signin_user(user)
-            flash('注册成功，欢迎来到中关村字典。')
-            return redirect(url_for('site.pieces'))
-        else:
-            send_activate_mail(user)
-            email_domain = get_domain_from_email(user.email)
-            if email_domain:
-                message = "请 <a href='%s' target='_blank'>登录邮箱</a> 激活账号" % email_domain
-            else:
-                message = "请登录邮箱激活账号"
-            return render_template('site/message.html', title='注册成功', message=message)
-    return render_template('account/signup.html', form=form)
+        send_activate_mail(user)
+        return {'result': True, 'domain': get_domain_from_email(user.email)}
+    else:
+        return {'result': False, 'name': _get_first_error(form.name), 'email': _get_first_error(form.email),
+                'password': _get_first_error(form.password)}
 
 
 @bp.route('/activate')
@@ -139,3 +130,8 @@ def reset_password():
         flash('密码重置成功，请使用新密码登录账户')
         return redirect(url_for('.signin'))
     return render_template('account/reset_password.html', form=form)
+
+
+def _get_first_error(field):
+    """获取field的第一条错误信息"""
+    return field.errors[0] if len(field.errors) else ""

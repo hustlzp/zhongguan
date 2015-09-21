@@ -1,13 +1,4 @@
 (function () {
-    // Add csrf token header for Ajax request
-    $.ajaxSetup({
-        beforeSend: function (xhr, settings) {
-            if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type)) {
-                xhr.setRequestHeader("X-CSRFToken", g.csrfToken);
-            }
-        }
-    });
-
     // Find out params in routing rules
     var pattern = new RegExp("<[^:]*:?([^>]+)>", "g");
     var result = null;
@@ -168,10 +159,39 @@
         return this;
     };
 
+    /**
+     * 显示tip
+     * @param $element
+     * @param tip
+     */
+    function showTip($element, tip) {
+        $element
+            .attr('data-original-title', tip)
+            .tooltip({
+                title: tip,
+                trigger: 'manual',
+                placement: 'top'
+            }).tooltip('show');
+    }
+
+    /**
+     * 隐藏tip
+     * @param $element
+     */
+    function hideTip($element) {
+        if ($element.length === 1) {
+            $element.tooltip('hide');
+        } else {
+            $.each($element, function () {
+                $(this).tooltip('hide');
+            });
+        }
+    }
+
+    window.showTip = showTip;
+    window.hideTip = hideTip;
     window.urlFor = urlFor;
     window.registerContext = registerContext;
     window.startsWith = startsWith;
     window.endsWith = endsWith;
-
-    ZeroClipboard.config({swfPath: "/static/bower_components/zeroclipboard/dist/ZeroClipboard.swf"});
 })();
