@@ -18,7 +18,7 @@ class UserRule(Rule):
         return 'user_id' in session
 
     def deny(self):
-        return redirect(url_for('account.signin'))
+        return redirect(url_for('site.index'))
 
 
 class AdminRule(Rule):
