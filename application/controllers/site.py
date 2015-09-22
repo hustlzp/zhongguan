@@ -37,7 +37,7 @@ def pieces():
     start_date = None
     delta = 0
 
-    while pieces_data_count < 5:
+    while pieces_data_count < 5 and delta < 20:
         target_day = date.today() - timedelta(days=delta)
         pieces_count = Piece.query.filter(db.func.date(Piece.created_at) == target_day).count()
         if pieces_count:
