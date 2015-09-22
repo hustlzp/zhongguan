@@ -35,9 +35,6 @@ class SigninForm(Form):
 
 class SignupForm(Form):
     """Form for signin"""
-    code = StringField('邀请码',
-                       validators=[DataRequired('邀请码不能为空')])
-
     name = StringField('用户名',
                        validators=[DataRequired('用户名不能为空')])
 
@@ -50,12 +47,6 @@ class SignupForm(Form):
     password = PasswordField('密码',
                              validators=[DataRequired('密码不能为空')])
 
-    repassword = PasswordField('确认密码',
-                               validators=[
-                                   DataRequired('再次确认你的密码'),
-                                   EqualTo('password', message='两次输入密码不一致')
-                               ])
-
     def validate_name(self, field):
         user = User.query.filter(User.name == self.name.data).first()
         if user:
@@ -65,11 +56,6 @@ class SignupForm(Form):
         user = User.query.filter(User.email == self.email.data).first()
         if user:
             raise ValueError('邮箱已被注册')
-
-    def validate_code(self, field):
-        code = InvitationCode.query.filter(InvitationCode.code == self.code.data).first()
-        if not code or code.used:
-            raise ValueError('无效的邀请码')
 
 
 class ForgotPasswordForm(Form):
