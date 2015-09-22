@@ -113,39 +113,73 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">注册</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#signin" aria-controls="signin" role="tab" data-toggle="tab">登陆</a>
-                        </li>
-                    </ul>
+                    <div class="signin-signup-wap">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">注册</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#signin" aria-controls="signin" role="tab" data-toggle="tab">登陆</a>
+                            </li>
+                        </ul>
 
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="signup">
-                            <div class="form-control-wap form-signup">
-                                <input type="text" name="email" placeholder="邮箱" class="form-control">
-                                <input type="password" name="password" placeholder="设置密码" class="form-control">
-                                <input type="text" name="name" placeholder="昵称" class="form-control">
-                            </div>
-
-                            <button type="button" class="btn-submit-signup-form" disabled>注册</button>
-                        </div>
-
-                        <div role="tabpanel" class="tab-pane" id="signin">
-                            <div class="form-control-wap form-signin">
-                                <input type="text" name="email" placeholder="邮箱" class="form-control">
-                                <input type="password" name="password" placeholder="密码" class="form-control">
-
-                                <div class="forgot-pwd-wap">
-                                    <a href="#">忘记密码？</a>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="signup">
+                                <div class="form-control-wap form-signup">
+                                    <input type="text" name="email" placeholder="邮箱" class="form-control">
+                                    <input type="password" name="password" placeholder="设置密码" class="form-control">
+                                    <input type="text" name="name" placeholder="昵称" class="form-control">
                                 </div>
+
+                                <button type="button" class="btn-submit-signup-form" disabled>注册</button>
                             </div>
 
-                            <button type="button" class="btn-submit-signin-form" disabled>登陆</button>
+                            <div role="tabpanel" class="tab-pane" id="signin">
+                                <div class="form-control-wap form-signin">
+                                    <input type="text" name="email" placeholder="邮箱" class="form-control">
+                                    <input type="password" name="password" placeholder="密码" class="form-control">
+
+                                    <div class="forgot-pwd-wap">
+                                        <a href="javascript: void(0)" class="btn-go-to-forgot-password">忘记密码？</a>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn-submit-signin-form" disabled>登陆</button>
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="form-forgot-password">
+                        <div class="title">忘记密码</div>
+
+                        <div class="form-control-wap">
+                            <input type="text" name="email" placeholder="邮箱" class="form-control">
+                        </div>
+
+                        <button type="button" class="btn-send-reset-password-email" disabled>发送</button>
+                    </div>
+
+                    <div class="send-reset-password-email-callback-wap">
+                        <div class="title"></div>
+                        <div class="message"></div>
+                    </div>
+
+                    <div class="form-reset-password">
+                        <div class="title">重置密码</div>
+
+                        <div class="form-control-wap">
+                            <input type="password" name="password" placeholder="新密码" class="form-control">
+                        </div>
+
+                        <button type="button" class="btn-reset-password" disabled>重置</button>
+                    </div>
+
+                    <div class="reset-password-callback-wap">
+                        <div class="title">密码重置成功</div>
+
+                        <div class="message">请使用新密码登陆 <a class="btn-go-to-signin-from-reset-password"
+                                                     href="javascript: void(0)">登陆</a></div>
                     </div>
                 </div>
             </div>

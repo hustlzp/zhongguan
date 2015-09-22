@@ -86,10 +86,10 @@ class ForgotPasswordForm(Form):
 
 
 class ResetPasswordForm(Form):
-    new_password = PasswordField('新的密码',
-                                 validators=[DataRequired('新密码不能为空')])
-
-    re_new_password = PasswordField('确认密码',
-                                    validators=[
-                                        DataRequired('请再输入一次新密码'),
-                                        EqualTo('new_password', message='两次输入密码不一致')])
+    password = PasswordField('新密码',
+                             validators=[DataRequired('新密码不能为空')])
+    #
+    # re_new_password = PasswordField('确认密码',
+    #                                 validators=[
+    #                                     DataRequired('请再输入一次新密码'),
+    #                                     EqualTo('new_password', message='两次输入密码不一致')])

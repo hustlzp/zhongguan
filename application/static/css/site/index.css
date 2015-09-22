@@ -283,13 +283,35 @@ body {
   overflow: hidden;
   padding: 0;
 }
-#account-modal .modal-body .nav-tabs {
+#account-modal .modal-body input {
+  display: block;
+  font-size: 20px;
+  height: auto;
+  padding: 12px 10px;
+}
+#account-modal .modal-body input:not(:last-child) {
+  margin-bottom: 30px;
+}
+#account-modal .modal-body button {
+  border: none;
+  display: block;
+  padding: 20px 0;
+  width: 100%;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  background-color: #76af61;
+}
+#account-modal .modal-body button:disabled {
+  background-color: #b1d1a5;
+}
+#account-modal .modal-body .signin-signup-wap .nav-tabs {
   background-color: #f8f8f8;
 }
-#account-modal .modal-body .nav-tabs > li {
+#account-modal .modal-body .signin-signup-wap .nav-tabs > li {
   width: 50%;
 }
-#account-modal .modal-body .nav-tabs > li > a {
+#account-modal .modal-body .signin-signup-wap .nav-tabs > li > a {
   background-color: #f8f8f8;
   border-bottom: 1px solid #ddd;
   margin-right: 0;
@@ -300,36 +322,72 @@ body {
   border-top: none;
   color: #999;
 }
-#account-modal .modal-body .nav-tabs > li.active > a {
+#account-modal .modal-body .signin-signup-wap .nav-tabs > li.active > a {
   background-color: white;
   border-bottom: 1px solid transparent;
   color: #333;
 }
-#account-modal .modal-body .tab-content .form-control-wap {
+#account-modal .modal-body .signin-signup-wap .tab-content .form-control-wap {
   padding: 40px 30px;
 }
-#account-modal .modal-body .tab-content .form-control-wap input {
-  display: block;
-  font-size: 20px;
-  height: auto;
-  padding: 12px 10px;
-}
-#account-modal .modal-body .tab-content .form-control-wap input:not(:last-child) {
-  margin-bottom: 30px;
-}
-#account-modal .modal-body .tab-content .form-control-wap .forgot-pwd-wap {
+#account-modal .modal-body .signin-signup-wap .tab-content .form-control-wap .forgot-pwd-wap {
   text-align: right;
 }
-#account-modal .modal-body .tab-content button {
-  border: none;
-  display: block;
-  padding: 20px 0;
-  width: 100%;
-  font-weight: bold;
-  font-size: 20px;
-  color: white;
-  background-color: #76af61;
+#account-modal .modal-body .form-forgot-password {
+  display: none;
 }
-#account-modal .modal-body .tab-content button:disabled {
-  background-color: #b1d1a5;
+#account-modal .modal-body .form-forgot-password .title {
+  font-size: 20px;
+  text-align: center;
+  padding: 30px 0;
+  font-weight: bold;
+}
+#account-modal .modal-body .form-forgot-password .form-control-wap {
+  padding: 0 30px;
+  margin-bottom: 40px;
+}
+#account-modal .modal-body .form-forgot-password .form-control-wap input {
+  display: block;
+}
+#account-modal .modal-body .send-reset-password-email-callback-wap {
+  display: none;
+}
+#account-modal .modal-body .send-reset-password-email-callback-wap .title {
+  font-size: 20px;
+  text-align: center;
+  padding: 30px 0;
+  font-weight: bold;
+}
+#account-modal .modal-body .send-reset-password-email-callback-wap .message {
+  text-align: center;
+  padding-bottom: 30px;
+}
+#account-modal .modal-body .form-reset-password {
+  display: none;
+}
+#account-modal .modal-body .form-reset-password .title {
+  font-size: 20px;
+  text-align: center;
+  padding: 30px 0;
+  font-weight: bold;
+}
+#account-modal .modal-body .form-reset-password .form-control-wap {
+  padding: 0 30px;
+  margin-bottom: 40px;
+}
+#account-modal .modal-body .form-reset-password .form-control-wap input {
+  display: block;
+}
+#account-modal .modal-body .reset-password-callback-wap {
+  display: none;
+}
+#account-modal .modal-body .reset-password-callback-wap .title {
+  font-size: 20px;
+  text-align: center;
+  padding: 30px 0;
+  font-weight: bold;
+}
+#account-modal .modal-body .reset-password-callback-wap .message {
+  text-align: center;
+  padding-bottom: 30px;
 }

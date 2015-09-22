@@ -27,7 +27,7 @@ def send_activate_mail(user):
 
 def send_reset_password_mail(user):
     """发送密码重置链接"""
-    url = absolute_url_for('account.reset_password', token=encode(user.id))
+    url = absolute_url_for('site.index', reset=1, token=encode(user.id))
     return send_mail(user.email,
                      "密码重置",
                      render_template('mail/reset_password.html', url=url))

@@ -1,7 +1,13 @@
 (function () {
+    /**
+     * 注册与登陆
+     */
+
     var $accountModal = $('#account-modal');
     var $btnSubmitSignupForm = $('.btn-submit-signup-form');
     var $btnSubmitSigninForm = $('.btn-submit-signin-form');
+
+    var $signinSignupWap = $('.signin-signup-wap');
 
     var $signupForm = $('.form-signup');
     var $nameInputInSignupForm = $signupForm.find("input[name='name']");
@@ -14,7 +20,7 @@
 
     // 弹出登陆框
     $('.piece-commands-wap button').click(function () {
-        $accountModal.modal().show();
+        $accountModal.modal();
     });
 
     // 注册
@@ -34,9 +40,25 @@
             }
         }).done(function (response) {
             if (response.result) {
-
+                window.location = urlFor('site.pieces');
             } else {
+                if (response.name !== "") {
+                    showTip($nameInputInSignupForm, response.name);
+                } else {
+                    hideTip($nameInputInSignupForm);
+                }
 
+                if (response.email !== "") {
+                    showTip($emailInputInSignupForm, response.email);
+                } else {
+                    hideTip($emailInputInSignupForm);
+                }
+
+                if (response.password !== "") {
+                    showTip($passwordInputInSignupForm, response.password);
+                } else {
+                    hideTip($passwordInputInSignupForm);
+                }
             }
         });
     });
@@ -100,6 +122,148 @@
         hideTip($signupForm.find('input'));
         hideTip($signinForm.find('input'));
     });
+
+    /**
+     * 忘记密码
+     */
+
+    var $btnGoToForgotPassword = $signinForm.find('.btn-go-to-forgot-password');
+    var $formForgotPassword = $('.form-forgot-password');
+    var $emailInForgotPassword = $formForgotPassword.find('input');
+    var $btnSendResetPasswordEmail = $formForgotPassword.find('.btn-send-reset-password-email');
+    var $sendResetPasswordCallbackWap = $('.send-reset-password-email-callback-wap');
+
+    // 跳转忘记密码
+    $btnGoToForgotPassword.click(function () {
+        $signinSignupWap.hide();
+        $formForgotPassword.show();
+    });
+
+    // 发送重置链接
+    $btnSendResetPasswordEmail.click(function () {
+        var email = $.trim($emailInForgotPassword.val());
+
+        $.ajax({
+            url: urlFor('account.forgot_password'),
+            method: 'post',
+            data: {
+                email: email
+            }
+        }).done(function (response) {
+            var title, message;
+
+            if (!response.result && response.email) {
+                showTip($emailInForgotPassword, response.email);
+            } else {
+                hideTip($emailInForgotPassword);
+                if (response.result) {
+                    title = '邮件已发送';
+                    message = '请登陆邮箱完成密码重置';
+                } else {
+                    if (response.unactive) {
+                        title = '账户尚未激活';
+                        message = '请先登陆邮箱激活账户';
+                    } else {
+                        title = '邮件发送失败';
+                        message = '请稍后再试';
+                    }
+                }
+
+                $formForgotPassword.hide();
+                $sendResetPasswordCallbackWap.find('.title').text('邮件已发送');
+                $sendResetPasswordCallbackWap.find('.message').text('请登陆邮箱完成密码重置');
+                $sendResetPasswordCallbackWap.show();
+            }
+        });
+    });
+
+    $emailInForgotPassword.keyup(function () {
+        hideTip($(this));
+
+        if ($.trim($(this).val()) !== '') {
+            $btnSendResetPasswordEmail.prop('disabled', false);
+        } else {
+            $btnSendResetPasswordEmail.attr('disabled', true);
+        }
+    });
+
+    /**
+     * 重置密码
+     */
+
+    var $formResetPassword = $('.form-reset-password');
+    var $btnResetPassword = $formResetPassword.find('.btn-reset-password');
+    var $passwordInReset = $formResetPassword.find('input');
+
+    var $resetPasswordCallbackWap = $('.reset-password-callback-wap');
+    var $btnGoToSigninFromResetPassword = $resetPasswordCallbackWap.find('.btn-go-to-signin-from-reset-password');
+
+    if (url('?reset') && url('?token')) {
+        setTimeout(function () {
+            $signinSignupWap.hide();
+            $formResetPassword.show();
+            $accountModal.modal();
+        }, 0);
+    }
+
+    $btnResetPassword.click(function () {
+        var password = $.trim($passwordInReset.val());
+
+        $.ajax({
+            url: urlFor('account.reset_password'),
+            method: 'post',
+            data: {
+                password: password,
+                token: url('?token')
+            }
+        }).done(function (response) {
+            if (!response.result && response.password) {
+                showTip($passwordInReset, response.password);
+            } else {
+                hideTip($passwordInReset);
+
+                if (!response.result) {
+                    $resetPasswordCallbackWap.find('.title').text('密码重置失败');
+                    $resetPasswordCallbackWap.find('.message').text('请稍后尝试');
+                }
+
+                $formResetPassword.hide();
+                $resetPasswordCallbackWap.show();
+            }
+        });
+    });
+
+    $passwordInReset.keyup(function () {
+        hideTip($(this));
+
+        if ($.trim($(this).val()) !== '') {
+            $btnResetPassword.prop('disabled', false);
+        } else {
+            $btnResetPassword.attr('disabled', true);
+        }
+    });
+
+    $btnGoToSigninFromResetPassword.click(function () {
+        $resetPasswordCallbackWap.hide();
+        $signinSignupWap.show();
+        $('.nav-tabs li:nth-child(2) a').click();
+    });
+
+    // modal隐藏时重置界面
+    $accountModal.on('hidden.bs.modal', function () {
+        $(this).find('input').val();
+        hideTip($(this).find('input'));
+        $signinSignupWap.show();
+        $formForgotPassword.hide();
+        $sendResetPasswordCallbackWap.hide();
+        $formResetPassword.hide();
+        $resetPasswordCallbackWap.hide();
+        $('.nav-tabs li:nth-child(1) a').first().click();
+    });
+
+    /**
+     * 发布条目
+     */
 
     var word;
 

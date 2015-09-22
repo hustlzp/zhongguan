@@ -340,65 +340,139 @@ body {
     overflow: hidden;
     padding: 0;
 
-    .nav-tabs {
-      background-color: #f8f8f8;
+    input {
+      display: block;
+      font-size: 20px;
+      height: auto;
+      padding: 12px 10px;
 
-      & > li {
-        width: 50%;
+      &:not(:last-child) {
+        margin-bottom: 30px;
+      }
+    }
 
-        & > a {
-          background-color: #f8f8f8;
-          border-bottom: 1px solid #ddd;
-          margin-right: 0;
-          text-align: center;
-          font-size: 20px;
-          padding: 18px 0;
-          border-radius: 0;
-          border-top: none;
-          color: #999;
+    button {
+      border: none;
+      display: block;
+      padding: 20px 0;
+      width: 100%;
+      font-weight: bold;
+      font-size: 20px;
+      color: white;
+      background-color: @main-color;
+
+      &:disabled {
+        background-color: lighten(@main-color, 20%);
+      }
+    }
+
+    .signin-signup-wap {
+      .nav-tabs {
+        background-color: #f8f8f8;
+
+        & > li {
+          width: 50%;
+
+          & > a {
+            background-color: #f8f8f8;
+            border-bottom: 1px solid #ddd;
+            margin-right: 0;
+            text-align: center;
+            font-size: 20px;
+            padding: 18px 0;
+            border-radius: 0;
+            border-top: none;
+            color: #999;
+          }
+
+          &.active > a {
+            background-color: white;
+            border-bottom: 1px solid transparent;
+            color: #333;
+          }
         }
+      }
 
-        &.active > a {
-          background-color: white;
-          border-bottom: 1px solid transparent;
-          color: #333;
+      .tab-content {
+        .form-control-wap {
+          padding: 40px 30px;
+
+          .forgot-pwd-wap {
+            text-align: right;
+          }
         }
       }
     }
 
-    .tab-content {
+    .form-forgot-password {
+      display: none;
+
+      .title {
+        font-size: 20px;
+        text-align: center;
+        padding: 30px 0;
+        font-weight: bold;
+      }
+
       .form-control-wap {
-        padding: 40px 30px;
+        padding: 0 30px;
+        margin-bottom: 40px;
 
         input {
           display: block;
-          font-size: 20px;
-          height: auto;
-          padding: 12px 10px;
-        }
-
-        input:not(:last-child) {
-          margin-bottom: 30px;
-        }
-
-        .forgot-pwd-wap {
-          text-align: right;
         }
       }
+    }
 
-      button {
-        border: none;
-        display: block;
-        padding: 20px 0;
-        width: 100%;
-        font-weight: bold;
+    .send-reset-password-email-callback-wap {
+      display: none;
+
+      .title {
         font-size: 20px;
-        color: white;
-        background-color: @main-color;
+        text-align: center;
+        padding: 30px 0;
+        font-weight: bold;
+      }
 
-        &:disabled {
-          background-color: lighten(@main-color, 20%);
+      .message {
+        text-align: center;
+        padding-bottom: 30px;
+      }
+    }
+
+    .form-reset-password {
+      display: none;
+
+      .title {
+        font-size: 20px;
+        text-align: center;
+        padding: 30px 0;
+        font-weight: bold;
+      }
+
+      .form-control-wap {
+        padding: 0 30px;
+        margin-bottom: 40px;
+
+        input {
+          display: block;
         }
+      }
+    }
+
+    .reset-password-callback-wap {
+      display: none;
+
+      .title {
+        font-size: 20px;
+        text-align: center;
+        padding: 30px 0;
+        font-weight: bold;
+      }
+
+      .message {
+        text-align: center;
+        padding-bottom: 30px;
       }
     }
   }

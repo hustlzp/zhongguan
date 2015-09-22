@@ -1,5 +1,5 @@
 # coding: utf-8
-from flask import render_template, Blueprint, redirect, request, url_for, flash
+from flask import render_template, Blueprint, redirect, request, url_for, flash, abort
 from ..forms import SigninForm, SignupForm, ResetPasswordForm, ForgotPasswordForm
 from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission
@@ -12,7 +12,7 @@ from ..models import db, User, InvitationCode
 bp = Blueprint('account', __name__)
 
 
-@bp.route('/signin', methods=['GET'])
+@bp.route('/signin')
 @VisitorPermission()
 def signin():
     """Signin"""
@@ -32,7 +32,7 @@ def do_signin():
         return {'result': False, 'email': _get_first_error(form.email), 'password': _get_first_error(form.password)}
 
 
-@bp.route('/signup', methods=['GET'])
+@bp.route('/signup')
 @VisitorPermission()
 def signup():
     """Signup"""
@@ -50,6 +50,7 @@ def do_signup():
         db.session.add(user)
         db.session.commit()
         send_activate_mail(user)
+        signin_user(user)
         return {'result': True, 'domain': get_domain_from_email(user.email)}
     else:
         return {'result': False, 'name': _get_first_error(form.name), 'email': _get_first_error(form.email),
@@ -61,15 +62,15 @@ def activate():
     """激活账号"""
     token = request.args.get('token')
     if not token:
-        return render_template('site/message.html', title="账号激活失败", message='无效的激活链接')
+        abort(403)
 
     user_id = decode(token)
     if not user_id:
-        return render_template('site/message.html', title="账号激活失败", message='无效的激活链接')
+        abort(403)
 
     user = User.query.filter(User.id == user_id).first()
     if not user:
-        return render_template('site/message.html', title="账号激活失败", message='无效的账号')
+        abort(403)
 
     user.is_active = True
     db.session.add(user)
@@ -86,50 +87,47 @@ def signout():
     return redirect(url_for('site.index'))
 
 
-@bp.route('/forgot_password', methods=['GET', 'POST'])
+@bp.route('/forgot_password', methods=['POST'])
+@VisitorPermission()
+@jsonify
 def forgot_password():
     """忘记密码"""
     form = ForgotPasswordForm()
     if form.validate_on_submit():
         user = User.query.filter(User.email == form.email.data).first()
-
         if not user.is_active:
-            return render_template('site/message.html', title="提示", message='请先完成账号激活')
-        send_reset_password_mail(user)
+            return {'result': False, 'unactive': True}
 
-        email_domain = get_domain_from_email(user.email)
-        if email_domain:
-            message = "请 <a href='%s' target='_blank'>登录邮箱</a> 完成密码重置" % email_domain
-        else:
-            message = "请登录邮箱完成密码重置"
-        return render_template('site/message.html',
-                               title="发送成功",
-                               message=message)
-    return render_template('account/forgot_password.html', form=form)
+        # return {'result': True}
+        return {'result': send_reset_password_mail(user)}
+    else:
+        return {'result': False, 'email': _get_first_error(form.email)}
 
 
-@bp.route('/reset_password', methods=['GET', 'POST'])
+@bp.route('/reset_password', methods=['POST'])
+@VisitorPermission()
+@jsonify
 def reset_password():
-    token = request.args.get('token')
+    token = request.form.get('token')
     if not token:
-        return render_template('site/message.html', title="密码重置失败", message='无效的密码重置链接')
+        return {'result': False}
 
     user_id = decode(token)
     if not user_id:
-        return render_template('site/message.html', title="密码重置失败", message='无效的密码重置链接')
+        return {'result': False}
 
     user = User.query.filter(User.id == user_id).first()
     if not user or not user.is_active:
-        return render_template('site/message.html', title="密码重置失败", message='无效的用户')
+        return {'result': False}
 
     form = ResetPasswordForm()
     if form.validate_on_submit():
-        user.password = form.new_password.data
+        user.password = form.password.data
         db.session.add(user)
         db.session.commit()
-        flash('密码重置成功，请使用新密码登录账户')
-        return redirect(url_for('.signin'))
-    return render_template('account/reset_password.html', form=form)
+        return {'result': True}
+    else:
+        return {'result': False, 'password': _get_first_error(form.password)}
 
 
 def _get_first_error(field):
