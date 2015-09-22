@@ -121,7 +121,7 @@
                             </a>
                             <ul class="dropdown-menu" role="menu">
                                 <li><a href="{{ url_for('user.profile', uid=g.user.id) }}">我点赞的</a></li>
-                                <li><a href="{{ url_for('user.likes', uid=g.user.id) }}">我撰写的</a></li>
+                                <li><a href="{{ url_for('user.shares', uid=g.user.id) }}">我撰写的</a></li>
                                 <li><a href="{{ url_for('user.voters', uid=g.user.id) }}">给我点赞的人</a></li>
                                 <li><a href="{{ url_for('user.settings') }}">设置</a></li>
                                 <li><a href="{{ url_for('account.signout') }}">退出</a></li>
