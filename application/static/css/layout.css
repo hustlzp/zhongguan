@@ -82,9 +82,11 @@ body {
   color: #fff;
 }
 #footer .bottom-market .slogan {
+  font-size: 14px;
   margin-bottom: 8px;
 }
 #footer .bottom-market .domain {
+  font-size: 14px;
   font-family: 'Krungthep', 'Krungthep';
 }
 #footer .other {
