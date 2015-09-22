@@ -3,7 +3,7 @@ from flask import g
 from flask_wtf import Form
 from wtforms import StringField, PasswordField
 from wtforms.validators import DataRequired, Email, EqualTo
-from ..models import User, InvitationCode
+from ..models import User
 
 
 class SigninForm(Form):

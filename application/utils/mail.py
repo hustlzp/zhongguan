@@ -5,7 +5,7 @@ import requests
 from flask import current_app, render_template, url_for
 from .helpers import absolute_url_for
 from .security import encode
-from ..models import db, MailLog
+from ..models import db
 
 
 def send_invitation_mail(to, invitation_code):
@@ -50,26 +50,13 @@ def send_mail(to, subject, html):
     try:
         r = requests.post(url, data=params)
     except Exception, e:
-        log = MailLog(email=to, message=traceback.format_exc())
-        db.session.add(log)
-        db.session.commit()
-        print(log.message)
         return False
     else:
         if r.status_code != 200:
-            log = MailLog(email=to,
-                          message="Do not conform to the basic sending format of SendCloud.")
-            db.session.add(log)
-            db.session.commit()
-            print(log.message)
             return False
 
         result = json.loads(r.text)
         if result['message'] == 'success':
             return True
         else:
-            log = MailLog(email=to, message=result['errors'].join('; '))
-            db.session.add(log)
-            db.session.commit()
-            print(log.message)
             return False

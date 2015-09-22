@@ -4,7 +4,6 @@ from datetime import date, timedelta
 from flask import render_template, Blueprint, request, redirect, url_for, g, current_app
 from ..models import db, Piece, Word
 from ..utils.geetest import geetest
-from ..utils.permissions import UserPermission
 
 bp = Blueprint('site', __name__)
 

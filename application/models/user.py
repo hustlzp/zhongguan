@@ -66,28 +66,3 @@ class Voter(db.Model):
 
     voter_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=None)
     voter = db.relationship('User', foreign_keys=[voter_id])
-
-
-class InvitationCode(db.Model):
-    """"""
-    id = db.Column(db.Integer, primary_key=True)
-    code = db.Column(db.String(200))
-    email = db.Column(db.String(100))
-    used = db.Column(db.Boolean, default=False)
-    sended_at = db.Column(db.DateTime)
-    created_at = db.Column(db.DateTime, default=datetime.now)
-
-    # 当用户使用此邀请码注册后，填充user_id字段
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=None)
-    user = db.relationship('User',
-                           backref=db.backref('invitation_code',
-                                              cascade="all, delete, delete-orphan",
-                                              uselist=False),
-                           foreign_keys=[user_id])
-
-    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), default=None)
-    sender = db.relationship('User',
-                             backref=db.backref('sended_invitation_codes',
-                                                cascade="all, delete, delete-orphan",
-                                                uselist=False),
-                             foreign_keys=[sender_id])

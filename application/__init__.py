@@ -74,7 +74,7 @@ def create_app():
 def register_jinja(app):
     """Register jinja filters, vars, functions."""
     from .utils import filters, permissions, helpers
-    from .models import Notification, NOTIFICATION_KIND, PIECE_EDIT_KIND, COLLECTION_EDIT_KIND
+    from .models import Notification, NOTIFICATION_KIND
 
     app.jinja_env.filters.update({
         'timesince': filters.timesince,
@@ -113,8 +113,6 @@ def register_jinja(app):
         'rules': rules,
         'permissions': permissions,
         'NOTIFICATION_KIND': NOTIFICATION_KIND,
-        'PIECE_EDIT_KIND': PIECE_EDIT_KIND,
-        'COLLECTION_EDIT_KIND': COLLECTION_EDIT_KIND
     })
 
 
@@ -127,13 +125,12 @@ def register_db(app):
 
 def register_routes(app):
     """Register routes."""
-    from .controllers import site, account, piece, user, collection, feedback, admin, word
+    from .controllers import site, account, piece, user, feedback, admin, word
 
     app.register_blueprint(site.bp)
     app.register_blueprint(account.bp)
     app.register_blueprint(piece.bp)
     app.register_blueprint(user.bp)
-    app.register_blueprint(collection.bp)
     app.register_blueprint(feedback.bp)
     app.register_blueprint(admin.bp)
     app.register_blueprint(word.bp)

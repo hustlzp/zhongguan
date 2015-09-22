@@ -5,8 +5,7 @@ from flask import render_template, Blueprint, redirect, request, url_for, flash,
 from ..utils.permissions import AdminPermission
 from ..utils.mail import send_invitation_mail
 from ..forms import SendInvitationCodeForm
-from ..models import db, CollectionEditLogReport, PieceEditLogReport, Feedback, InvitationCode, \
-    User, Piece, Collection
+from ..models import db, Feedback, User, Piece
 
 bp = Blueprint('admin', __name__)
 
