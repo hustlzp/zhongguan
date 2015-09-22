@@ -84,7 +84,10 @@
                 password: password,
                 word: word,
                 content: content,
-                sentence: sentence
+                sentence: sentence,
+                'geetest_challenge': $('.geetest_challenge').val(),
+                'geetest_validate': $('.geetest_validate').val(),
+                'geetest_seccode': $('.geetest_seccode').val()
             }
         }).done(function (response) {
             if (response.result) {

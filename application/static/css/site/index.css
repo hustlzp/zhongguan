@@ -331,6 +331,7 @@ body {
   padding: 40px 30px;
 }
 #account-modal .modal-body .signin-signup-wap .tab-content .form-control-wap .forgot-pwd-wap {
+  margin-top: 30px;
   text-align: right;
 }
 #account-modal .modal-body .form-forgot-password {

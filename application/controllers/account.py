@@ -1,5 +1,5 @@
 # coding: utf-8
-from flask import render_template, Blueprint, redirect, request, url_for, flash, abort
+from flask import render_template, Blueprint, redirect, request, url_for, flash, abort, current_app
 from ..forms import SigninForm, SignupForm, ResetPasswordForm, ForgotPasswordForm
 from ..utils.account import signin_user, signout_user
 from ..utils.permissions import VisitorPermission
@@ -8,6 +8,7 @@ from ..utils.security import decode
 from ..utils.helpers import get_domain_from_email
 from ..utils.decorators import jsonify
 from ..models import db, User, Piece
+from ..utils.geetest import geetest
 
 bp = Blueprint('account', __name__)
 
@@ -33,8 +34,17 @@ def do_signin():
         if word and content:
             Piece.create(word, content, sentence, form.user)
 
-        signin_user(form.user)
-        return {'result': True}
+        captcha_id = current_app.config.get('GEETEST_CAPTCHA_ID')
+        private_key = current_app.config.get('GEETEST_PRIVATE_KEY')
+        challenge = request.form.get('geetest_challenge')
+        validate = request.form.get('geetest_validate')
+        seccode = request.form.get('geetest_seccode')
+        gt = geetest(captcha_id, private_key)
+        if gt.geetest_validate(challenge, validate, seccode):
+            signin_user(form.user)
+            return {'result': True}
+        else:
+            return {'result': False}
     else:
         return {'result': False, 'email': _get_first_error(form.email), 'password': _get_first_error(form.password)}
 

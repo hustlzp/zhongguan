@@ -39,5 +39,10 @@ class Config(object):
     SC_API_USER = ''
     SC_API_KEY = ''
 
+    # Geetest
+    GEETEST_BASE_URL = "api.geetest.com/get.php?gt="
+    GEETEST_CAPTCHA_id = ""
+    GEETEST_PRIVATE_KEY = ""
+
     # Host string, used by fabric
     HOST_STRING = ""
