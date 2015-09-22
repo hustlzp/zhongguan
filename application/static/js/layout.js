@@ -13,6 +13,21 @@ ZeroClipboard.config({swfPath: "/static/bower_components/zeroclipboard/dist/Zero
 setTimeout(showFlash, 200);
 setTimeout(hideFlash, 2000);
 
+$('.notification-dropdown-toggle').click(function () {
+    $(this).find('.notifications-count').text('0');
+
+    $.ajax({
+        url: urlFor('user.check_all_notifications'),
+        method: 'post'
+    });
+});
+
+$('.notifications-in-nav .noti').click(function () {
+    var pieceId = $(this).data('piece-id');
+
+    window.location = urlFor('site.pieces', {piece_id: pieceId});
+});
+
 // 顶句子
 $(document).on('click', '.vote', function () {
     var pieceId = parseInt($(this).attr('data-piece-id')),

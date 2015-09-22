@@ -92,13 +92,58 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     {% if g.user %}
-                        <li>
-                            <a href="{{ url_for('user.notifications') }}">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle notification-dropdown-toggle" data-toggle="dropdown">
                                 <span class="fa fa-bell-o"></span>
                                 {% if notifications_count %}
-                                    <span class="notifications-count">{{ notifications_count }}</span>
+                                    <sup class="notifications-count">{{ notifications_count }}</sup>
                                 {% endif %}
                             </a>
+
+                            <div class="dropdown-menu notifications-dropdown-menu">
+                                <div class="notifications-in-nav">
+                                    {% for noti in notifications %}
+                                        {% if noti.kind == NOTIFICATION_KIND.UPVOTE_PIECE %}
+                                            {% set piece = noti.piece %}
+                                        {% else %}
+                                            {% set piece = noti.piece_comment.piece %}
+                                        {% endif %}
+
+                                        <div class="noti" data-piece-id="{{ piece.id }}">
+                                            {% set senders_count = noti.senders.count() %}
+
+                                            <span class="senders">
+                                                {% for sender in noti.senders %}
+                                                    <a href="{{ url_for('user.profile', uid=sender.id) }}"
+                                                       class="user-avatar">
+                                                        <img src="{{ sender.avatar_url }}"
+                                                             class="img-circle" data-toggle="tooltip"
+                                                             data-placement="bottom" title="{{ sender.name }}"
+                                                             data-user-id="{{ sender.id }}" alt=""/>
+                                                    </a>
+                                                {% endfor %}
+                                            </span>
+
+                                            {% if senders_count == 1 %}
+                                                <span class="dark">{{ noti.senders.first().name }}</span>
+                                            {% elif senders_count > 4 %}
+                                                等{{ senders_count }}人
+                                            {% endif %}
+
+                                            {% if noti.kind == NOTIFICATION_KIND.UPVOTE_PIECE %}
+                                                赞了 <span class="dark">{{ piece.word.word }}</span>
+                                            {% elif noti.kind == NOTIFICATION_KIND.COMMENT_PIECE %}
+                                                评论了 <span class="dark">{{ piece.word.word }}</span>
+                                            {% elif noti.kind == NOTIFICATION_KIND.COMMENT_PIECE_COMMENT %}
+                                                在 <span class="dark">{{ piece.word.word }}</span> 中回复了你
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <a class="btn-go-to-notifications" href="{{ url_for('user.notifications') }}">
+                                    查看全部消息
+                                </a>
+                            </div>
                         </li>
 
                         {% if permissions.AdminPermission().check() %}

@@ -169,6 +169,7 @@ def check_notification(uid):
 
 @bp.route('/my/notifications/check', methods=['POST'])
 @UserPermission()
+@jsonify
 def check_all_notifications():
     notifications = g.user.notifications.filter(~Notification.checked)
     for notification in notifications:
@@ -176,4 +177,4 @@ def check_all_notifications():
         notification.checked_at = datetime.now()
         db.session.add(notification)
     db.session.commit()
-    return json.dumps({'result': True})
+    return {'result': True}

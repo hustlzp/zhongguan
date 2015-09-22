@@ -45,6 +45,15 @@ body {
 }
 
 .navbar-nav {
+  & > li > a.user-avatar-dropdown-toggle {
+    padding: 15px 20px 15px 15px;
+
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
   .notifications-count {
     border-radius: 2px;
     background-color: @main-color;
@@ -57,12 +66,48 @@ body {
     vertical-align: 1px;
   }
 
-  & > li > a.user-avatar-dropdown-toggle {
-    padding: 15px 20px 15px 15px;
+  .notifications-dropdown-menu {
+    color: #999;
+    overflow: hidden;
 
-    img {
-      width: 40px;
-      height: 40px;
+    .noti {
+      cursor: pointer;
+      width: 280px;
+      padding: 18px 15px 16px 15px;
+      border-bottom: 1px solid #EEE;
+
+      .senders {
+        margin-right: 3px;
+
+        .user-avatar {
+          display: inline-block;
+          margin: 0 2px 2px;
+
+          img {
+            width: 26px;
+            height: 26px;
+          }
+        }
+      }
+
+      .dark {
+        color: #444;
+      }
+
+      &:hover {
+        background-color: #eee;
+      }
+    }
+
+    .btn-go-to-notifications {
+      text-align: center;
+      display: block;
+      padding: 12px;
+      color: #999;
+
+      &:hover {
+        background-color: #eee;
+      }
     }
   }
 }

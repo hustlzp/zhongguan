@@ -33,6 +33,13 @@ body {
 .navbar-form {
   margin: 10px 0;
 }
+.navbar-nav > li > a.user-avatar-dropdown-toggle {
+  padding: 15px 20px 15px 15px;
+}
+.navbar-nav > li > a.user-avatar-dropdown-toggle img {
+  width: 40px;
+  height: 40px;
+}
 .navbar-nav .notifications-count {
   border-radius: 2px;
   background-color: #76af61;
@@ -44,12 +51,41 @@ body {
   padding: 2px 5px;
   vertical-align: 1px;
 }
-.navbar-nav > li > a.user-avatar-dropdown-toggle {
-  padding: 15px 20px 15px 15px;
+.navbar-nav .notifications-dropdown-menu {
+  color: #999;
+  overflow: hidden;
 }
-.navbar-nav > li > a.user-avatar-dropdown-toggle img {
-  width: 40px;
-  height: 40px;
+.navbar-nav .notifications-dropdown-menu .noti {
+  cursor: pointer;
+  width: 280px;
+  padding: 18px 15px 16px 15px;
+  border-bottom: 1px solid #EEE;
+}
+.navbar-nav .notifications-dropdown-menu .noti .senders {
+  margin-right: 3px;
+}
+.navbar-nav .notifications-dropdown-menu .noti .senders .user-avatar {
+  display: inline-block;
+  margin: 0 2px 2px;
+}
+.navbar-nav .notifications-dropdown-menu .noti .senders .user-avatar img {
+  width: 26px;
+  height: 26px;
+}
+.navbar-nav .notifications-dropdown-menu .noti .dark {
+  color: #444;
+}
+.navbar-nav .notifications-dropdown-menu .noti:hover {
+  background-color: #eee;
+}
+.navbar-nav .notifications-dropdown-menu .btn-go-to-notifications {
+  text-align: center;
+  display: block;
+  padding: 12px;
+  color: #999;
+}
+.navbar-nav .notifications-dropdown-menu .btn-go-to-notifications:hover {
+  background-color: #eee;
 }
 @media (min-width: 768px) {
   #nav-signin {
