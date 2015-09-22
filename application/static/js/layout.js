@@ -7,8 +7,6 @@ $.ajaxSetup({
     }
 });
 
-ZeroClipboard.config({swfPath: "/static/bower_components/zeroclipboard/dist/ZeroClipboard.swf"});
-
 // Flash message
 setTimeout(showFlash, 200);
 setTimeout(hideFlash, 2000);

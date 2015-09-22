@@ -1,4 +1,6 @@
 (function () {
+    ZeroClipboard.config({swfPath: "/static/bower_components/zeroclipboard/dist/ZeroClipboard.swf"});
+
     // Find out params in routing rules
     var pattern = new RegExp("<[^:]*:?([^>]+)>", "g");
     var result = null;
