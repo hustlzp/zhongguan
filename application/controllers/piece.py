@@ -118,7 +118,11 @@ def edit(uid):
 @jsonify
 def vote(uid):
     piece = Piece.query.get_or_404(uid)
+    if g.user.id == piece.user_id:
+        return {'result': False}
+
     vote = g.user.voted_pieces.filter(PieceVote.piece_id == uid).first()
+
     if not vote:
         vote = PieceVote(piece_id=uid)
         g.user.voted_pieces.append(vote)
@@ -138,6 +142,8 @@ def vote(uid):
         piece.user.update_voters_count()
         db.session.add(piece.user)
 
+        Notification.upvote_piece(g.user, piece)
+
         db.session.commit()
         return {'result': True}
     else:
@@ -149,9 +155,12 @@ def vote(uid):
 @jsonify
 def unvote(uid):
     piece = Piece.query.get_or_404(uid)
+    if g.user.id == piece.user_id:
+        return {'result': False}
+
     vote = g.user.voted_pieces.filter(PieceVote.piece_id == uid).first()
     if not vote:
-        return json.dumps({'result': False})
+        return {'result': False}
     else:
         db.session.delete(vote)
         if g.user.votes_count > 0:
@@ -197,20 +206,12 @@ def comment(uid):
     db.session.add(comment)
     db.session.commit()
 
+    # 通知
     if root_comment_id:
-        noti_receiver_id = target_user_id
-        noti_kind = NOTIFICATION_KIND.COMMENT_PIECE_COMMENT
+        Notification.comment_piece_comment(g.user, comment)
     else:
-        noti_receiver_id = piece.user_id
-        noti_kind = NOTIFICATION_KIND.COMMENT_PIECE
-
-    # 推送通知
-    if noti_receiver_id != g.user.id:
-        noti = Notification(sender_id=g.user.id, target=piece.content, content=content,
-                            receiver_id=noti_receiver_id, kind=noti_kind,
-                            link="%s#comment_%d" % (url_for('piece.view', uid=uid), comment.id))
-        db.session.add(noti)
-        db.session.commit()
+        Notification.comment_piece(g.user, comment)
+    db.session.commit()
 
     # 返回comment HTML
     comment_macro = get_template_attribute('macros/_piece.html', 'render_piece_comment')
