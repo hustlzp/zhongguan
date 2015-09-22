@@ -74,7 +74,7 @@ def do_signup():
             Piece.create(word, content, sentence, user)
 
         db.session.commit()
-        # send_activate_mail(user)
+        send_activate_mail(user)
         signin_user(user)
         return {'result': True, 'domain': get_domain_from_email(user.email)}
     else:
