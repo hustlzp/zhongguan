@@ -27,12 +27,13 @@
         </div>
     </div>
 
-    <div class="piece">
-        <div class="word">
-            {{ piece.word.word }}
-        </div>
+    {% if piece %}
+        <div class="piece">
+            <div class="word">
+                {{ piece.word.word }}
+            </div>
 
-        <div class="text-center">
+            <div class="text-center">
             <span class="qrcode-in-index-page">
                 <span class="fa fa-qrcode btn-show-qrcode"></span>
 
@@ -46,27 +47,28 @@
                     </div>
                 </div>
             </span>
-        </div>
-
-        <div class="content">{{ piece.friendly_content|safe }}</div>
-
-        {% if piece.sentence %}
-            <div class="sentence-wap">
-                <div class="sentence-title">例句</div>
-                <div class="sentence">{{ piece.friendly_sentence|safe }}</div>
             </div>
-        {% endif %}
 
-        <div class="piece-commands-wap">
-            <button class="btn btn-primary btn-lg">
-                <span class="fa fa-caret-up"></span>&nbsp;&nbsp;解释到位
-            </button>
+            <div class="content">{{ piece.friendly_content|safe }}</div>
 
-            <button class="btn btn-danger btn-lg">
-                <span class="fa fa-caret-down"></span>&nbsp;&nbsp;不给力呀老湿
-            </button>
+            {% if piece.sentence %}
+                <div class="sentence-wap">
+                    <div class="sentence-title">例句</div>
+                    <div class="sentence">{{ piece.friendly_sentence|safe }}</div>
+                </div>
+            {% endif %}
+
+            <div class="piece-commands-wap">
+                <button class="btn btn-primary btn-lg">
+                    <span class="fa fa-caret-up"></span>&nbsp;&nbsp;解释到位
+                </button>
+
+                <button class="btn btn-danger btn-lg">
+                    <span class="fa fa-caret-down"></span>&nbsp;&nbsp;不给力呀老湿
+                </button>
+            </div>
         </div>
-    </div>
+    {% endif %}
 
     <div class="add-piece-wap-in-index-page first">
         <div class="first-step">
