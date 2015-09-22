@@ -38,7 +38,7 @@ def pieces_by_date():
     delta = 1
     next_start_date = None
 
-    while data_count < days:
+    while data_count < days and delta < 5:
         target_day = start_date - timedelta(days=delta)
         pieces_count = Piece.query.filter(db.func.date(Piece.created_at) == target_day).count()
         if pieces_count:
@@ -47,6 +47,7 @@ def pieces_by_date():
             next_start_date = (target_day - timedelta(days=1)).strftime("%Y-%m-%d")
             data_count += 1
         delta += 1
+
     return json.dumps({
         'html': html,
         'start': next_start_date
