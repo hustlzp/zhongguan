@@ -7,7 +7,7 @@ from ..utils.mail import send_activate_mail, send_reset_password_mail
 from ..utils.security import decode
 from ..utils.helpers import get_domain_from_email
 from ..utils.decorators import jsonify
-from ..models import db, User, InvitationCode
+from ..models import db, User, Piece
 
 bp = Blueprint('account', __name__)
 
@@ -26,6 +26,13 @@ def signin():
 def do_signin():
     form = SigninForm()
     if form.validate():
+        word = request.form.get('word')
+        content = request.form.get('content')
+        sentence = request.form.get('sentence')
+
+        if word and content:
+            Piece.create(word, content, sentence, form.user)
+
         signin_user(form.user)
         return {'result': True}
     else:
@@ -48,8 +55,16 @@ def do_signup():
     if form.validate_on_submit():
         user = User(name=form.name.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
+
+        word = request.form.get('word')
+        content = request.form.get('content')
+        sentence = request.form.get('sentence')
+
+        if word and content:
+            Piece.create(word, content, sentence, user)
+
         db.session.commit()
-        send_activate_mail(user)
+        # send_activate_mail(user)
         signin_user(user)
         return {'result': True, 'domain': get_domain_from_email(user.email)}
     else:
@@ -82,7 +97,6 @@ def activate():
 
 @bp.route('/signout')
 def signout():
-    """Signout"""
     signout_user()
     return redirect(url_for('site.index'))
 

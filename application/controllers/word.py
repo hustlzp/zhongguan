@@ -8,7 +8,6 @@ bp = Blueprint('word', __name__)
 
 
 @bp.route('/word/query', methods=['POST'])
-@UserPermission()
 @jsonify
 def query():
     """查询词"""

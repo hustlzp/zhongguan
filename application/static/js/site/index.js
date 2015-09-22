@@ -1,4 +1,8 @@
 (function () {
+    var word = '';
+    var content = '';
+    var sentence = '';
+
     /**
      * 注册与登陆
      */
@@ -36,7 +40,10 @@
             data: {
                 name: name,
                 email: email,
-                password: password
+                password: password,
+                word: word,
+                content: content,
+                sentence: sentence
             }
         }).done(function (response) {
             if (response.result) {
@@ -74,7 +81,10 @@
             dataType: 'json',
             data: {
                 email: email,
-                password: password
+                password: password,
+                word: word,
+                content: content,
+                sentence: sentence
             }
         }).done(function (response) {
             if (response.result) {
@@ -265,8 +275,6 @@
      * 发布条目
      */
 
-    var word;
-
     var $btnAddPieceFromIndex = $('.btn-add-piece-from-index');
     var timerForTypeahead = null;
     var $addPieceWap = $('.add-piece-wap-in-index-page');
@@ -341,25 +349,14 @@
     });
 
     // 提交
-    //$btnSubmitPiece.click(function () {
-    //    var explanation = $.trim($explanationTextarea.val());
-    //    var sentence = $.trim($sentenceTextarea.val());
-    //
-    //    $.ajax({
-    //        url: urlFor('piece.add'),
-    //        method: 'post',
-    //        dataType: 'json',
-    //        data: {
-    //            word: word,
-    //            content: explanation,
-    //            sentence: sentence
-    //        }
-    //    }).done(function (response) {
-    //        if (response.result) {
-    //            window.location = urlFor('site.index', {piece_id: response.piece_id});
-    //        }
-    //    });
-    //});
+    $btnSubmitPiece.click(function () {
+        content = $.trim($explanationTextarea.val());
+        sentence = $.trim($sentenceTextarea.val());
+
+        if (word !== '' && content !== '') {
+            $accountModal.modal();
+        }
+    });
 
     // 添加例句
     $btnAddSentence.click(function () {

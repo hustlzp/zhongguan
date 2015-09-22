@@ -24,13 +24,6 @@ class Word(db.Model):
         super(Word, self).__setattr__(name, value)
 
     @staticmethod
-    def add_word(word):
-        if Word.query.filter(Word.word == word).count() == 0:
-            _word = Word(word=word)
-            db.session.add(_word)
-            db.session.commit()
-
-    @staticmethod
     def get_word(word_content):
         word = Word.query.filter(Word.word == word_content).first()
         if not word:
@@ -71,6 +64,26 @@ class Piece(db.Model):
         if name == 'content':
             super(Piece, self).__setattr__('content_length', Piece.calculate_content_length(value))
         super(Piece, self).__setattr__(name, value)
+
+    @staticmethod
+    def create(word, content, sentence, user):
+        word = Word.get_word(word)
+        piece = Piece(content=content, sentence=sentence, word=word, user=user)
+        db.session.add(piece)
+        db.session.commit()
+
+        piece.make_qrcode()
+        db.session.add(piece)
+
+        if not user.pieces_count:
+            user.pieces_count = 1
+        else:
+            user.pieces_count += 1
+
+        db.session.add(user)
+        db.session.commit()
+
+        return piece
 
     @property
     def friendly_content(self):

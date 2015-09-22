@@ -79,44 +79,7 @@ def modal(uid):
 def add():
     form = PieceForm()
     if form.validate_on_submit():
-        word = Word.get_word(form.word.data)
-
-        piece = Piece(content=form.content.data, sentence=form.sentence.data, word_id=word.id, user_id=g.user.id)
-        db.session.add(piece)
-        db.session.commit()
-
-        # 自动vote
-        # vote = PieceVote(piece_id=piece.id, user_id=g.user.id)
-        # db.session.add(vote)
-        # g.user.votes_count += 1
-        # piece.votes_count += 1
-
-        # log
-        log = PieceEditLog(piece_id=piece.id, user_id=g.user.id, kind=PIECE_EDIT_KIND.CREATE)
-        db.session.add(log)
-
-        # Generate QRCode
-        piece.make_qrcode()
-        db.session.add(piece)
-
-        # # 如果存在title为author的句集，则自动将piece加入到此句集
-        # author_collection = Collection.get_by_title(piece.author)
-        # if author_collection:
-        #     author_collection_piece = CollectionPiece(collection_id=author_collection.id)
-        #     piece.collections.append(author_collection_piece)
-        #
-        # # 如果存在title为source的句集，则自动将piece加入到此句集
-        # source_collection = Collection.get_by_title(piece.source)
-        # if source_collection:
-        #     source_collection_piece = CollectionPiece(collection_id=source_collection.id)
-        #     piece.collections.append(source_collection_piece)
-
-        g.user.pieces_count += 1
-        db.session.add(g.user)
-
-        Word.add_word(form.word.data)
-
-        db.session.commit()
+        piece = Piece.create(form.word.data, form.content.data, form.sentence.data, g.user)
         return {'result': True, 'piece_id': piece.id}
     else:
         return {'result': False}
