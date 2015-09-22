@@ -29,5 +29,16 @@
                 </a>
             </div>
         </div>
+
+        <div class="setting-item clearfix">
+            <div class="key">激活状态</div>
+            <div class="control">
+                {% if g.user.is_active %}
+                    <span class="label label-success">已激活</span>
+                {% else %}
+                    <span class="label label-warning">未激活，请登陆邮箱激活账户</span>
+                {% endif %}
+            </div>
+        </div>
     </div>
 {% endblock %}
