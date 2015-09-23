@@ -20,7 +20,7 @@ def index():
     gt = geetest(captcha_id, private_key)
     url = ""
     httpsurl = ""
-    product = "embed"
+    product = "float"
     try:
         challenge = gt.geetest_register()
     except Exception as e:
