@@ -30,6 +30,41 @@ def timesince(value):
         return '刚刚'
 
 
+def cn_month(date):
+    """中文月份"""
+    month = date.month
+    if month == 1:
+        return "一月"
+    elif month == 2:
+        return "二月"
+    elif month == 3:
+        return "三月"
+    elif month == 4:
+        return "四月"
+    elif month == 5:
+        return "五月"
+    elif month == 6:
+        return "六月"
+    elif month == 7:
+        return "七月"
+    elif month == 8:
+        return "八月"
+    elif month == 9:
+        return "九月"
+    elif month == 10:
+        return "十月"
+    elif month == 11:
+        return "十一月"
+    elif month == 12:
+        return "十二月"
+    else:
+        raise ValueError()
+
+
+def day(date):
+    return date.strftime("%d")
+
+
 def date_cn(day):
     """日期的中文表示"""
     if day == datetime.date.today():

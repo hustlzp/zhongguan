@@ -8,24 +8,44 @@
   color: #999;
 }
 .notifications .noti {
+  position: relative;
+}
+.notifications .noti .noti-body {
   cursor: pointer;
   padding: 22px 15px 20px 15px;
-  border-bottom: 1px solid #EEE;
+  border-bottom: 1px solid #F8F8F8;
 }
-.notifications .noti .senders {
+.notifications .noti .noti-body .senders {
   margin-right: 3px;
 }
-.notifications .noti .senders .user-avatar {
+.notifications .noti .noti-body .senders .user-avatar {
   display: inline-block;
   margin: 0 2px 2px;
 }
-.notifications .noti .senders .user-avatar img {
+.notifications .noti .noti-body .senders .user-avatar img {
   width: 26px;
   height: 26px;
 }
-.notifications .noti .dark {
+.notifications .noti .noti-body .dark {
   color: #444;
 }
-.notifications .noti:hover {
+.notifications .noti .noti-body:hover {
   background-color: #F2F2F2;
+}
+.notifications .noti .date-wap {
+  position: absolute;
+  top: -1px;
+  width: 50px;
+  right: -70px;
+  border-radius: 2px;
+  text-align: center;
+  padding: 5px 0;
+  background-color: #eee;
+}
+.notifications .noti .date-wap .day {
+  font-weight: bold;
+  font-size: 18px;
+}
+.notifications .noti .date-wap .month {
+  color: #999;
 }

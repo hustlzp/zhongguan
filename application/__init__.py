@@ -82,7 +82,9 @@ def register_jinja(app):
         'date_cn': filters.date_cn,
         'date_number': filters.date_number,
         'weekday_cn': filters.weekday_cn,
-        'is_today': filters.is_today
+        'is_today': filters.is_today,
+        'day': filters.day,
+        'cn_month': filters.cn_month
     })
 
     @app.context_processor

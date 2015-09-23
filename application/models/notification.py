@@ -31,6 +31,15 @@ class Notification(db.Model):
     piece_comment_id = db.Column(db.Integer, db.ForeignKey('piece_comment.id'))
     piece_comment = db.relationship('PieceComment')
 
+    def last_in_that_day(self, user_id):
+        """该问题是否为当天最晚的消息"""
+        day = self.created_at.date()
+        noti = Notification.query. \
+            filter(db.func.date(Notification.created_at) == day,
+                   Notification.user_id == user_id). \
+            order_by(Notification.created_at.desc()).first()
+        return noti is not None and noti.id == self.id
+
     def add_sender(self, sender_id):
         """添加发起者"""
         senders_list = set(json.loads(self.senders_list or "[]"))

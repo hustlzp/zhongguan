@@ -11,30 +11,54 @@
   color: #999;
 
   .noti {
-    cursor: pointer;
-    padding: 22px 15px 20px 15px;
-    border-bottom: 1px solid #EEE;
+    position: relative;
 
-    .senders {
-      margin-right: 3px;
+    .noti-body {
+      cursor: pointer;
+      padding: 22px 15px 20px 15px;
+      border-bottom: 1px solid #F8F8F8;
 
-      .user-avatar {
-        display: inline-block;
-        margin: 0 2px 2px;
+      .senders {
+        margin-right: 3px;
 
-        img {
-          width: 26px;
-          height: 26px;
+        .user-avatar {
+          display: inline-block;
+          margin: 0 2px 2px;
+
+          img {
+            width: 26px;
+            height: 26px;
+          }
         }
+      }
+
+      .dark {
+        color: #444;
+      }
+
+      &:hover {
+        background-color: #F2F2F2;
       }
     }
 
-    .dark {
-      color: #444;
-    }
+    .date-wap {
+      position: absolute;
+      top: -1px;
+      width: 50px;
+      right: -70px;
+      border-radius: 2px;
+      text-align: center;
+      padding: 5px 0;
+      background-color: #eee;
 
-    &:hover {
-      background-color: #F2F2F2;
+      .day {
+        font-weight: bold;
+        font-size: 18px;
+      }
+
+      .month {
+        color: #999;
+      }
     }
   }
 }
