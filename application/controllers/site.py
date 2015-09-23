@@ -33,6 +33,7 @@ def index():
         pieces_data_count = 0
         start_date = None
         delta = 0
+        target_day = None
 
         while pieces_data_count < 5 and delta < 5:
             target_day = date.today() - timedelta(days=delta)
@@ -55,8 +56,10 @@ def index():
         if word_id:
             word = Word.query.get(word_id)
 
+        show_load_more_btn = Piece.query.filter(db.func.date(Piece.created_at) < target_day).count() > 0
+
         return render_template('site/pieces.html', pieces_data=pieces_data, start_date=start_date, piece=piece,
-                               word=word)
+                               word=word, show_load_more_btn=show_load_more_btn)
 
 
 @bp.route('/load_piece', methods=['POST'])

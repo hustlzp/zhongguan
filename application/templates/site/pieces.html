@@ -16,10 +16,12 @@
             {% endfor %}
         </div>
 
-        <button type="button" class="btn btn-default btn-load-more-pieces">
-            <span class="for-not-loading">加载更多</span>
-            <span class="for-loading fa fa-refresh fa-spin"></span>
-        </button>
+        {% if show_load_more_btn %}
+            <button type="button" class="btn btn-default btn-load-more-pieces">
+                <span class="for-not-loading">加载更多</span>
+                <span class="for-loading fa fa-refresh fa-spin"></span>
+            </button>
+        {% endif %}
     </div>
 
     {% if piece %}
