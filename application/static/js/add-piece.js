@@ -119,7 +119,7 @@
         $addPieceWap.show();
 
         if (typeof word !== 'undefined') {
-            $wordInput.val(word);
+            $wordInput.typeahead('val', word);
             $titleInFirstStep.text('给老词添加一条解释');
         }
 
