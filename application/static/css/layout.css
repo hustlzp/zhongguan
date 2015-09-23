@@ -139,7 +139,7 @@ body {
 }
 #footer .bottom-market .domain {
   font-size: 14px;
-  font-family: 'Krungthep', 'Helvetica Neue';
+  font-family: 'Krungthep', sans-serif;
 }
 #footer .other {
   position: absolute;
