@@ -256,8 +256,19 @@ ol {
 
   &:focus,
   &:hover {
-    background-color: @light-main;
+    background-color: @dark-main;
   }
+}
+
+.btn-danger.active,
+.btn-danger.focus,
+.btn-danger:active,
+.btn-danger:focus,
+.btn-danger:hover,
+.open > .dropdown-toggle.btn-danger {
+  color: #fff;
+  background-color: darken(#d9534f, 5%);
+  border-color: #ac2925;
 }
 
 .form-group {

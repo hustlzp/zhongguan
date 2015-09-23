@@ -207,7 +207,17 @@ ol li {
 }
 .btn-primary:focus,
 .btn-primary:hover {
-  background-color: #85b872;
+  background-color: #69a453;
+}
+.btn-danger.active,
+.btn-danger.focus,
+.btn-danger:active,
+.btn-danger:focus,
+.btn-danger:hover,
+.open > .dropdown-toggle.btn-danger {
+  color: #fff;
+  background-color: #d43f3a;
+  border-color: #ac2925;
 }
 .form-group {
   margin-bottom: 20px;
