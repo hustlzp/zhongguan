@@ -1,3 +1,11 @@
+/*!
+ *  Fonts.css -- Cross-platform Chinese fonts solution
+ * 
+ *  Copyright (C) 2013-2014 Zeno Zeng
+ *  Released under the MIT license
+ * 
+ *  Github: https://github.com/zenozeng/fonts.css
+ */
 @media (min-width: 1200px) {
   .container {
     width: 880px;
@@ -125,7 +133,10 @@ ol li {
   top: 0;
   cursor: pointer;
 }
-.tooltip-inner {
+.tooltip {
+  font-family: "Helvetica Neue", "Hiragino Sans GB", "\4F53", Arial, sans-serif;
+}
+.tooltip .tooltip-inner {
   font-size: 12px;
   line-height: 12px;
   padding: 6px 8px;

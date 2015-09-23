@@ -11,10 +11,10 @@ nav,
   display: none;
 }
 body {
-  background-color: #333;
+  background-color: #3f4348;
   color: white;
   padding: 0 20px;
-  font-family: "Helvetica Neue", "Hiragino Sans GB", "\9ED1\4F53", Arial, sans-serif;
+  font-family: "Helvetica Neue", "Hiragino Sans GB", "\4F53", Arial, sans-serif;
   margin-bottom: 0;
 }
 .first-screen {

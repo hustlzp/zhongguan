@@ -479,6 +479,7 @@
 }
 .pieces-wap .piece .body .sentence {
   color: #666666;
+  line-height: 1.6;
 }
 .pieces-wap .piece .meta {
   color: #aaa;

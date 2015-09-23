@@ -1,4 +1,5 @@
 @import "utils";
+@import "fonts";
 
 @media (min-width: 1200px) {
   .container {
@@ -159,11 +160,15 @@ ol {
   }
 }
 
-.tooltip-inner {
-  font-size: 12px;
-  line-height: 12px;
-  padding: 6px 8px;
-  border-radius: 2px;
+.tooltip {
+  .font-hei();
+
+  .tooltip-inner {
+    font-size: 12px;
+    line-height: 12px;
+    padding: 6px 8px;
+    border-radius: 2px;
+  }
 }
 
 .label {
