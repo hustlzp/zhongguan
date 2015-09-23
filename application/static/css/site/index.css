@@ -181,6 +181,9 @@ body {
 .piece .piece-commands-wap button.btn-vote {
   padding: 10px 16px 10px 30px;
 }
+.piece .piece-commands-wap button.btn-downvote .icon-wap {
+  top: 10px;
+}
 .piece-creator-info {
   position: absolute;
   bottom: 20px;
