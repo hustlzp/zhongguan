@@ -41,18 +41,11 @@ def likes(uid, page):
     return render_template('user/collections.html', user=user, collections=collections)
 
 
-@bp.route('/my/settings', methods=['GET', 'POST'])
+@bp.route('/my/settings')
 @UserPermission()
 def settings():
     """个人设置"""
-    form = SettingsForm(obj=g.user)
-    if form.validate_on_submit():
-        form.populate_obj(g.user)
-        db.session.add(g.user)
-        db.session.commit()
-        flash('设置已保存')
-        return redirect(url_for('.settings'))
-    return render_template('user/settings.html', form=form)
+    return render_template('user/settings.html')
 
 
 @bp.route('/my/toggle_setting', methods=['POST'])
