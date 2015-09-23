@@ -1,51 +1,28 @@
-.panel-primary .panel-body {
-  padding: 0;
+.title {
+  text-align: center;
+  font-size: 28px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #eee;
 }
-.panel-heading {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-.btn-check-all {
-  float: right;
-  display: block;
-  color: #cee2c7;
+.notifications .noti {
   cursor: pointer;
+  padding: 22px 15px 20px 15px;
+  border-bottom: 1px solid #EEE;
 }
-.btn-check-all:hover {
-  color: #fff;
+.notifications .noti .senders {
+  margin-right: 3px;
 }
-.notification {
-  border-bottom: 1px solid #e2e2e2;
-  margin: 0;
-  padding: 18px 20px;
-  cursor: pointer;
-  position: relative;
+.notifications .noti .senders .user-avatar {
+  display: inline-block;
+  margin: 0 2px 2px;
 }
-.notification:hover {
-  background-color: #f8f8f8;
+.notifications .noti .senders .user-avatar img {
+  width: 26px;
+  height: 26px;
 }
-.notification:last-child {
-  border-bottom: none;
+.notifications .noti .dark {
+  color: #444;
 }
-.notification.checked {
-  color: #aaa;
-}
-.notification .user-avatar {
-  width: 32px;
-  height: 32px;
-}
-.notification .media-left {
-  padding-right: 15px;
-}
-.notification .media-body {
-  padding-right: 60px;
-  padding-top: 5px;
-}
-.notification .created-at {
-  display: block;
-  color: #aaa;
-  font-size: 12px;
-  position: absolute;
-  right: 20px;
-  top: 25px;
+.notifications .noti:hover {
+  background-color: #F2F2F2;
 }

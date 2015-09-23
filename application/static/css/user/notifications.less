@@ -1,64 +1,39 @@
 @import "../utils";
 
-.panel-primary .panel-body {
-  padding: 0;
+.title {
+  text-align: center;
+  font-size: 28px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #eee;
 }
 
-.panel-heading {
-  padding-left: 20px;
-  padding-right: 20px;
-}
+.notifications {
 
-.btn-check-all {
-  float: right;
-  display: block;
-  color: lighten(@main-color, 30%);
-  cursor: pointer;
+  .noti {
+    cursor: pointer;
+    padding: 22px 15px 20px 15px;
+    border-bottom: 1px solid #EEE;
 
-  &:hover {
-    color: #fff;
-  }
-}
+    .senders {
+      margin-right: 3px;
 
-.notification {
-  border-bottom: 1px solid @border-color;
-  margin: 0;
-  padding: 18px 20px;
-  cursor: pointer;
-  position: relative;
+      .user-avatar {
+        display: inline-block;
+        margin: 0 2px 2px;
 
-  &:hover {
-    background-color: #f8f8f8;
-  }
+        img {
+          width: 26px;
+          height: 26px;
+        }
+      }
+    }
 
-  &:last-child {
-    border-bottom: none;
-  }
+    .dark {
+      color: #444;
+    }
 
-  &.checked {
-    color: #aaa;
-  }
-
-  .user-avatar {
-    width: 32px;
-    height: 32px;
-  }
-
-  .media-left {
-    padding-right: 15px;
-  }
-
-  .media-body {
-    padding-right: 60px;
-    padding-top: 5px;
-  }
-
-  .created-at {
-    display: block;
-    color: #aaa;
-    font-size: 12px;
-    position: absolute;
-    right: 20px;
-    top: 25px;
+    &:hover {
+      background-color: #F2F2F2;
+    }
   }
 }

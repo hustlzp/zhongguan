@@ -88,8 +88,8 @@ def register_jinja(app):
     @app.context_processor
     def inject_vars():
         return dict(
-            notifications=g.user.notifications.order_by(Notification.created_at.desc()) if g.user else [],
-            notifications_count=g.user.notifications.filter(
+            g_notifications=g.user.notifications.limit(5) if g.user else [],
+            g_notifications_count=g.user.notifications.filter(
                 ~Notification.checked).count() if g.user else 0
         )
 
