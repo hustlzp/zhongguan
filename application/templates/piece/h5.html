@@ -1,5 +1,4 @@
 {% from "macros/_piece.html" import render_piece_comment %}
-{% from "macros/_user.html" import render_user_avatar %}
 
 <!doctype html>
 <html>
@@ -41,19 +40,17 @@
             <div class="comment" data-comment-id="{{ comment.id }}">
                 <div class="media">
                     <div class="media-left">
-                        {{ render_user_avatar(comment.user) }}
+                        <img src="{{ comment.user.avatar_url }}" class="user-avatar user-avatar-popover img-circle"
+                             data-user-id="{{ comment.user.id }}"/>
                     </div>
 
                     <div class="media-body">
                         <div class="comment-user">
-                            <a href="{{ url_for('user.profile', uid=comment.user_id) }}">
-                                {{ comment.user.name }}
-                            </a>
+                            <a>{{ comment.user.name }}</a>
+
                             {% if comment.root_comment_id %}
                                 <span class="to-target-user">回复</span>
-                                <a href="{{ url_for('user.profile', uid=comment.target_user_id) }}">
-                                    {{ comment.target_user.name }}
-                                </a>
+                                <a>{{ comment.target_user.name }}</a>
                             {% endif %}
                         </div>
                         <div class="comment-content">{{ comment.content }}</div>

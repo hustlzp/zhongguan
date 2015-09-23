@@ -77,7 +77,8 @@ body {
 }
 .comments .comment .comment-user a {
   text-decoration: none;
-  color: #999;
+  color: #333;
+  font-weight: bold;
 }
 .comments .comment .comment-user .to-target-user {
   color: #999;
@@ -112,5 +113,5 @@ body {
 .footer .domain {
   color: #999;
   font-size: 14px;
-  font-family: 'Krungthep', 'Krungthep';
+  font-family: 'Arial';
 }
