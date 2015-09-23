@@ -214,7 +214,7 @@ def comment(uid):
             Notification.comment_piece_comment(g.user, comment)
             db.session.commit()
     else:
-        if piece.user.receive_comments_notification
+        if piece.user.receive_comments_notification:
             Notification.comment_piece(g.user, comment)
             db.session.commit()
 
