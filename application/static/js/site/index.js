@@ -119,6 +119,42 @@
 
     // 登录
     $btnSubmitSigninForm.click(function () {
+        submitSigninForm();
+    });
+
+    $signupForm.find('input').keyup(function (event) {
+        hideTip($(this));
+
+        if ($.trim($emailInputInSignupForm.val()) !== ''
+            && $.trim($nameInputInSignupForm.val()) !== ''
+            && $.trim($passwordInputInSignupForm.val()) !== '') {
+            $btnSubmitSignupForm.prop('disabled', false);
+        } else {
+            $btnSubmitSignupForm.attr('disabled', true);
+        }
+    });
+
+    $signinForm.find('input').keyup(function () {
+        hideTip($(this));
+
+        if ($.trim($emailInputInSigninForm.val()) !== ''
+            && $.trim($passwordInputInSigninForm.val()) !== '') {
+            $btnSubmitSigninForm.prop('disabled', false);
+        } else {
+            $btnSubmitSigninForm.attr('disabled', true);
+        }
+
+        if (event.keyCode === 13) {
+            submitSigninForm();
+        }
+    });
+
+    $('.nav-tabs li a').click(function () {
+        hideTip($signupForm.find('input'));
+        hideTip($signinForm.find('input'));
+    });
+
+    function submitSigninForm() {
         var email = $.trim($emailInputInSigninForm.val());
         var password = $.trim($passwordInputInSigninForm.val());
 
@@ -154,36 +190,7 @@
                 }
             }
         });
-    });
-
-
-    $signupForm.find('input').keyup(function () {
-        hideTip($(this));
-
-        if ($.trim($emailInputInSignupForm.val()) !== ''
-            && $.trim($nameInputInSignupForm.val()) !== ''
-            && $.trim($passwordInputInSignupForm.val()) !== '') {
-            $btnSubmitSignupForm.prop('disabled', false);
-        } else {
-            $btnSubmitSignupForm.attr('disabled', true);
-        }
-    });
-
-    $signinForm.find('input').keyup(function () {
-        hideTip($(this));
-
-        if ($.trim($emailInputInSigninForm.val()) !== ''
-            && $.trim($passwordInputInSigninForm.val()) !== '') {
-            $btnSubmitSigninForm.prop('disabled', false);
-        } else {
-            $btnSubmitSigninForm.attr('disabled', true);
-        }
-    });
-
-    $('.nav-tabs li a').click(function () {
-        hideTip($signupForm.find('input'));
-        hideTip($signinForm.find('input'));
-    });
+    }
 
     /**
      * 忘记密码
