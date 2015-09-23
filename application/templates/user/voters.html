@@ -10,12 +10,14 @@
 
         <div class="voters">
             {% for voter in user.voters %}
-                <a class="voter" href="{{ url_for('user.profile', uid=voter.user_id) }}">
-                    <img src="{{ user.avatar_url }}" class="img-circle user-avatar" alt=""/>
+                {% set _voter = voter.voter %}
+                <a class="voter" href="{{ url_for('user.profile', uid=_voter.id) }}">
+                    <img src="{{ _voter.avatar_url }}" class="img-circle user-avatar" alt=""/>
 
-                    <div class="name">{{ voter.user.name }}</div>
+                    <div class="name">{{ _voter.name }}</div>
                     <div class="count {% if voter.count == 1 %}one{% endif %}">
-                        {{ voter.count }} 次</div>
+                        {{ voter.count }} 次
+                    </div>
                 </a>
             {% endfor %}
         </div>
