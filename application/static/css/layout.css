@@ -148,6 +148,9 @@ body {
 #footer .other .about-us {
   padding-right: 20px;
 }
+#footer .other .about-us img {
+  height: 20px;
+}
 #footer .other .about-us a {
   color: #aaa;
   display: inline-block;
@@ -214,6 +217,10 @@ body {
   color: white;
   background-color: #76AF61;
   border: 1px solid #76AF61;
+}
+.add-piece-wap .first-step .input-group .btn-go-to-second-step img {
+  height: 30px;
+  vertical-align: text-top;
 }
 .add-piece-wap .second-step {
   border-radius: 2px;

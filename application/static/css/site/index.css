@@ -183,6 +183,10 @@ body {
   background-color: #76AF61;
   border: 1px solid #76AF61;
 }
+.add-piece-wap-in-index-page .first-step .input-group .btn-go-to-second-step img {
+  height: 30px;
+  vertical-align: text-top;
+}
 .add-piece-wap-in-index-page .second-step {
   display: none;
   border-radius: 2px;
@@ -248,6 +252,9 @@ body {
 }
 .footer .about-us {
   padding-right: 20px;
+}
+.footer .about-us img {
+  height: 20px;
 }
 .footer .about-us a {
   color: #aaa;
