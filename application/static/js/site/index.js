@@ -6,7 +6,7 @@
     if (url('?signin')) {
         setTimeout(function () {
             $accountModal.modal();
-            $('.nav-tabs li:nth-child(2) a').click();
+            switchToSignin();
         }, 0);
     }
 
@@ -174,6 +174,11 @@
     var $btnSendResetPasswordEmail = $formForgotPassword.find('.btn-send-reset-password-email');
     var $sendResetPasswordCallbackWap = $('.send-reset-password-email-callback-wap');
 
+    $('.btn-back-to-signin').click(function () {
+        $formForgotPassword.hide();
+        switchToSignin();
+    });
+
     // 跳转忘记密码
     $btnGoToForgotPassword.click(function () {
         $signinSignupWap.hide();
@@ -286,21 +291,30 @@
 
     $btnGoToSigninFromResetPassword.click(function () {
         $resetPasswordCallbackWap.hide();
-        $signinSignupWap.show();
-        $('.nav-tabs li:nth-child(2) a').click();
+        switchToSignin();
     });
 
     // modal隐藏时重置界面
     $accountModal.on('hidden.bs.modal', function () {
         $(this).find('input').val();
         hideTip($(this).find('input'));
-        $signinSignupWap.show();
         $formForgotPassword.hide();
         $sendResetPasswordCallbackWap.hide();
         $formResetPassword.hide();
         $resetPasswordCallbackWap.hide();
-        $('.nav-tabs li:nth-child(1) a').first().click();
+        switchToSignup();
     });
+
+
+    function switchToSignup() {
+        $signinSignupWap.show();
+        $('.nav-tabs li:nth-child(1) a').first().click();
+    }
+
+    function switchToSignin() {
+        $signinSignupWap.show();
+        $('.nav-tabs li:nth-child(2) a').first().click();
+    }
 
     /**
      * 发布条目

@@ -335,6 +335,12 @@ body {
 }
 #account-modal .modal-body .form-forgot-password {
   display: none;
+  position: relative;
+}
+#account-modal .modal-body .form-forgot-password .btn-back-to-signin {
+  position: absolute;
+  top: 30px;
+  left: 30px;
 }
 #account-modal .modal-body .form-forgot-password .title {
   font-size: 20px;
