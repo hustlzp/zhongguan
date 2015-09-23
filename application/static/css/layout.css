@@ -215,6 +215,7 @@ body {
   height: auto;
   font-size: 24px;
   font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
+  border-right: 1px solid #76af61;
   padding: 8px 15px;
 }
 .add-piece-wap .first-step .input-group .btn-go-to-second-step {
