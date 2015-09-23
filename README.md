@@ -1,8 +1,8 @@
 中关村字典
 =========
 
-http://www.1jingdian.com
+http://zidian.tech
 
-每天分享好句子。
+在这里解释互联网。
 
-By [hustlzp](https://github.com/hustlzp) and [pengyuan](https://github.com/pengyuan)
+By [hustlzp](https://github.com/hustlzp).
