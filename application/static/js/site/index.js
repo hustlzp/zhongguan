@@ -50,7 +50,12 @@
             }
         }).done(function (response) {
             if (response.result) {
-                window.location = urlFor('site.pieces');
+                if (response.piece_id) {
+                    window.location = urlFor('site.pieces', {piece_id: response.piece_id});
+                } else {
+                    window.location = urlFor('site.pieces');
+                }
+
             } else {
                 if (response.name !== "") {
                     showTip($nameInputInSignupForm, response.name);
@@ -91,7 +96,11 @@
             }
         }).done(function (response) {
             if (response.result) {
-                window.location = urlFor('site.pieces');
+                if (response.piece_id) {
+                    window.location = urlFor('site.pieces', {piece_id: response.piece_id});
+                } else {
+                    window.location = urlFor('site.pieces');
+                }
             } else {
                 if (response.email !== "") {
                     showTip($emailInputInSigninForm, response.email);

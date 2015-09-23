@@ -31,11 +31,12 @@ def do_signin():
         content = request.form.get('content')
         sentence = request.form.get('sentence')
 
+        piece = None
         if word and content:
-            Piece.create(word, content, sentence, form.user)
+            piece = Piece.create(word, content, sentence, form.user)
 
         signin_user(form.user)
-        return {'result': True}
+        return {'result': True, 'piece_id': piece.id if piece else None}
     else:
         return {'result': False, 'email': _get_first_error(form.email), 'password': _get_first_error(form.password)}
 
@@ -70,13 +71,14 @@ def do_signup():
         content = request.form.get('content')
         sentence = request.form.get('sentence')
 
+        piece = None
         if word and content:
-            Piece.create(word, content, sentence, user)
+            piece = Piece.create(word, content, sentence, user)
 
         db.session.commit()
         send_activate_mail(user)
         signin_user(user)
-        return {'result': True, 'domain': get_domain_from_email(user.email)}
+        return {'result': True, 'domain': get_domain_from_email(user.email), 'piece_id': piece.id if piece else None}
     else:
         return {'result': False, 'name': _get_first_error(form.name), 'email': _get_first_error(form.email),
                 'password': _get_first_error(form.password)}
