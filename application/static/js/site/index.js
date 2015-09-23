@@ -28,6 +28,8 @@
      * 注册与登录
      */
 
+    var $btnOpenAccountModal = $('.btn-open-account-modal');
+
     var $accountModal = $('#account-modal');
     var $btnSubmitSignupForm = $('.btn-submit-signup-form');
     var $btnSubmitSigninForm = $('.btn-submit-signin-form');
@@ -42,6 +44,10 @@
     var $signinForm = $('.form-signin');
     var $emailInputInSigninForm = $signinForm.find("input[name='email']");
     var $passwordInputInSigninForm = $signinForm.find("input[name='password']");
+
+    $btnOpenAccountModal.click(function () {
+        $accountModal.modal();
+    });
 
     // 弹出登录框
     $(document).on('click', '.btn-vote', function () {
@@ -149,6 +155,7 @@
             }
         });
     });
+
 
     $signupForm.find('input').keyup(function () {
         hideTip($(this));

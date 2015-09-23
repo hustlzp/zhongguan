@@ -46,6 +46,14 @@ body {
   border-radius: 3px;
   padding: 5px 12px;
 }
+.header .commands-wap .btn-open-account-modal {
+  height: 30px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.header .commands-wap .tooltip .tooltip-inner {
+  white-space: nowrap;
+}
 .piece {
   padding-bottom: 120px;
 }
