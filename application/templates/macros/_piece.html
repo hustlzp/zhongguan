@@ -712,6 +712,8 @@
                 var $modal = $('.piece-modal-wap');
                 var modalWidth = $modal.outerWidth();
 
+                $('body').addClass('modal-open');
+
                 $pieceModalBackdrop.show().animate({'opacity': '0.8'}, 400, 'linear');
                 $btnClosePieceModal.css('right', modalWidth + 20).animate({'opacity': '1'}, 400, 'linear');
 
@@ -757,6 +759,8 @@
                     if ($.isFunction(callback)) {
                         callback();
                     }
+
+                    $('body').removeClass('modal-open');
                 });
             }
 

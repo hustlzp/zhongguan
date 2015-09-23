@@ -69,6 +69,8 @@
             var $addPieceToWord = $('.btn-add-piece-to-word');
             var $pieceBody = $('.piece-in-word .body');
 
+            $('body').addClass('modal-open');
+
             $wordModalBackdrop.click(function () {
                 closeModal();
             });
@@ -111,6 +113,8 @@
                     if ($.isFunction(callback)) {
                         callback();
                     }
+
+                    $('body').removeClass('modal-open');
                 });
             }
         })();
