@@ -4,7 +4,7 @@
     var sentence = '';
 
     /**
-     * 注册与登陆
+     * 注册与登录
      */
 
     var $accountModal = $('#account-modal');
@@ -22,7 +22,7 @@
     var $emailInputInSigninForm = $signinForm.find("input[name='email']");
     var $passwordInputInSigninForm = $signinForm.find("input[name='password']");
 
-    // 弹出登陆框
+    // 弹出登录框
     $('.piece-commands-wap button').click(function () {
         $accountModal.modal();
     });
@@ -70,7 +70,7 @@
         });
     });
 
-    // 登陆
+    // 登录
     $btnSubmitSigninForm.click(function () {
         var email = $.trim($emailInputInSigninForm.val());
         var password = $.trim($passwordInputInSigninForm.val());
@@ -171,11 +171,11 @@
                 hideTip($emailInForgotPassword);
                 if (response.result) {
                     title = '邮件已发送';
-                    message = '请登陆邮箱完成密码重置';
+                    message = '请登录邮箱完成密码重置';
                 } else {
                     if (response.unactive) {
                         title = '账户尚未激活';
-                        message = '请先登陆邮箱激活账户';
+                        message = '请先登录邮箱激活账户';
                     } else {
                         title = '邮件发送失败';
                         message = '请稍后再试';
@@ -184,7 +184,7 @@
 
                 $formForgotPassword.hide();
                 $sendResetPasswordCallbackWap.find('.title').text('邮件已发送');
-                $sendResetPasswordCallbackWap.find('.message').text('请登陆邮箱完成密码重置');
+                $sendResetPasswordCallbackWap.find('.message').text('请登录邮箱完成密码重置');
                 $sendResetPasswordCallbackWap.show();
             }
         });
