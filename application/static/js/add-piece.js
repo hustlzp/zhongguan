@@ -99,7 +99,7 @@
             }
         }).done(function (response) {
             if (response.result) {
-                window.location = urlFor('site.pieces', {piece_id: response.piece_id});
+                window.location = urlFor('site.index', {piece_id: response.piece_id});
             }
         });
     });

@@ -10,7 +10,7 @@ class VisitorRule(Rule):
         return 'user_id' not in session
 
     def deny(self):
-        return redirect(url_for('site.pieces'))
+        return redirect(url_for('site.index'))
 
 
 class UserRule(Rule):

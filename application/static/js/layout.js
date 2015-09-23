@@ -23,7 +23,7 @@ $('.notification-dropdown-toggle').click(function () {
 $('.notifications-in-nav .noti').click(function () {
     var pieceId = $(this).data('piece-id');
 
-    window.location = urlFor('site.pieces', {piece_id: pieceId});
+    window.location = urlFor('site.index', {piece_id: pieceId});
 });
 
 // 顶句子

@@ -84,9 +84,9 @@
         }).done(function (response) {
             if (response.result) {
                 if (response.piece_id) {
-                    window.location = urlFor('site.pieces', {piece_id: response.piece_id});
+                    window.location = urlFor('site.index', {piece_id: response.piece_id});
                 } else {
-                    window.location = urlFor('site.pieces');
+                    window.location = urlFor('site.index');
                 }
 
             } else {
@@ -130,9 +130,9 @@
         }).done(function (response) {
             if (response.result) {
                 if (response.piece_id) {
-                    window.location = urlFor('site.pieces', {piece_id: response.piece_id});
+                    window.location = urlFor('site.index', {piece_id: response.piece_id});
                 } else {
-                    window.location = urlFor('site.pieces');
+                    window.location = urlFor('site.index');
                 }
             } else {
                 if (response.email !== "") {

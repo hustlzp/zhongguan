@@ -39,7 +39,7 @@
 
         <div class="words">
             {% for word in words %}
-                <a href="{{ url_for('site.pieces', word_id=word.id) }}" class="word">{{ word.word }}</a>
+                <a href="{{ url_for('site.index', word_id=word.id) }}" class="word">{{ word.word }}</a>
             {% endfor %}
         </div>
 

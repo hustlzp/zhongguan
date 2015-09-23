@@ -483,7 +483,7 @@
         {% set pieces_count = piece.word.pieces.count() %}
         {% if piece.word.pieces.count() > 1 %}
             <div class="redirect-to-word">
-                <a href="{{ url_for('site.pieces', word_id=piece.word_id) }}">
+                <a href="{{ url_for('site.index', word_id=piece.word_id) }}">
                     查看 {{ piece.word.word }} 的 {{ pieces_count }} 个全部解释
                 </a>
             </div>
@@ -541,7 +541,7 @@
 
                 client.on("copy", function (event) {
                     var clipboard = event.clipboardData;
-                    clipboard.setData("text/plain", g.domain + urlFor('site.pieces', {piece_id: pieceId}));
+                    clipboard.setData("text/plain", g.domain + urlFor('site.index', {piece_id: pieceId}));
                     $btnCopyLink.parent().find('.tooltip-inner').text('链接已复制');
                 });
 
@@ -570,7 +570,7 @@
                             method: 'post'
                         }).done(function (response) {
                             if (response.result) {
-                                window.location = urlFor('site.pieces');
+                                window.location = urlFor('site.index');
                             }
                         });
                     } else {
@@ -738,7 +738,7 @@
                 var $modal = $('.piece-modal-wap');
                 var modalWidth = $modal.outerWidth();
 
-                history.replaceState(null, null, urlFor('site.pieces'));
+                history.replaceState(null, null, urlFor('site.index'));
 
                 $pieceModalBackdrop.animate({'opacity': '0'}, 400, 'linear', function () {
                     $(this).hide();

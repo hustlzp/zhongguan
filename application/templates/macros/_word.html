@@ -85,7 +85,7 @@
 
             $pieceBody.click(function () {
                 var id = $(this).data('piece-id');
-                window.location = urlFor('site.pieces', {piece_id: id});
+                window.location = urlFor('site.index', {piece_id: id});
             });
 
             /**
@@ -95,7 +95,7 @@
             function closeModal(callback) {
                 var modalWidth = $wordModal.outerWidth();
 
-                history.replaceState(null, null, urlFor('site.pieces'));
+                history.replaceState(null, null, urlFor('site.index'));
 
                 $wordModalBackdrop.animate({'opacity': '0'}, 400, 'linear', function () {
                     $(this).hide();
