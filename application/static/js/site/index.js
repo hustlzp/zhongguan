@@ -3,6 +3,18 @@
     var content = '';
     var sentence = '';
 
+    var windowHeight = $(window).outerHeight();
+    var $firstScreen = $('.first-screen');
+    var $secondScreen = $('.second-screen');
+    var $firstStep = $('.first-step');
+    var $secondStep = $('.second-step');
+
+    // 尺寸调整
+    $firstScreen.css('minHeight', windowHeight);
+    $secondScreen.css('height', windowHeight);
+    $firstStep.css('paddingTop', (windowHeight - $firstStep.outerHeight()) * 0.4).show();
+
+    // 按需弹出登陆框
     if (url('?signin')) {
         setTimeout(function () {
             $accountModal.modal();
@@ -337,7 +349,7 @@
     var $wordInSecondStep = $addPieceWapSecondStep.find('.word');
 
     $btnAddPieceFromIndex.click(function () {
-        $(window).scrollTo($addPieceWap, 200);
+        $(window).scrollTo($secondScreen, 200);
     });
 
     // 启动Typeahead自动完成
@@ -387,9 +399,11 @@
         word = $.trim($wordInput.val());
 
         if (word) {
-            $addPieceWap.removeClass('first').addClass('second');
+            $firstStep.hide();
+            $secondStep.show();
             $wordInSecondStep.text(word);
             $explanationTextarea.focus();
+            $secondStep.css('paddingTop', (windowHeight - $secondStep.outerHeight()) * 0.4);
         }
     });
 

@@ -9,12 +9,13 @@ nav,
 body {
   background-color: #333;
   color: white;
-  padding: 15px 20px;
-  font-family: "Microsoft YaHei";
-  margin-bottom: 50px;
+  padding: 0 20px;
+  .font-hei();
+  margin-bottom: 0;
 }
 
 .header {
+  padding-top: 15px;
   margin-bottom: 40px;
 
   .logo-wap {
@@ -181,29 +182,10 @@ body {
 }
 
 .add-piece-wap-in-index-page {
-  padding: 160px 0 280px 0;
-
-  &.first {
-    .first-step {
-      display: block;
-    }
-    .second-step {
-      display: none;
-    }
-  }
-
-  &.second {
-    .first-step {
-      display: none;
-    }
-    .second-step {
-      display: block;
-    }
-  }
-
   .first-step {
+    display: none;
     width: 700px;
-    margin: 120px auto 0 auto;
+    margin: 0 auto;
 
     .title {
       font-size: 28px;
@@ -235,6 +217,7 @@ body {
   }
 
   .second-step {
+    display: none;
     border-radius: 2px;
     padding: 0 30px 0 30px;
     width: 800px;

@@ -9,67 +9,71 @@
     </script>
 {% endblock %}
 {% block page_content %}
-    <div class="header clearfix">
-        <div class="logo-wap pull-left">
-            <div class="media">
-                <div class="media-left">
-                    <img src="{{ static('image/logo.png') }}" alt="">
+    <div class="first-screen">
+        <div class="header clearfix">
+            <div class="logo-wap pull-left">
+                <div class="media">
+                    <div class="media-left">
+                        <img src="{{ static('image/logo.png') }}" alt="">
+                    </div>
+                    <div class="media-body">
+                        <div class="product-name">中关村字典</div>
+                        <div class="slogan">在这里解释互联网</div>
+                    </div>
                 </div>
-                <div class="media-body">
-                    <div class="product-name">中关村字典</div>
-                    <div class="slogan">在这里解释互联网</div>
-                </div>
+            </div>
+
+            <div class="commands-wap pull-right">
+                <button class="btn-add-piece-from-index btn btn-default">+ 创建新词条</button>
             </div>
         </div>
 
-        <div class="commands-wap pull-right">
-            <button class="btn-add-piece-from-index btn btn-default">+ 创建新词条</button>
+        <div class="piece-wap">
+            {% if piece %}
+                {{ render_piece_in_index_page(piece) }}
+            {% endif %}
         </div>
     </div>
 
-    <div class="piece-wap">
-        {% if piece %}
-            {{ render_piece_in_index_page(piece) }}
-        {% endif %}
-    </div>
+    <div class="second-screen">
+        <div class="add-piece-wap-in-index-page first">
+            <div class="first-step">
+                <div class="title">创建新词条</div>
 
-    <div class="add-piece-wap-in-index-page first">
-        <div class="first-step">
-            <div class="title">创建新词条</div>
-
-            <div class="input-group">
-                <input type="text" class="form-control word-input" placeholder="词条名称">
+                <div class="input-group">
+                    <input type="text" class="form-control word-input" placeholder="词条名称">
             <span class="input-group-btn">
                 <button class="btn btn-primary btn-go-to-second-step" type="button">😂开始</button>
             </span>
+                </div>
             </div>
-        </div>
 
-        <div class="second-step">
-            <div class="word"></div>
+            <div class="second-step">
+                <div class="word"></div>
 
         <textarea class="form-control explanation-textarea" rows="4" name="explanation"
                   placeholder="你的解释，尽量通俗易懂。"></textarea>
 
-            <button class="btn btn-default btn-block btn-add-sentence">
-                + 添加例句
-            </button>
+                <button class="btn btn-default btn-block btn-add-sentence">
+                    + 添加例句
+                </button>
 
         <textarea class="form-control sentence-textarea" rows="4" name="sentence"
                   placeholder="添加例句，让解释更生动形象，😂😂😂效果更加"></textarea>
 
-            <div class="text-center btn-submit-piece-wap">
-                <button class="btn btn-lg btn-primary btn-submit-piece">发布</button>
+                <div class="text-center btn-submit-piece-wap">
+                    <button class="btn btn-lg btn-primary btn-submit-piece">发布</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="footer clearfix">
-        <div class="copyright pull-left">
-            © 2015 <strong>zidian.tech</strong>
-        </div>
-        <div class="about-us pull-right">
-            Made with 😂in Beijing. <a href="{{ url_for('site.about') }}">关于我们</a>
+        <div class="footer clearfix">
+            <div class="copyright pull-left">
+                © 2015 <strong>zidian.tech</strong>
+            </div>
+            <div class="about-us pull-right">
+                Made with 😂in Beijing. <a href="{{ url_for('site.about') }}">关于我们</a>
+            </div>
         </div>
     </div>
 

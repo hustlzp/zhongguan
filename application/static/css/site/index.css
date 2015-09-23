@@ -13,11 +13,12 @@ nav,
 body {
   background-color: #333;
   color: white;
-  padding: 15px 20px;
-  font-family: "Microsoft YaHei";
-  margin-bottom: 50px;
+  padding: 0 20px;
+  font-family: "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "Hiragino Sans GB", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+  margin-bottom: 0;
 }
 .header {
+  padding-top: 15px;
   margin-bottom: 40px;
 }
 .header .logo-wap img {
@@ -153,24 +154,10 @@ body {
 .piece .piece-commands-wap button:first-child {
   margin-right: 10px;
 }
-.add-piece-wap-in-index-page {
-  padding: 160px 0 280px 0;
-}
-.add-piece-wap-in-index-page.first .first-step {
-  display: block;
-}
-.add-piece-wap-in-index-page.first .second-step {
-  display: none;
-}
-.add-piece-wap-in-index-page.second .first-step {
-  display: none;
-}
-.add-piece-wap-in-index-page.second .second-step {
-  display: block;
-}
 .add-piece-wap-in-index-page .first-step {
+  display: none;
   width: 700px;
-  margin: 120px auto 0 auto;
+  margin: 0 auto;
 }
 .add-piece-wap-in-index-page .first-step .title {
   font-size: 28px;
@@ -197,6 +184,7 @@ body {
   border: 1px solid #76AF61;
 }
 .add-piece-wap-in-index-page .second-step {
+  display: none;
   border-radius: 2px;
   padding: 0 30px 0 30px;
   width: 800px;
