@@ -452,9 +452,11 @@
   text-decoration: underline;
 }
 .pieces-wap .piece .body .word {
+  margin-top: -5px;
   font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
   font-weight: bold;
   font-size: 24px;
+  margin-bottom: 3px;
 }
 .pieces-wap .piece .body .content {
   padding-right: 85px;
