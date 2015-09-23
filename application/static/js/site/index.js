@@ -16,7 +16,7 @@
     $firstStep.css('paddingTop', (windowHeight - $firstStep.outerHeight()) * 0.4).show();
     $footer.show();
 
-    // 按需弹出登陆框
+    // 按需弹出登录框
     if (url('?signin')) {
         setTimeout(function () {
             $accountModal.modal();
