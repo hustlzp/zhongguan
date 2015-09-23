@@ -3,4 +3,3 @@ $('#main-wap .noti').click(function () {
 
     window.location = urlFor('site.index', {piece_id: pieceId});
 });
-

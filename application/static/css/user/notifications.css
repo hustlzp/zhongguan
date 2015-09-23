@@ -4,6 +4,9 @@
   padding-bottom: 30px;
   border-bottom: 1px solid #eee;
 }
+.notifications {
+  color: #999;
+}
 .notifications .noti {
   cursor: pointer;
   padding: 22px 15px 20px 15px;
