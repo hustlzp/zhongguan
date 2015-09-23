@@ -23,8 +23,20 @@
     var $passwordInputInSigninForm = $signinForm.find("input[name='password']");
 
     // 弹出登录框
-    $('.piece-commands-wap button').click(function () {
+    $(document).on('click', '.btn-vote', function () {
         $accountModal.modal();
+    });
+
+    // 切换下一条
+    $(document).on('click', '.btn-downvote', function () {
+        $.ajax({
+            url: urlFor('site.load_piece'),
+            method: 'post'
+        }).done(function (response) {
+            if (response.result) {
+                $('.piece-wap').html(response.html);
+            }
+        });
     });
 
     // 注册

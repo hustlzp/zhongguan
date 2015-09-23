@@ -1,9 +1,10 @@
 # coding: utf-8
 import string
 from datetime import date, timedelta
-from flask import render_template, Blueprint, request, redirect, url_for, g, current_app
+from flask import render_template, Blueprint, request, redirect, url_for, g, current_app, get_template_attribute
 from ..models import db, Piece, Word
 from ..utils.geetest import geetest
+from ..utils.decorators import jsonify
 
 bp = Blueprint('site', __name__)
 
@@ -28,6 +29,14 @@ def index():
     if len(challenge) == 32:
         url = "http://%s%s&challenge=%s&product=%s" % (base_url, captcha_id, challenge, product)
     return render_template('site/index.html', piece=piece, url=url)
+
+
+@bp.route('/load_piece', methods=['POST'])
+@jsonify
+def load_piece():
+    piece = Piece.query.order_by(db.func.random()).first()
+    macro = get_template_attribute('macros/_piece.html', 'render_piece_in_index_page')
+    return {'result': True, 'html': macro(piece)}
 
 
 @bp.route('/pieces')

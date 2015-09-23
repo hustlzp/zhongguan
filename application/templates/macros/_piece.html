@@ -963,3 +963,47 @@
         </div>
     </form>
 {% endmacro %}
+
+
+{% macro render_piece_in_index_page(piece) %}
+    <div class="piece">
+        <div class="word">
+            {{ piece.word.word }}
+        </div>
+
+        <div class="text-center">
+            <span class="qrcode-in-index-page">
+                <span class="fa fa-qrcode btn-show-qrcode"></span>
+
+                <div class="share-popover">
+                    <div class="piece-word">{{ piece.word.word }}</div>
+
+                    <img src="{{ piece.qrcode_url }}" class="piece-qrcode" alt=""/>
+
+                    <div class="tip">
+                        <img src="{{ static('image/wechat.png') }}" class="wechat-icon">&nbsp;&nbsp;微信扫一扫,分享到朋友圈
+                    </div>
+                </div>
+            </span>
+        </div>
+
+        <div class="content">{{ piece.friendly_content|safe }}</div>
+
+        {% if piece.sentence %}
+            <div class="sentence-wap">
+                <div class="sentence-title">例句</div>
+                <div class="sentence">{{ piece.friendly_sentence|safe }}</div>
+            </div>
+        {% endif %}
+
+        <div class="piece-commands-wap">
+            <button class="btn btn-primary btn-lg btn-vote">
+                <span class="fa fa-caret-up"></span>&nbsp;&nbsp;解释到位
+            </button>
+
+            <button class="btn btn-danger btn-lg btn-downvote">
+                <span class="fa fa-caret-down"></span>&nbsp;&nbsp;不给力呀老湿
+            </button>
+        </div>
+    </div>
+{% endmacro %}
