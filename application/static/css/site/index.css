@@ -161,6 +161,7 @@ body {
 .piece .piece-commands-wap button {
   font-size: 18px;
   font-weight: bold;
+  border: 0;
 }
 .piece .piece-commands-wap button .fa {
   font-size: 22px;
