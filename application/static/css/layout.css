@@ -16,7 +16,7 @@
   font-weight: normal;
 }
 @font-face {
-  font-family: "/static/fonts/Krungthep";
+  font-family: "Krungthep";
   src: url("/static/fonts/Krungthep.eot");
   /* IE9 */
   src: url("/static/fonts/Krungthep.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */ url("/static/fonts/Krungthep.woff") format("woff"), /* chrome、firefox */ url("/static/fonts/Krungthep.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+ */ url("/static/fonts/Krungthep.svg#/static/fonts/Krungthep") format("svg");
