@@ -14,6 +14,10 @@ body {
   margin-bottom: 0;
 }
 
+.first-screen {
+  position: relative;
+}
+
 .header {
   padding-top: 15px;
   margin-bottom: 40px;
@@ -51,6 +55,8 @@ body {
 }
 
 .piece {
+  padding-bottom: 120px;
+
   .word {
     text-align: center;
     .font-song();
@@ -69,7 +75,7 @@ body {
     text-align: center;
 
     &:hover {
-      color: white;
+      color: #DDD;
 
       .share-popover {
         display: block;
@@ -163,7 +169,7 @@ body {
   }
 
   .piece-commands-wap {
-    margin-top: 150px;
+    margin-top: 120px;
     text-align: center;
 
     button {
@@ -178,6 +184,23 @@ body {
         margin-right: 10px;
       }
     }
+  }
+}
+
+.piece-creator-info {
+  position: absolute;
+  bottom: 20px;
+  right: 0px;
+
+  img {
+    width: 34px;
+    height: 34px;
+  }
+
+  .name {
+    font-weight: bold;
+    color: #999;
+    margin-left: 3px;
   }
 }
 
@@ -286,6 +309,7 @@ body {
 }
 
 .footer {
+  display: none;
   position: absolute;
   bottom: 15px;
   color: #aaa;

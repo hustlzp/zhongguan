@@ -33,6 +33,13 @@
                 {{ render_piece_in_index_page(piece) }}
             {% endif %}
         </div>
+
+        {% if piece %}
+            <div class="piece-creator-info">
+                <img src="{{ piece.user.avatar_url }}" alt="" class="img-circle">
+                <span class="name">{{ piece.user.name }}</span>
+            </div>
+        {% endif %}
     </div>
 
     <div class="second-screen">

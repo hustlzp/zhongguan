@@ -17,6 +17,9 @@ body {
   font-family: "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "Hiragino Sans GB", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
   margin-bottom: 0;
 }
+.first-screen {
+  position: relative;
+}
 .header {
   padding-top: 15px;
   margin-bottom: 40px;
@@ -43,6 +46,9 @@ body {
   border-radius: 4px;
   padding: 5px 12px;
 }
+.piece {
+  padding-bottom: 120px;
+}
 .piece .word {
   text-align: center;
   font-family: Georgia, "Nimbus Roman No9 L", "Songti SC", STSong, "AR PL SungtiL GB", NSimSun, SimSun, "TW\-Sung", "WenQuanYi Bitmap Song", "AR PL UMing CN", "AR PL UMing HK", "AR PL UMing TW", "AR PL UMing TW MBE", serif;
@@ -60,7 +66,7 @@ body {
   text-align: center;
 }
 .piece .qrcode-in-index-page:hover {
-  color: white;
+  color: #DDD;
 }
 .piece .qrcode-in-index-page:hover .share-popover {
   display: block;
@@ -141,7 +147,7 @@ body {
   margin-bottom: 10px;
 }
 .piece .piece-commands-wap {
-  margin-top: 150px;
+  margin-top: 120px;
   text-align: center;
 }
 .piece .piece-commands-wap button {
@@ -153,6 +159,20 @@ body {
 }
 .piece .piece-commands-wap button:first-child {
   margin-right: 10px;
+}
+.piece-creator-info {
+  position: absolute;
+  bottom: 20px;
+  right: 0px;
+}
+.piece-creator-info img {
+  width: 34px;
+  height: 34px;
+}
+.piece-creator-info .name {
+  font-weight: bold;
+  color: #999;
+  margin-left: 3px;
 }
 .add-piece-wap-in-index-page .first-step {
   display: none;
@@ -240,6 +260,7 @@ body {
   display: block;
 }
 .footer {
+  display: none;
   position: absolute;
   bottom: 15px;
   color: #aaa;

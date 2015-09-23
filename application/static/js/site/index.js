@@ -8,11 +8,13 @@
     var $secondScreen = $('.second-screen');
     var $firstStep = $('.first-step');
     var $secondStep = $('.second-step');
+    var $footer = $secondScreen.find('.footer');
 
     // 尺寸调整
     $firstScreen.css('minHeight', windowHeight);
     $secondScreen.css('height', windowHeight);
     $firstStep.css('paddingTop', (windowHeight - $firstStep.outerHeight()) * 0.4).show();
+    $footer.show();
 
     // 按需弹出登陆框
     if (url('?signin')) {
