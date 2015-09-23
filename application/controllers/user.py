@@ -4,7 +4,7 @@ from flask import render_template, Blueprint, redirect, request, url_for, flash,
 from ..utils.permissions import UserPermission
 from ..utils.uploadsets import avatars, crop_image, process_image_for_cropping
 from ..models import db, User, Notification
-from ..forms import SettingsForm, ChangePasswordForm
+from ..forms import ChangePasswordForm
 from ..utils.decorators import jsonify
 
 bp = Blueprint('user', __name__)
