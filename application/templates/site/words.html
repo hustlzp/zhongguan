@@ -25,11 +25,11 @@
 
             <div class="selectors-outer-wap">
                 <div class="selectors-wap">
-                    <a href="{{ url_for('site.collections') }}"
+                    <a href="{{ url_for('site.words') }}"
                        class="selector {% if not first_letter %}active{% endif %}">全部</a>
 
                     {% for letter in letters %}
-                        <a href="{{ url_for('site.collections', first_letter=letter) }}"
+                        <a href="{{ url_for('site.words', first_letter=letter) }}"
                            class="selector {% if first_letter == letter %}active{% endif %}">
                             {{ letter|upper }}</a>
                     {% endfor %}

@@ -78,8 +78,8 @@ def search():
     return render_template('site/search.html')
 
 
-@bp.route('/collections')
-def collections():
+@bp.route('/words')
+def words():
     """浏览字典"""
     first_letter = request.args.get('first_letter')
     words = Word.query
@@ -91,7 +91,7 @@ def collections():
         if Word.query.filter(Word.first_letter == letter).count() > 0:
             letters.append(letter)
 
-    return render_template('site/collections.html', words=words, letters=letters, first_letter=first_letter)
+    return render_template('site/words.html', words=words, letters=letters, first_letter=first_letter)
 
 
 @bp.route('/test')
