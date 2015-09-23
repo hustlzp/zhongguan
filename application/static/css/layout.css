@@ -88,6 +88,12 @@ body {
 .navbar-nav .notifications-dropdown-menu .noti:hover {
   background-color: #eee;
 }
+.navbar-nav .notifications-dropdown-menu .noti.new {
+  background-color: #e2eedd;
+}
+.navbar-nav .notifications-dropdown-menu .noti.new:hover {
+  background-color: #d4e6ce;
+}
 .navbar-nav .notifications-dropdown-menu .btn-go-to-notifications {
   text-align: center;
   display: block;
