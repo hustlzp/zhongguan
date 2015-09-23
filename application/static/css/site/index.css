@@ -14,7 +14,7 @@ body {
   background-color: #333;
   color: white;
   padding: 0 20px;
-  font-family: "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "Hiragino Sans GB", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+  font-family: "Hiragino Sans GB", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
   margin-bottom: 0;
 }
 .first-screen {
