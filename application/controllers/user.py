@@ -2,9 +2,8 @@
 from datetime import datetime
 from flask import render_template, Blueprint, redirect, request, url_for, flash, g, json, abort
 from ..utils.permissions import UserPermission
-from ..utils.uploadsets import avatars, crop_image, process_image_for_cropping
+from ..utils.uploadsets import avatars, process_avatar
 from ..models import db, User, Notification
-from ..forms import ChangePasswordForm
 from ..utils.decorators import jsonify
 
 bp = Blueprint('user', __name__)
@@ -96,7 +95,7 @@ def update_motto():
 @jsonify
 def upload_avatar():
     try:
-        filename, (w, h) = process_image_for_cropping(request.files['file'], avatars)
+        filename, (w, h) = process_avatar(request.files['file'], avatars)
     except Exception, e:
         return json.dumps({'result': False, 'error': e.__repr__()})
     else:

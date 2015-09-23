@@ -10,31 +10,13 @@ collection_covers = UploadSet('collectionCovers', IMAGES)
 qrcodes = UploadSet('qrcodes', IMAGES)
 
 
-def process_image_for_cropping(file_storage, upload_set):
+def process_avatar(file_storage, upload_set):
     """将图片处理为适合裁剪的大小，即长宽均不超过1000"""
     image = open_image(file_storage)
     image = center_crop(image)
-    image = resize_with_max(image, 200)
+    image = image.resize((300, 300), Image.ANTIALIAS)
     ext = extension(file_storage.filename)
     return save_image(image, upload_set, ext), image.size
-
-
-def crop_image(filename, upload_set, top_left_x_ratio, top_left_y_ratio, bottom_right_x_ratio,
-               bottom_right_y_ratio):
-    """裁剪用户头像"""
-    file_path = upload_set.path(filename)
-    image = Image.open(file_path)
-    image = crop_by_ratio(image, top_left_x_ratio, top_left_y_ratio, bottom_right_x_ratio,
-                          bottom_right_y_ratio)
-    image = center_crop(image)
-    image = resize_square(image, 160)
-
-    # 删除裁剪前的图片
-    os.remove(file_path)
-
-    # 保存裁剪后的图片
-    ext = extension(filename)
-    return save_image(image, upload_set, ext)
 
 
 def open_image(file_storage):
