@@ -13,14 +13,6 @@ from ..utils.geetest import geetest
 bp = Blueprint('account', __name__)
 
 
-@bp.route('/signin')
-@VisitorPermission()
-def signin():
-    """Signin"""
-    form = SigninForm()
-    return render_template('account/signin.html', form=form)
-
-
 @bp.route('/signin', methods=['POST'])
 @VisitorPermission()
 @jsonify
@@ -39,14 +31,6 @@ def do_signin():
         return {'result': True, 'piece_id': piece.id if piece else None}
     else:
         return {'result': False, 'email': _get_first_error(form.email), 'password': _get_first_error(form.password)}
-
-
-@bp.route('/signup')
-@VisitorPermission()
-def signup():
-    """Signup"""
-    form = SignupForm()
-    return render_template('account/signup.html', form=form)
 
 
 @bp.route('/do_signup', methods=['POST'])

@@ -3,6 +3,13 @@
     var content = '';
     var sentence = '';
 
+    if (url('?signin')) {
+        setTimeout(function () {
+            $accountModal.modal();
+            $('.nav-tabs li:nth-child(2) a').click();
+        }, 0);
+    }
+
     /**
      * 注册与登录
      */

@@ -58,14 +58,14 @@ $(document).on('click', '.vote', function () {
 // 若某操作需要登录，而用户尚未登录，则跳转登录页
 $('.need-signed-in').click(function () {
     if (!g.signedIn) {
-        window.location = urlFor('account.signin');
+        window.location = urlFor('site.index', {signin: 1});
         return false;
     }
 });
 
 $(document).on('click', '.need-signed-in', function () {
     if (!g.signedIn) {
-        window.location = urlFor('account.signin');
+        window.location = urlFor('site.index', {signin: 1});
         return false;
     }
 });
