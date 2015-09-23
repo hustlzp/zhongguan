@@ -42,7 +42,7 @@
     <div class="comment {% if sub %}sub-comment{% endif %}" data-comment-id="{{ comment.id }}">
         <div class="media">
             <div class="media-left">
-                {{ render_user_avatar(comment.user) }}
+                {{ render_user_avatar(comment.user, tooltip=False) }}
             </div>
 
             <div class="media-body">
