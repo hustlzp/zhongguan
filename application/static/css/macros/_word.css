@@ -121,17 +121,7 @@
   margin-bottom: 15px;
   line-height: 1.6;
   font-size: 16px;
-  color: #666666;
-}
-@media (max-width: 767px) {
-  .word-modal-wap .piece-in-word .body .content {
-    padding-right: 50px;
-  }
-}
-@media (max-width: 500px) {
-  .word-modal-wap .piece-in-word .body .content {
-    padding-right: 0px;
-  }
+  color: #333;
 }
 .word-modal-wap .piece-in-word .body .sentence-title {
   color: #999;

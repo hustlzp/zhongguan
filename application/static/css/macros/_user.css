@@ -54,6 +54,7 @@
 }
 .user-profile-header .user-info .name-wap .name-outer-wap .name-inner-wap {
   position: relative;
+  font-weight: bold;
 }
 .user-profile-header .user-info .name-wap .name-outer-wap .name-inner-wap .for-empty-name {
   display: none;
