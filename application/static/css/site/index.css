@@ -165,8 +165,19 @@ body {
 .piece .piece-commands-wap button .fa {
   font-size: 22px;
 }
-.piece .piece-commands-wap button:first-child {
+.piece .piece-commands-wap button.btn-vote {
+  position: relative;
   margin-right: 10px;
+  padding: 10px 16px 10px 30px;
+}
+.piece .piece-commands-wap button.btn-vote .votes-count-wap {
+  position: absolute;
+  line-height: 1;
+  top: 0;
+  left: 16px;
+}
+.piece .piece-commands-wap button.btn-vote .votes-count-wap .votes-count {
+  margin-top: -3px;
 }
 .piece-creator-info {
   position: absolute;

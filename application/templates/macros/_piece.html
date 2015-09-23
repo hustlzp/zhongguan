@@ -998,7 +998,11 @@
 
         <div class="piece-commands-wap">
             <button class="btn btn-primary btn-lg btn-vote">
-                <span class="fa fa-caret-up"></span>&nbsp;&nbsp;解释到位
+                <div class="votes-count-wap">
+                    <div class="fa fa-caret-up"></div>
+                    <div class="votes-count">{{ piece.votes_count }}</div>
+                </div>
+                &nbsp;&nbsp;解释到位
             </button>
 
             <button class="btn btn-danger btn-lg btn-downvote">

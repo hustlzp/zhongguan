@@ -190,8 +190,21 @@ body {
         font-size: 22px;
       }
 
-      &:first-child {
+      &.btn-vote {
+        position: relative;
         margin-right: 10px;
+        padding: 10px 16px 10px 30px;
+
+        .votes-count-wap {
+          position: absolute;
+          line-height: 1;
+          top: 0;
+          left: 16px;
+
+          .votes-count {
+            margin-top: -3px;
+          }
+        }
       }
     }
   }
