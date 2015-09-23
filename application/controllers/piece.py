@@ -142,7 +142,8 @@ def vote(uid):
         piece.user.update_voters_count()
         db.session.add(piece.user)
 
-        Notification.upvote_piece(g.user, piece)
+        if piece.user.receive_votes_notification:
+            Notification.upvote_piece(g.user, piece)
 
         db.session.commit()
         return {'result': True}
@@ -193,6 +194,7 @@ def comment(uid):
     content = request.form.get('comment')
     root_comment_id = request.form.get('root_comment_id', type=int)
     target_user_id = request.form.get('target_user_id', type=int)
+    target_user = None
 
     if not content:
         abort(500)
@@ -208,10 +210,13 @@ def comment(uid):
 
     # 通知
     if root_comment_id:
-        Notification.comment_piece_comment(g.user, comment)
+        if target_user.receive_comments_notification:
+            Notification.comment_piece_comment(g.user, comment)
+            db.session.commit()
     else:
-        Notification.comment_piece(g.user, comment)
-    db.session.commit()
+        if piece.user.receive_comments_notification
+            Notification.comment_piece(g.user, comment)
+            db.session.commit()
 
     # 返回comment HTML
     comment_macro = get_template_attribute('macros/_piece.html', 'render_piece_comment')
