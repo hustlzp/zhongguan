@@ -131,6 +131,7 @@ body {
 }
 #footer .bottom-market .product-name {
   font-size: 22px;
+  font-weight: bold;
   color: #fff;
 }
 #footer .bottom-market .slogan {
