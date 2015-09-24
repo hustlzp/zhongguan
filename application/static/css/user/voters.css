@@ -2,16 +2,19 @@
   margin-top: 30px;
 }
 .voters .voter {
-  display: inline-block;
+  float: left;
   vertical-align: top;
   border: 1px solid #eee;
   border-radius: 2px;
-  margin: 0 20px 20px 0;
+  margin: 0 14px 20px 0;
   width: 130px;
   cursor: pointer;
   text-align: center;
   padding: 25px 10px 10px 10px;
   color: #333;
+}
+.voters .voter:nth-child(6n) {
+  margin-right: 0;
 }
 .voters .voter:hover {
   background-color: #F6F6F6;
@@ -25,6 +28,8 @@
 .voters .voter .name {
   font-weight: bold;
   margin-bottom: 5px;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .voters .voter .count {
   color: #aaa;
