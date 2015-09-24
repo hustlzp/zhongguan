@@ -66,8 +66,9 @@ def index():
 @jsonify
 def load_piece():
     piece = Piece.query.order_by(db.func.random()).first()
-    macro = get_template_attribute('macros/_piece.html', 'render_piece_in_index_page')
-    return {'result': True, 'html': macro(piece)}
+    piece_macro = get_template_attribute('macros/_piece.html', 'render_piece_in_index_page')
+    piece_creator_macro = get_template_attribute('macros/_piece.html', 'render_piece_creator_info')
+    return {'result': True, 'piece_html': piece_macro(piece), 'piece_creator_html': piece_creator_macro(piece)}
 
 
 @bp.route('/about')

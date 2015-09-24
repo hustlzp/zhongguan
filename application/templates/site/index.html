@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
-{% from "macros/_piece.html" import render_pieces_by_date, render_piece_modal_wap, render_piece_in_index_page %}
+{% from "macros/_piece.html" import render_pieces_by_date, render_piece_modal_wap, render_piece_in_index_page,
+    render_piece_creator_info %}
 {% from "macros/_word.html" import render_word_modal_wap %}
 
 {% block page_title %}中关村字典{% endblock %}
@@ -36,12 +37,11 @@
             {% endif %}
         </div>
 
-        {% if piece %}
-            <div class="piece-creator-info">
-                <img src="{{ piece.user.avatar_url }}" alt="" class="img-circle">
-                <span class="name">{{ piece.user.name }}</span>
-            </div>
-        {% endif %}
+        <div class="piece-creator-info-wap">
+            {% if piece %}
+                {{ render_piece_creator_info(piece) }}
+            {% endif %}
+        </div>
     </div>
 
     <div class="second-screen">

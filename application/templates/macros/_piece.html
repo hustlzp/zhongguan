@@ -1014,3 +1014,11 @@
         </div>
     </div>
 {% endmacro %}
+
+
+{% macro render_piece_creator_info(piece) %}
+    <div class="piece-creator-info">
+        <img src="{{ piece.user.avatar_url }}" alt="" class="img-circle">
+        <span class="name">{{ piece.user.name }}</span>
+    </div>
+{% endmacro %}

@@ -61,7 +61,8 @@
             method: 'post'
         }).done(function (response) {
             if (response.result) {
-                $('.piece-wap').html(response.html);
+                $('.piece-wap').html(response.piece_html);
+                $('.piece-creator-info-wap').html(response.piece_creator_html);
             }
         });
     });
