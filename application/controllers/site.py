@@ -13,21 +13,7 @@ bp = Blueprint('site', __name__)
 def index():
     if not g.user:
         piece = Piece.query.order_by(db.func.random()).first()
-
-        base_url = current_app.config.get('GEETEST_BASE_URL')
-        captcha_id = current_app.config.get('GEETEST_CAPTCHA_ID')
-        private_key = current_app.config.get('GEETEST_PRIVATE_KEY')
-        gt = geetest(captcha_id, private_key)
-        url = ""
-        httpsurl = ""
-        product = "float"
-        try:
-            challenge = gt.geetest_register()
-        except Exception as e:
-            challenge = ""
-        if len(challenge) == 32:
-            url = "http://%s%s&challenge=%s&product=%s" % (base_url, captcha_id, challenge, product)
-        return render_template('site/index.html', piece=piece, url=url)
+        return render_template('site/index.html', piece=piece)
     else:
         pieces_data = []
         pieces_data_count = 0

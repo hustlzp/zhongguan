@@ -39,15 +39,6 @@ def do_signin():
 def do_signup():
     form = SignupForm()
     if form.validate_on_submit():
-        captcha_id = current_app.config.get('GEETEST_CAPTCHA_ID')
-        private_key = current_app.config.get('GEETEST_PRIVATE_KEY')
-        challenge = request.form.get('geetest_challenge')
-        validate = request.form.get('geetest_validate')
-        seccode = request.form.get('geetest_seccode')
-        gt = geetest(captcha_id, private_key)
-        if not gt.geetest_validate(challenge, validate, seccode):
-            return {'result': False}
-
         user = User(name=form.name.data, email=form.email.data, password=form.password.data)
         db.session.add(user)
 
