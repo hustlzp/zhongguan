@@ -46,3 +46,5 @@ class Config(object):
 
     # Host string, used by fabric
     HOST_STRING = ""
+    
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
